@@ -15,4 +15,9 @@ public class NewBehaviourScript : MonoBehaviour
     {
         
     }
+
+    void newMethod(int a)
+    {
+        int kaki;
+    } 
 }
