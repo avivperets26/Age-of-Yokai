@@ -1,7 +1,97 @@
 fileFormatVersion: 2
 guid: d5ad1faa73f6f144bbdfa66f1d72f261
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -6346006087626438416
+    second: road_sheet00_0
+  - first:
+      213: -9149279462426850834
+    second: road_sheet00_1
+  - first:
+      213: 3133697252983345624
+    second: road_sheet00_2
+  - first:
+      213: 104539238882320865
+    second: road_sheet00_3
+  - first:
+      213: 3548046162981356271
+    second: road_sheet00_4
+  - first:
+      213: 594342417366834278
+    second: road_sheet00_5
+  - first:
+      213: 2310390950180940797
+    second: road_sheet00_6
+  - first:
+      213: -2827662528880347612
+    second: road_sheet00_7
+  - first:
+      213: 5986601717333673430
+    second: road_sheet00_8
+  - first:
+      213: 5219555096659721083
+    second: road_sheet00_9
+  - first:
+      213: -222211223490343115
+    second: road_sheet00_10
+  - first:
+      213: 497532302373284786
+    second: road_sheet00_11
+  - first:
+      213: 7745940418553341165
+    second: road_sheet00_12
+  - first:
+      213: 954498385263944342
+    second: road_sheet00_13
+  - first:
+      213: 1400220357746909459
+    second: road_sheet00_14
+  - first:
+      213: -1555696220261173982
+    second: road_sheet00_15
+  - first:
+      213: 1439239808576972745
+    second: road_sheet00_16
+  - first:
+      213: 652214585832982220
+    second: road_sheet00_17
+  - first:
+      213: 5887866281761899977
+    second: road_sheet00_18
+  - first:
+      213: 6817904780897517444
+    second: road_sheet00_19
+  - first:
+      213: -4744118149058207057
+    second: road_sheet00_20
+  - first:
+      213: -3583286735318594687
+    second: road_sheet00_21
+  - first:
+      213: 382707900257572946
+    second: road_sheet00_22
+  - first:
+      213: -4370653734122588500
+    second: road_sheet00_23
+  - first:
+      213: 2810057238991632715
+    second: road_sheet00_24
+  - first:
+      213: 8011409264833551496
+    second: road_sheet00_25
+  - first:
+      213: -6078082185758376860
+    second: road_sheet00_26
+  - first:
+      213: -8830192231017427401
+    second: road_sheet00_27
+  - first:
+      213: -602852108910863484
+    second: road_sheet00_28
+  - first:
+      213: -8645237766029814531
+    second: road_sheet00_29
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -40,7 +130,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -69,9 +159,661 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: road_sheet00_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1664
+        width: 1024
+        height: 270
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0abb9f8f2bdb8e44aa36fa4b0a35109e
+      internalID: -6346006087626438416
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: road_sheet00_1
+      rect:
+        serializedVersion: 2
+        x: 1132
+        y: 1664
+        width: 67
+        height: 270
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 915eaecbd6eb5df4b9539275a463a45d
+      internalID: -9149279462426850834
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: road_sheet00_2
+      rect:
+        serializedVersion: 2
+        x: 1371
+        y: 1664
+        width: 67
+        height: 270
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5dee202c42088614a85d56717ab2c969
+      internalID: 3133697252983345624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: road_sheet00_3
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 1766
+        width: 512
+        height: 55
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 095584f52e75ae94f894f818980627db
+      internalID: 104539238882320865
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: road_sheet00_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1280
+        width: 168
+        height: 171
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c025c98cb5fc1b488f4bb23fc9f647b
+      internalID: 3548046162981356271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: road_sheet00_5
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 1280
+        width: 141
+        height: 145
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37dd9e6cb501f36478b73091ad32bdfc
+      internalID: 594342417366834278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: road_sheet00_6
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 1363
+        width: 170
+        height: 187
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10b9a9fe66a854146ac506f7a0022e05
+      internalID: 2310390950180940797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: road_sheet00_7
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 1307
+        width: 221
+        height: 243
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d49b0e34a9dfbc4694c9f7b7df3942e
+      internalID: -2827662528880347612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: road_sheet00_8
+      rect:
+        serializedVersion: 2
+        x: 991
+        y: 1409
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35c77863738d1f349a0c96a82a44ed5f
+      internalID: 5986601717333673430
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: road_sheet00_9
+      rect:
+        serializedVersion: 2
+        x: 1137
+        y: 1280
+        width: 143
+        height: 150
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1d96fa4c0f9e7a4f8e0234d759fe90a
+      internalID: 5219555096659721083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: road_sheet00_10
+      rect:
+        serializedVersion: 2
+        x: 1373
+        y: 1280
+        width: 163
+        height: 161
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab425bf2075c6c841b2e835e194d09d7
+      internalID: -222211223490343115
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: road_sheet00_11
+      rect:
+        serializedVersion: 2
+        x: 1621
+        y: 1363
+        width: 171
+        height: 187
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84451928edb2dde4e8f4e411d75646a0
+      internalID: 497532302373284786
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: road_sheet00_12
+      rect:
+        serializedVersion: 2
+        x: 1878
+        y: 1356
+        width: 170
+        height: 194
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10da700c7af72204086a9948d08c546a
+      internalID: 7745940418553341165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: road_sheet00_13
+      rect:
+        serializedVersion: 2
+        x: 1652
+        y: 1382
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 898edba71bc85c440b7674daa23dab37
+      internalID: 954498385263944342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: road_sheet00_14
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 896
+        width: 661
+        height: 270
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35e6ce308fcb72047bd7d5b83ef2ace5
+      internalID: 1400220357746909459
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: road_sheet00_15
+      rect:
+        serializedVersion: 2
+        x: 766
+        y: 896
+        width: 188
+        height: 270
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4aee26ba57ce13e4fb5d919e6a388e52
+      internalID: -1555696220261173982
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: road_sheet00_16
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 975
+        width: 512
+        height: 191
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 085b559b8189dc04aaccbda00d544bbc
+      internalID: 1439239808576972745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: road_sheet00_17
+      rect:
+        serializedVersion: 2
+        x: 1627
+        y: 896
+        width: 167
+        height: 270
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37e730dc841f93941b0ac29cdfe0de64
+      internalID: 652214585832982220
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: road_sheet00_18
+      rect:
+        serializedVersion: 2
+        x: 1850
+        y: 896
+        width: 198
+        height: 270
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9caeee1abef6b4e44988f2d531ede874
+      internalID: 5887866281761899977
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: road_sheet00_19
+      rect:
+        serializedVersion: 2
+        x: 878
+        y: 753
+        width: 34
+        height: 29
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2164cc64195227d4ab4c3b15c6fbed15
+      internalID: 6817904780897517444
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: road_sheet00_20
+      rect:
+        serializedVersion: 2
+        x: 1906
+        y: 639
+        width: 51
+        height: 143
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fdfbae61f55546145a14de8a8e8b3f0f
+      internalID: -4744118149058207057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: road_sheet00_21
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 704
+        width: 4
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: abb6bce1f33bd924d9a89e24d8e47818
+      internalID: -3583286735318594687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: road_sheet00_22
+      rect:
+        serializedVersion: 2
+        x: 1185
+        y: 704
+        width: 4
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 049631c1f7cbd664b88b646f256ca7a0
+      internalID: 382707900257572946
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: road_sheet00_23
+      rect:
+        serializedVersion: 2
+        x: 219
+        y: 616
+        width: 38
+        height: 39
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45efbbbb40816404baa0fdd32c6f395f
+      internalID: -4370653734122588500
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: road_sheet00_24
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 623
+        width: 27
+        height: 34
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e1feae5e1cd1bb94c9df47a638161dde
+      internalID: 2810057238991632715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: road_sheet00_25
+      rect:
+        serializedVersion: 2
+        x: 1131
+        y: 619
+        width: 149
+        height: 46
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 449aec042bc7d90449d55376b002cd0f
+      internalID: 8011409264833551496
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: road_sheet00_26
+      rect:
+        serializedVersion: 2
+        x: 1378
+        y: 512
+        width: 45
+        height: 149
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f862d4ad42d8dff419aad22d09b971ef
+      internalID: -6078082185758376860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: road_sheet00_27
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 616
+        width: 129
+        height: 46
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b89b0fb6a0339b45b6c0442859f8317
+      internalID: -8830192231017427401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: road_sheet00_28
+      rect:
+        serializedVersion: 2
+        x: 363
+        y: 512
+        width: 38
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d12ecbdc3ee0c8e429d4b6b34b75db37
+      internalID: -602852108910863484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: road_sheet00_29
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 390
+        width: 1900
+        height: 1562
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bad4162d7a270a6489bbb2ab9e434bc7
+      internalID: -8645237766029814531
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
