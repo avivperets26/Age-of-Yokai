@@ -6,12 +6,23 @@ public class Hero : Character
 {
 
     // Start is called before the first frame update
-   
+    [SerializeField]
+    private Stat stamina;
 
+    [SerializeField]
+    private float initStamina = 100;
+
+    protected override void Start()
+    {
+        stamina.Initialize(initStamina, initStamina);
+        base.Start();
+    }
     // Update is called once per frame
     protected override void Update()
     {
         GetInput();
+
+        //stamina.MyCurrentValue = 100;
         base.Update();
     }
 
@@ -19,6 +30,17 @@ public class Hero : Character
     private void GetInput()
     {
         direction = Vector2.zero;
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            stamina.MyCurrentValue -= 10;
+        }
+        else if (Input.GetKeyDown(KeyCode.O))
+        {
+            stamina.MyCurrentValue += 10;
+        }
+
+
+
 
         if (Input.GetKey(KeyCode.W))//UP
         {
