@@ -9,6 +9,9 @@ public class Stat : MonoBehaviour
     private Image content;
 
     [SerializeField]
+    private Text statValue;
+
+    [SerializeField]
     private float lerpSpeed;
     private float currnetFill;
     private float currentValue;
@@ -35,6 +38,8 @@ public class Stat : MonoBehaviour
 
             
             currnetFill = currentValue / MyMaxValue;
+
+            statValue.text = currentValue + "/" + MyMaxValue;
 
         }
     }
