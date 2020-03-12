@@ -12,6 +12,8 @@ public class Hero : Character
     [SerializeField]
     private float initStamina = 100;
 
+    [SerializeField]
+    private GameObject[] spellPrefab;
     protected override void Start()
     {
         stamina.Initialize(initStamina, initStamina);
@@ -62,23 +64,31 @@ public class Hero : Character
         //transform.position = Vector3.MoveTowards(transform.position, targetPosition, Time.deltaTime * 5);
         else if (Input.GetKeyDown(KeyCode.Space))
         {
-           attackRoutine = StartCoroutine(Attack()); // Coroutine to attack at the same time of other functions, Not fully threading.
+            if (!isAttacking && !IsMoving)
+            {
+                attackRoutine = StartCoroutine(Attack()); // Coroutine to attack at the same time of other functions, Not fully threading.
+            }
         }
       
     }
 
     private IEnumerator Attack()//to Call Yield 
-    {
-        if (!isAttacking && !IsMoving)
-        {
-            isAttacking = true;
+    {                        
+        isAttacking = true;
 
-            myAnimator.SetBool("attack", isAttacking);
+        myAnimator.SetBool("attack", isAttacking);
 
-            yield return new WaitForSeconds(5); //This is an hardcoded cast time, for debugging.
-        }
+        yield return new WaitForSeconds(1); //This is an hardcoded cast time, for debugging.
+
         Debug.Log("Attack Done");
-        StopAttack();
 
+        CastSpell();
+
+        StopAttack();
+    }
+
+    public void CastSpell()
+    {
+        Instantiate(spellPrefab[0], transform.position, Quaternion.identity);//Make an instanse of Prefabe, position where it start, Quaternion to make sure the object will not rotate while mooving.
     }
 }
