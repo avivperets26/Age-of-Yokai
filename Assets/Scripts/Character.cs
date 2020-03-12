@@ -13,6 +13,9 @@ public abstract class Character : MonoBehaviour
     private Rigidbody2D myRigidbody;
     //protected Vector3 targetPosition;
 
+    protected bool isAttacking;
+
+    protected Coroutine attackRoutine;
     public bool IsMoving
     {
         get
@@ -21,7 +24,7 @@ public abstract class Character : MonoBehaviour
         }
     }
 
-    private Animator myAnimator;
+    protected Animator myAnimator;
     // Start is called before the first frame update
     protected virtual void Start()
     {
@@ -56,6 +59,12 @@ public abstract class Character : MonoBehaviour
             //Sets the animation parameter so that he faces the correct direction
             myAnimator.SetFloat("X", direction.x);
             myAnimator.SetFloat("Y", direction.y);
+
+            StopAttack();//Will not able to animate-attack while wallking
+        }
+        else if(isAttacking)
+        {
+            ActivateLayer("AttackLayer");
         }
         else
         {
@@ -74,4 +83,14 @@ public abstract class Character : MonoBehaviour
 
     }
 
+    public void StopAttack()
+    {
+        if(attackRoutine != null)
+        {
+            StopCoroutine(attackRoutine);
+            Debug.Log("Attack Stops");
+            isAttacking = false;
+            myAnimator.SetBool("attack", isAttacking);
+        }        
+    }
 }

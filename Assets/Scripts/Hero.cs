@@ -30,11 +30,11 @@ public class Hero : Character
     private void GetInput()
     {
         direction = Vector2.zero;
-        if (Input.GetKeyDown(KeyCode.I))
+        if (Input.GetKeyDown(KeyCode.I))//Decrease Stamina by press I
         {
             stamina.MyCurrentValue -= 10;
         }
-        else if (Input.GetKeyDown(KeyCode.O))
+        else if (Input.GetKeyDown(KeyCode.O))//Increase Stamina by press O
         {
             stamina.MyCurrentValue += 10;
         }
@@ -60,6 +60,25 @@ public class Hero : Character
             direction += Vector2.left;
         }
         //transform.position = Vector3.MoveTowards(transform.position, targetPosition, Time.deltaTime * 5);
+        else if (Input.GetKeyDown(KeyCode.Space))
+        {
+           attackRoutine = StartCoroutine(Attack()); // Coroutine to attack at the same time of other functions, Not fully threading.
+        }
+      
     }
 
+    private IEnumerator Attack()//to Call Yield 
+    {
+        if (!isAttacking && !IsMoving)
+        {
+            isAttacking = true;
+
+            myAnimator.SetBool("attack", isAttacking);
+
+            yield return new WaitForSeconds(5); //This is an hardcoded cast time, for debugging.
+        }
+        Debug.Log("Attack Done");
+        StopAttack();
+
+    }
 }
