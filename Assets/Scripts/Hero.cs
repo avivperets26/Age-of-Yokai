@@ -16,20 +16,30 @@ public class Hero : Character
     private GameObject[] spellPrefab;
 
     [SerializeField]
+    private Block[] blocks;
+
+    [SerializeField]
     private Transform[] exitPoints; // will store all the exit point of the wizard attack.
 
     private int exitIndex = 2;//will make sure we are using the right direction, initiate to 2 because defualt state is Down.
+
+    private Transform target;
+
     protected override void Start()
     {
         stamina.Initialize(initStamina, initStamina);
+
+        //For testing and debugging
+        target = GameObject.Find("Enemy Skeleton").transform;
+
         base.Start();
     }
     // Update is called once per frame
     protected override void Update()
     {
         GetInput();
-
-        //stamina.MyCurrentValue = 100;
+        Debug.Log(LayerMask.GetMask("Block"));
+        stamina.MyCurrentValue = 100;
         base.Update();
     }
 
@@ -73,15 +83,18 @@ public class Hero : Character
         //transform.position = Vector3.MoveTowards(transform.position, targetPosition, Time.deltaTime * 5);
         else if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (!isAttacking && !IsMoving)
+
+            Block();
+
+            if (!isAttacking && !IsMoving && InLineOfSight())
             {
-                attackRoutine = StartCoroutine(Attack()); // Coroutine to attack at the same time of other functions, Not fully threading.
+                attackRoutine = StartCoroutine(Attack()); //Coroutine to attack at the same time of other functions, Not fully threading.
             }
         }
       
     }
 
-    private IEnumerator Attack()//to Call Yield 
+    private IEnumerator Attack()//To Call Yield 
     {                        
         isAttacking = true;
 
@@ -97,5 +110,29 @@ public class Hero : Character
     public void CastSpell()
     {
         Instantiate(spellPrefab[0], exitPoints[exitIndex].position, Quaternion.identity);//Make an instanse of Prefabe, position where it start, Quaternion to make sure the object will not rotate while mooving.
+    }
+
+    private bool InLineOfSight()//Will check if we are in line of sight of our target
+    {
+        Vector3 targetDirecion = (target.transform.position - transform.position).normalized;
+
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, target.position,Vector2.Distance(transform.position,target.transform.position),256);
+        
+        if(hit.collider == null)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    private void Block()//Will Deactivate the block sight of the hero 
+    {
+        foreach (Block b in blocks)
+        {
+            b.Deactivete();
+        }
+
+        blocks[exitIndex].Activete();
     }
 }
