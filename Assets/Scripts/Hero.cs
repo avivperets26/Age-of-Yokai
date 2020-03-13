@@ -14,6 +14,11 @@ public class Hero : Character
 
     [SerializeField]
     private GameObject[] spellPrefab;
+
+    [SerializeField]
+    private Transform[] exitPoints; // will store all the exit point of the wizard attack.
+
+    private int exitIndex = 2;//will make sure we are using the right direction, initiate to 2 because defualt state is Down.
     protected override void Start()
     {
         stamina.Initialize(initStamina, initStamina);
@@ -46,19 +51,23 @@ public class Hero : Character
 
         if (Input.GetKey(KeyCode.W))//UP
         {
+            exitIndex = 0;
             direction += Vector2.up;
            // targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         }
         else if (Input.GetKey(KeyCode.S))//DOWN
         {
+            exitIndex = 2;
             direction += Vector2.down;
         }
         else if (Input.GetKey(KeyCode.D))//RIGHT
         {
+            exitIndex = 1;
             direction += Vector2.right;
         }
         else if (Input.GetKey(KeyCode.A))//LEFT
         {
+            exitIndex = 3;
             direction += Vector2.left;
         }
         //transform.position = Vector3.MoveTowards(transform.position, targetPosition, Time.deltaTime * 5);
@@ -80,8 +89,6 @@ public class Hero : Character
 
         yield return new WaitForSeconds(1); //This is an hardcoded cast time, for debugging.
 
-        Debug.Log("Attack Done");
-
         CastSpell();
 
         StopAttack();
@@ -89,6 +96,6 @@ public class Hero : Character
 
     public void CastSpell()
     {
-        Instantiate(spellPrefab[0], transform.position, Quaternion.identity);//Make an instanse of Prefabe, position where it start, Quaternion to make sure the object will not rotate while mooving.
+        Instantiate(spellPrefab[0], exitPoints[exitIndex].position, Quaternion.identity);//Make an instanse of Prefabe, position where it start, Quaternion to make sure the object will not rotate while mooving.
     }
 }
