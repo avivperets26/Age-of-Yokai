@@ -23,14 +23,14 @@ public class Hero : Character
 
     private int exitIndex = 2;//will make sure we are using the right direction, initiate to 2 because defualt state is Down.
 
-    private Transform target;
+    public Transform MyTarget { get; set; }//The Player target
 
     protected override void Start()
     {
         stamina.Initialize(initStamina, initStamina);
 
         //For testing and debugging
-        target = GameObject.Find("Enemy Skeleton").transform;
+        //target = GameObject.Find("Enemy Skeleton").transform;
 
         base.Start();
     }
@@ -114,9 +114,9 @@ public class Hero : Character
 
     private bool InLineOfSight()//Will check if we are in line of sight of our target
     {
-        Vector3 targetDirecion = (target.transform.position - transform.position).normalized;
+        Vector3 targetDirecion = (MyTarget.transform.position - transform.position).normalized;
 
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, target.position,Vector2.Distance(transform.position,target.transform.position),256);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, MyTarget.position,Vector2.Distance(transform.position, MyTarget.transform.position),256);
         
         if(hit.collider == null)
         {
