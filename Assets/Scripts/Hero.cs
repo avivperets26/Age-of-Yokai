@@ -81,35 +81,32 @@ public class Hero : Character
             direction += Vector2.left;
         }
         //transform.position = Vector3.MoveTowards(transform.position, targetPosition, Time.deltaTime * 5);
-        else if (Input.GetKeyDown(KeyCode.Space))
-        {
 
-            Block();
-
-            if (!isAttacking && !IsMoving && InLineOfSight())
-            {
-                attackRoutine = StartCoroutine(Attack()); //Coroutine to attack at the same time of other functions, Not fully threading.
-            }
-        }
       
     }
 
-    private IEnumerator Attack()//To Call Yield 
+    private IEnumerator Attack(int spellIndex)//To Call Yield 
     {                        
         isAttacking = true;
 
         myAnimator.SetBool("attack", isAttacking);
 
-        yield return new WaitForSeconds(1); //This is an hardcoded cast time, for debugging.
+        yield return new WaitForSeconds(1); //This is an hardcoded cast time, for debugging.        
 
-        CastSpell();
+        Instantiate(spellPrefab[spellIndex], exitPoints[exitIndex].position, Quaternion.identity);//Make an instanse of Prefabe, position where it start, Quaternion to make sure the object will not rotate while mooving.
 
         StopAttack();
     }
 
-    public void CastSpell()
+    public void CastSpell(int spellIndex)
     {
-        Instantiate(spellPrefab[0], exitPoints[exitIndex].position, Quaternion.identity);//Make an instanse of Prefabe, position where it start, Quaternion to make sure the object will not rotate while mooving.
+        Block();
+
+        if (MyTarget != null && !isAttacking && !IsMoving && InLineOfSight())//Check if we are able to attack
+        {
+            attackRoutine = StartCoroutine(Attack(spellIndex)); //Coroutine to attack at the same time of other functions, Not fully threading.
+        }
+       
     }
 
     private bool InLineOfSight()//Will check if we are in line of sight of our target
