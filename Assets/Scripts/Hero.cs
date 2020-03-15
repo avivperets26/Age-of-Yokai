@@ -93,7 +93,9 @@ public class Hero : Character
 
         yield return new WaitForSeconds(1); //This is an hardcoded cast time, for debugging.        
 
-        Instantiate(spellPrefab[spellIndex], exitPoints[exitIndex].position, Quaternion.identity);//Make an instanse of Prefabe, position where it start, Quaternion to make sure the object will not rotate while mooving.
+        Spell s = Instantiate(spellPrefab[spellIndex], exitPoints[exitIndex].position, Quaternion.identity).GetComponent<Spell>();//Make an instanse of Prefabe, position where it start, Quaternion to make sure the object will not rotate while mooving.
+
+        s.MyTarget = MyTarget;
 
         StopAttack();
     }

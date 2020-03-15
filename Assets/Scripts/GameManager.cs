@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
             {
                 if(hit.collider.tag == "Enemy")
                 {
-                    player.MyTarget = hit.transform;//If we click on enemy than set it as our target
+                    player.MyTarget = hit.transform.GetChild(0);//If we click on enemy than set it as our target
                 }               
             }
             else

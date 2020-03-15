@@ -10,14 +10,12 @@ public class Spell : MonoBehaviour
     [SerializeField]
     private float speed;
 
-    private Transform target;
-    // Start is called before the first frame update
+    public Transform MyTarget { get; set; }
+
     void Start()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
 
-        //For testing and debugging
-        target = GameObject.Find("Enemy Skeleton").transform;
     }
 
 
@@ -29,13 +27,29 @@ public class Spell : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector2 direction = target.position - transform.position; //target = Enemy position, Transform = Fire ball position , by decreasing them we will be able to make sure that the fire ball will follow the enemy.
+        if (MyTarget != null)
+        {
+            Vector2 direction = MyTarget.position - transform.position; //target = Enemy position, Transform = Fire ball position , by decreasing them we will be able to make sure that the fire ball will follow the enemy.
 
-        myRigidbody.velocity = direction.normalized * speed;
+            myRigidbody.velocity = direction.normalized * speed;
 
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        }
+        
 
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "HitBox" && collision.transform == MyTarget.transform)
+        {
+            GetComponent<Animator>().SetTrigger("impact");
+
+            myRigidbody.velocity = Vector2.zero;
+
+            MyTarget = null;
+        }
     }
 }
