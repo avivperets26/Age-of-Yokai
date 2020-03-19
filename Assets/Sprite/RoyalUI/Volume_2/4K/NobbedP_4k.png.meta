@@ -1,0 +1,384 @@
+fileFormatVersion: 2
+guid: 7e7f850095d74a24fa7538370f43af80
+timeCreated: 1542022661
+licenseType: Store
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: NobbedP_4k_0
+    21300002: NobbedP_4k_1
+    21300004: NobbedP_4k_8
+    21300006: NobbedP_4k_2
+    21300008: NobbedP_4k_3
+    21300010: NobbedP_4k_4
+    21300012: NobbedP_4k_5
+    21300014: NobbedP_4k_6
+    21300016: NobbedP_4k_7
+    21300018: NobbedP_4k_9
+    21300020: NobbedP_4k_10
+    21300022: NobbedP_4k_11
+    21300024: NobbedP_4k_12
+    21300026: NobbedP_4k_13
+    21300028: NobbedP_4k_14
+    21300030: NobbedP_4k_15
+    21300032: NobbedP_4k_16
+    21300034: NobbedP_4k_17
+    21300036: NobbedP_4k_18
+    21300038: NobbedP_4k_19
+    21300040: NobbedP_4k_20
+    21300042: NobbedP_4k_21
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 400
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 4096
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: NobbedP_4k_0
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 3394
+        width: 1285
+        height: 647
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 102, y: 77, z: 93, w: 93}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: NobbedP_4k_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 3045
+        width: 1272
+        height: 332
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 102, y: 90, z: 89, w: 97}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: NobbedP_4k_8
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 2688
+        width: 353
+        height: 345
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: NobbedP_4k_2
+      rect:
+        serializedVersion: 2
+        x: 1349
+        y: 2756
+        width: 1294
+        height: 1285
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 115, y: 94, z: 98, w: 97}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: NobbedP_4k_3
+      rect:
+        serializedVersion: 2
+        x: 2656
+        y: 2756
+        width: 655
+        height: 1281
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 98, y: 102, z: 89, w: 93}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: NobbedP_4k_4
+      rect:
+        serializedVersion: 2
+        x: 3337
+        y: 2760
+        width: 332
+        height: 1281
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 97, y: 94, z: 86, w: 97}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: NobbedP_4k_5
+      rect:
+        serializedVersion: 2
+        x: 3690
+        y: 3701
+        width: 340
+        height: 340
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 89, y: 89, z: 81, w: 85}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: NobbedP_4k_6
+      rect:
+        serializedVersion: 2
+        x: 3694
+        y: 3339
+        width: 341
+        height: 345
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: NobbedP_4k_7
+      rect:
+        serializedVersion: 2
+        x: 3698
+        y: 2897
+        width: 281
+        height: 429
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: NobbedP_4k_9
+      rect:
+        serializedVersion: 2
+        x: 877
+        y: 1496
+        width: 1234
+        height: 1239
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: NobbedP_4k_10
+      rect:
+        serializedVersion: 2
+        x: 2132
+        y: 1364
+        width: 1234
+        height: 1235
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: NobbedP_4k_11
+      rect:
+        serializedVersion: 2
+        x: 3396
+        y: 2101
+        width: 643
+        height: 638
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: NobbedP_4k_12
+      rect:
+        serializedVersion: 2
+        x: 3392
+        y: 1360
+        width: 643
+        height: 630
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: NobbedP_4k_13
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 1068
+        width: 341
+        height: 341
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: NobbedP_4k_14
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 719
+        width: 1286
+        height: 341
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 115, y: 94, z: 111, w: 94}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: NobbedP_4k_15
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 55
+        width: 1290
+        height: 656
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 102, y: 98, z: 98, w: 94}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: NobbedP_4k_16
+      rect:
+        serializedVersion: 2
+        x: 1349
+        y: 60
+        width: 1290
+        height: 1276
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 111, y: 102, z: 94, w: 89}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: NobbedP_4k_17
+      rect:
+        serializedVersion: 2
+        x: 2660
+        y: 55
+        width: 651
+        height: 1290
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 102, y: 107, z: 98, w: 102}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: NobbedP_4k_18
+      rect:
+        serializedVersion: 2
+        x: 3332
+        y: 55
+        width: 337
+        height: 1286
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 94, y: 107, z: 90, w: 90}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: NobbedP_4k_19
+      rect:
+        serializedVersion: 2
+        x: 3707
+        y: 779
+        width: 260
+        height: 421
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: NobbedP_4k_20
+      rect:
+        serializedVersion: 2
+        x: 3690
+        y: 413
+        width: 340
+        height: 340
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: NobbedP_4k_21
+      rect:
+        serializedVersion: 2
+        x: 3686
+        y: 64
+        width: 353
+        height: 336
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 93, y: 72, z: 98, w: 81}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

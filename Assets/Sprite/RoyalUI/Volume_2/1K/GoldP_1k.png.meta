@@ -1,0 +1,385 @@
+fileFormatVersion: 2
+guid: e8ac9a539a8b8ed4eb1a83c9f855a843
+timeCreated: 1542021912
+licenseType: Store
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: GoldP_1k_0
+    21300002: GoldP_1k_3
+    21300004: GoldP_1k_4
+    21300006: GoldP_1k_5
+    21300008: GoldP_1k_6
+    21300010: GoldP_1k_7
+    21300012: GoldP_1k_77
+    21300014: GoldP_1k_2
+    21300016: GoldP_1k_8
+    21300018: GoldP_1k_9
+    21300020: GoldP_1k_10
+    21300022: GoldP_1k_11
+    21300024: GoldP_1k_12
+    21300026: GoldP_1k_13
+    21300028: GoldP_1k_14
+    21300030: GoldP_1k_15
+    21300032: GoldP_1k_16
+    21300034: GoldP_1k_17
+    21300036: GoldP_1k_18
+    21300038: GoldP_1k_19
+    21300040: GoldP_1k_20
+    21300042: GoldP_1k_21
+    21300044: GoldP_1k_1
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 1024
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 1024
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: GoldP_1k_0
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 845
+        width: 326
+        height: 168
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 28, y: 20, z: 23, w: 23}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: GoldP_1k_2
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 690
+        width: 323
+        height: 321
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 24, y: 22, z: 22, w: 23}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: GoldP_1k_3
+      rect:
+        serializedVersion: 2
+        x: 664
+        y: 688
+        width: 165
+        height: 324
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 22, y: 21, z: 21, w: 24}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: GoldP_1k_4
+      rect:
+        serializedVersion: 2
+        x: 831
+        y: 687
+        width: 88
+        height: 326
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 25, y: 22, z: 21, w: 27}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: GoldP_1k_5
+      rect:
+        serializedVersion: 2
+        x: 922
+        y: 927
+        width: 85
+        height: 84
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 19, y: 15, z: 19, w: 20}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: GoldP_1k_6
+      rect:
+        serializedVersion: 2
+        x: 923
+        y: 837
+        width: 86
+        height: 86
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: GoldP_1k_7
+      rect:
+        serializedVersion: 2
+        x: 923
+        y: 721
+        width: 74
+        height: 112
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: GoldP_1k_1
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 758
+        width: 322
+        height: 86
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 25, y: 23, z: 20, w: 20}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: GoldP_1k_8
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 670
+        width: 89
+        height: 87
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: GoldP_1k_9
+      rect:
+        serializedVersion: 2
+        x: 219
+        y: 373
+        width: 311
+        height: 314
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: GoldP_1k_10
+      rect:
+        serializedVersion: 2
+        x: 533
+        y: 342
+        width: 310
+        height: 312
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: GoldP_1k_11
+      rect:
+        serializedVersion: 2
+        x: 849
+        y: 525
+        width: 158
+        height: 161
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: GoldP_1k_12
+      rect:
+        serializedVersion: 2
+        x: 847
+        y: 339
+        width: 162
+        height: 161
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: GoldP_1k_13
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 266
+        width: 89
+        height: 92
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: GoldP_1k_14
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 179
+        width: 323
+        height: 86
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 26, y: 22, z: 24, w: 20}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: GoldP_1k_15
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 15
+        width: 321
+        height: 164
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 24, y: 22, z: 20, w: 20}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: GoldP_1k_16
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 15
+        width: 321
+        height: 323
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 24, y: 23, z: 20, w: 22}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: GoldP_1k_17
+      rect:
+        serializedVersion: 2
+        x: 662
+        y: 15
+        width: 168
+        height: 323
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 25, y: 23, z: 24, w: 25}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: GoldP_1k_18
+      rect:
+        serializedVersion: 2
+        x: 832
+        y: 13
+        width: 87
+        height: 323
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 24, y: 26, z: 22, w: 21}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: GoldP_1k_19
+      rect:
+        serializedVersion: 2
+        x: 925
+        y: 193
+        width: 71
+        height: 107
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: GoldP_1k_20
+      rect:
+        serializedVersion: 2
+        x: 923
+        y: 103
+        width: 87
+        height: 87
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: GoldP_1k_21
+      rect:
+        serializedVersion: 2
+        x: 923
+        y: 17
+        width: 84
+        height: 85
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 21, y: 16, z: 19, w: 20}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
