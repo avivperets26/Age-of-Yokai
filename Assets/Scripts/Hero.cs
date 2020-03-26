@@ -56,9 +56,6 @@ public class Hero : Character
             stamina.MyCurrentValue += 10;
         }
 
-
-
-
         if (Input.GetKey(KeyCode.W))//UP
         {
             exitIndex = 0;
@@ -87,18 +84,23 @@ public class Hero : Character
 
     private IEnumerator Attack(int spellIndex)//To Call Yield 
     {
+        Transform currentTarget = MyTarget;
+
         Spell newSpell = spellBook.CastSpell(spellIndex);
 
         isAttacking = true;//Indicates if we are attacking
 
         myAnimator.SetBool("attack", isAttacking); //Starts the attack animation
 
-        yield return new WaitForSeconds(newSpell.MyCastTime); //This is an hardcoded cast time, for debugging.        
+        yield return new WaitForSeconds(newSpell.MyCastTime); //This is an hardcoded cast time, for debugging.    
+        
+        if(currentTarget != null && InLineOfSight())
+        {
+            SpellScript s = Instantiate(newSpell.MySpellPrefab, exitPoints[exitIndex].position, Quaternion.identity).GetComponent<SpellScript>();//Make an instanse of Prefabe, position where it start, Quaternion to make sure the object will not rotate while mooving.
 
-        SpellScript s = Instantiate(newSpell.MySpellPrefab, exitPoints[exitIndex].position, Quaternion.identity).GetComponent<SpellScript>();//Make an instanse of Prefabe, position where it start, Quaternion to make sure the object will not rotate while mooving.
-
-        s.MyTarget = MyTarget;
-
+            s.MyTarget = currentTarget;
+        }
+      
         StopAttack();//Ends the attack
     }
 
