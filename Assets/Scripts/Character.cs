@@ -83,14 +83,16 @@ public abstract class Character : MonoBehaviour
 
     }
 
-    public void StopAttack()
+    public virtual void StopAttack()
     {
-        if(attackRoutine != null)
+
+        isAttacking = false;//Makes sure that we are not attacking
+
+        myAnimator.SetBool("attack", isAttacking);//Stops the attack animation
+
+        if (attackRoutine != null)//Checks if we have a reference to an co routine
         {
-            StopCoroutine(attackRoutine);
-            Debug.Log("Attack Stops");
-            isAttacking = false;
-            myAnimator.SetBool("attack", isAttacking);
+            StopCoroutine(attackRoutine);           
         }        
     }
 }

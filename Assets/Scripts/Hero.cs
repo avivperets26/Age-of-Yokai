@@ -10,23 +10,23 @@ public class Hero : Character
     private Stat stamina;
 
     [SerializeField]
-    private float initStamina = 100;
+    private float initStamina = 100; // The Player initial Stamina
 
     [SerializeField]
-    private GameObject[] spellPrefab;
-
-    [SerializeField]
-    private Block[] blocks;
+    private Block[] blocks; //An array of blocks used for blocking the player's sight.
 
     [SerializeField]
     private Transform[] exitPoints; // will store all the exit point of the wizard attack.
 
     private int exitIndex = 2;//will make sure we are using the right direction, initiate to 2 because defualt state is Down.
 
+    private SpellBook spellBook;
+
     public Transform MyTarget { get; set; }//The Player target
 
     protected override void Start()
     {
+        spellBook = GetComponent<SpellBook>();
         stamina.Initialize(initStamina, initStamina);
 
         //For testing and debugging
@@ -86,18 +86,20 @@ public class Hero : Character
     }
 
     private IEnumerator Attack(int spellIndex)//To Call Yield 
-    {                        
-        isAttacking = true;
+    {
+        Spell newSpell = spellBook.CastSpell(spellIndex);
 
-        myAnimator.SetBool("attack", isAttacking);
+        isAttacking = true;//Indicates if we are attacking
 
-        yield return new WaitForSeconds(1); //This is an hardcoded cast time, for debugging.        
+        myAnimator.SetBool("attack", isAttacking); //Starts the attack animation
 
-        Spell s = Instantiate(spellPrefab[spellIndex], exitPoints[exitIndex].position, Quaternion.identity).GetComponent<Spell>();//Make an instanse of Prefabe, position where it start, Quaternion to make sure the object will not rotate while mooving.
+        yield return new WaitForSeconds(newSpell.MyCastTime); //This is an hardcoded cast time, for debugging.        
+
+        SpellScript s = Instantiate(newSpell.MySpellPrefab, exitPoints[exitIndex].position, Quaternion.identity).GetComponent<SpellScript>();//Make an instanse of Prefabe, position where it start, Quaternion to make sure the object will not rotate while mooving.
 
         s.MyTarget = MyTarget;
 
-        StopAttack();
+        StopAttack();//Ends the attack
     }
 
     public void CastSpell(int spellIndex)
@@ -113,15 +115,17 @@ public class Hero : Character
 
     private bool InLineOfSight()//Will check if we are in line of sight of our target
     {
+        //Calculates the target's direction
         Vector3 targetDirecion = (MyTarget.transform.position - transform.position).normalized;
 
+        //Throws a raycast in the direction of the target
         RaycastHit2D hit = Physics2D.Raycast(transform.position, MyTarget.position,Vector2.Distance(transform.position, MyTarget.transform.position),256);
         
-        if(hit.collider == null)
+        if(hit.collider == null)//If we didn't hit the block, then we can cast a spell
         {
             return true;
         }
-
+        //If we hit the block we can't cast a spell
         return false;
     }
 
@@ -133,5 +137,12 @@ public class Hero : Character
         }
 
         blocks[exitIndex].Activete();
+    }
+
+    public override void StopAttack()
+    {
+        spellBook.StopCasting();
+
+        base.StopAttack();
     }
 }

@@ -1,55 +1,39 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using UnityEngine;
 
-public class Spell : MonoBehaviour
+[Serializable]
+public class Spell
 {
+    [SerializeField]
+    private string name;
 
-    private Rigidbody2D myRigidbody;
+    [SerializeField]
+    private int damage;
+
+    [SerializeField]
+    private Sprite icon;
 
     [SerializeField]
     private float speed;
 
-    public Transform MyTarget { get; set; }
+    [SerializeField]
+    private float castTime;
 
-    void Start()
-    {
-        myRigidbody = GetComponent<Rigidbody2D>();
+    [SerializeField]
+    private GameObject spellPrefab;
 
-    }
+    [SerializeField]
+    private Color barColor;
 
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    private void FixedUpdate()
-    {
-        if (MyTarget != null)
-        {
-            Vector2 direction = MyTarget.position - transform.position; //target = Enemy position, Transform = Fire ball position , by decreasing them we will be able to make sure that the fire ball will follow the enemy.
-
-            myRigidbody.velocity = direction.normalized * speed;
-
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-
-            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        }
-        
-
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.tag == "HitBox" && collision.transform == MyTarget.transform)
-        {
-            GetComponent<Animator>().SetTrigger("impact");
-
-            myRigidbody.velocity = Vector2.zero;
-
-            MyTarget = null;
-        }
-    }
+    public string MyName { get => name;}
+    public int MyDamage { get => damage;}
+    public Sprite MyIcon { get => icon;}
+    public float MySpeed { get => speed;}
+    public float MyCastTime { get => castTime;}
+    public GameObject MySpellPrefab { get => spellPrefab;}
+    public Color MyBarColor { get => barColor;}
 }
