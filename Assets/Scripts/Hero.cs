@@ -5,12 +5,13 @@ using UnityEngine;
 public class Hero : Character
 {
 
-    // Start is called before the first frame update
+    
     [SerializeField]
-    private Stat stamina;
+    private Stat stamina;//The hero stamina
 
     [SerializeField]
-    private float initStamina = 100; // The Player initial Stamina
+    private float initStamina; // The Player initial Stamina
+
 
     [SerializeField]
     private Block[] blocks; //An array of blocks used for blocking the player's sight.
@@ -28,7 +29,7 @@ public class Hero : Character
     {
         spellBook = GetComponent<SpellBook>();
         stamina.Initialize(initStamina, initStamina);
-
+        
         //For testing and debugging
         //target = GameObject.Find("Enemy Skeleton").transform;
 
@@ -38,8 +39,8 @@ public class Hero : Character
     protected override void Update()
     {
         GetInput();
-        Debug.Log(LayerMask.GetMask("Block"));
-        stamina.MyCurrentValue = 100;
+        //stamina.MyCurrentValue = 100;
+        //health.MyCurrentValue = 100;
         base.Update();
     }
 
@@ -54,7 +55,7 @@ public class Hero : Character
         else if (Input.GetKeyDown(KeyCode.O))//Increase Stamina by press O
         {
             stamina.MyCurrentValue += 10;
-        }
+        }       
 
         if (Input.GetKey(KeyCode.W))//UP
         {
@@ -98,7 +99,7 @@ public class Hero : Character
         {
             SpellScript s = Instantiate(newSpell.MySpellPrefab, exitPoints[exitIndex].position, Quaternion.identity).GetComponent<SpellScript>();//Make an instanse of Prefabe, position where it start, Quaternion to make sure the object will not rotate while mooving.
 
-            s.MyTarget = currentTarget;
+            s.Initialized(currentTarget, newSpell.MyDamage);
         }
       
         StopAttack();//Ends the attack
@@ -117,16 +118,20 @@ public class Hero : Character
 
     private bool InLineOfSight()//Will check if we are in line of sight of our target
     {
-        //Calculates the target's direction
-        Vector3 targetDirecion = (MyTarget.transform.position - transform.position).normalized;
-
-        //Throws a raycast in the direction of the target
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, MyTarget.position,Vector2.Distance(transform.position, MyTarget.transform.position),256);
-        
-        if(hit.collider == null)//If we didn't hit the block, then we can cast a spell
+        if(MyTarget != null)
         {
-            return true;
+            //Calculates the target's direction
+            Vector3 targetDirecion = (MyTarget.transform.position - transform.position).normalized;
+
+            //Throws a raycast in the direction of the target
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, MyTarget.position, Vector2.Distance(transform.position, MyTarget.transform.position), 256);
+
+            if (hit.collider == null)//If we didn't hit the block, then we can cast a spell
+            {
+                return true;
+            }           
         }
+
         //If we hit the block we can't cast a spell
         return false;
     }

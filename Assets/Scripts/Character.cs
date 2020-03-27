@@ -7,20 +7,26 @@ using UnityEngine;
 public abstract class Character : MonoBehaviour
 {
     [SerializeField]
-    private float speed;
+    private float speed;//Player movement speed
 
-    protected Vector2 direction;
+    protected Animator myAnimator;//A reference to the character's animator
 
+    protected Vector2 direction;//The palyer's direction
 
-    private Rigidbody2D myRigidbody;
-    //protected Vector3 targetPosition;
+    private Rigidbody2D myRigidbody;   
 
     protected bool isAttacking;
 
-    protected Coroutine attackRoutine;
+    protected Coroutine attackRoutine;//A reference to the attack coroutine
 
     [SerializeField]
     protected Transform hitBox;
+
+    [SerializeField]
+    protected Stat health;
+
+    [SerializeField]
+    private float initHealth;//The Character initial Health
 
     public bool IsMoving
     {
@@ -30,11 +36,13 @@ public abstract class Character : MonoBehaviour
         }
     }
 
-    protected Animator myAnimator;
-    // Start is called before the first frame update
+   
     protected virtual void Start()
     {
-        myRigidbody = GetComponent<Rigidbody2D>();
+        health.Initialize(initHealth, initHealth);
+
+        myRigidbody = GetComponent<Rigidbody2D>();//Makes a reference to the rigidbody2D
+
         myAnimator = GetComponent<Animator>();
     }
 
@@ -47,17 +55,17 @@ public abstract class Character : MonoBehaviour
     {
         Move();
     }
+
     //Move the Player
     public void Move()
-    {
-        //transform.Translate(direction * speed * Time.deltaTime);
+    {      
         myRigidbody.velocity = direction.normalized * speed;//make sure that the player moves
 
     }
     public void HandleLayers()
     {       
 
-        if (IsMoving)
+        if (IsMoving)//checks if we are moving or standing still, if we are moving then we need to play the move animation
         {
             //Make Player Animate move
             ActivateLayer("WallkLayer");
@@ -74,11 +82,12 @@ public abstract class Character : MonoBehaviour
         }
         else
         {
-            // Player movment Animate return to  be Idle
+            //Make sure that we will go back to idle when we aren't pressing any keys.
             ActivateLayer("IdleLayer");
         }
     }
 
+    //Activates an aimation layer based on a string
     public void ActivateLayer(string layerName)
     {
         for (int i = 0; i < myAnimator.layerCount; i++)
@@ -89,6 +98,7 @@ public abstract class Character : MonoBehaviour
 
     }
 
+    //Stops the attack
     public virtual void StopAttack()
     {
 
@@ -100,5 +110,15 @@ public abstract class Character : MonoBehaviour
         {
             StopCoroutine(attackRoutine);           
         }        
+    }
+
+    public virtual void TakeDamage(float damage)
+    {
+        health.MyCurrentValue -= damage;
+
+        if(health.MyCurrentValue <= 0)
+        {
+            myAnimator.SetTrigger("die");
+        }
     }
 }

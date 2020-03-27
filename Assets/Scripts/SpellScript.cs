@@ -5,19 +5,27 @@ using UnityEngine;
 public class SpellScript : MonoBehaviour
 {
 
-    private Rigidbody2D myRigidbody;
+    private Rigidbody2D myRigidbody;//A reference to the spell's rigid body
 
     [SerializeField]
-    private float speed;
+    private float speed;//The spell's movement speed
 
-    public Transform MyTarget { get; set; }
 
-    void Start()
+    public Transform MyTarget { get;private set; }//The spells target
+
+    private int damage;
+
+    void Start()//Use for initalization
     {
-        myRigidbody = GetComponent<Rigidbody2D>();
+        myRigidbody = GetComponent<Rigidbody2D>();//Creates a reference to the spell's rigidbody
 
     }
 
+    public void Initialized(Transform target, int damage)
+    {
+        this.MyTarget = target;
+        this.damage = damage;
+    }
 
     // Update is called once per frame
     void Update()
@@ -43,8 +51,12 @@ public class SpellScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "HitBox" && collision.transform == MyTarget.transform)
+        if(collision.tag == "HitBox" && collision.transform == MyTarget)
         {
+            speed = 0;
+
+            collision.GetComponentInParent<Enemy>().TakeDamage(damage);
+
             GetComponent<Animator>().SetTrigger("impact");
 
             myRigidbody.velocity = Vector2.zero;

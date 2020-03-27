@@ -14,7 +14,7 @@ public class Stat : MonoBehaviour
     [SerializeField]
     private float lerpSpeed;
     private float currnetFill;
-    private float currentValue;
+    private float currentValue =100;
     public float MyMaxValue { get; set; }
     public float MyCurrentValue
     {
@@ -37,10 +37,13 @@ public class Stat : MonoBehaviour
             }
 
             
-            currnetFill = currentValue / MyMaxValue;
+            currnetFill = currentValue / MyMaxValue;//Calculates the currentFill, so that we can lerp
 
-            statValue.text = currentValue + "/" + MyMaxValue;
-
+            if(statValue != null)
+            {
+                statValue.text = currentValue + "/" + MyMaxValue;//Makes sure that we update the value text
+            }
+          
         }
     }
 
