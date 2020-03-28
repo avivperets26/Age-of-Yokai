@@ -5,9 +5,12 @@ using UnityEngine.EventSystems;
 
 public class GameManager : MonoBehaviour
 {
+
+
+
     [SerializeField]
     private Hero player;
-    // Start is called before the first frame update
+    
 
     private NPC currentTarget;
     void Start()
@@ -18,7 +21,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ClickTarget();
+        ClickTarget();//Executes click target
     }
 
     public void ClickTarget()
@@ -30,21 +33,27 @@ public class GameManager : MonoBehaviour
 
             if (hit.collider != null)// if we hiy something
             {
-                if(currentTarget != null)
+                if(currentTarget != null)//if we  have a current target
                 {
-                    currentTarget.DeSelect();
+                    currentTarget.DeSelect();//Deselecet the current target
                 }
 
-                currentTarget = hit.collider.GetComponent<NPC>();
+                currentTarget = hit.collider.GetComponent<NPC>();//Selects the new target
 
-                player.MyTarget = currentTarget.Select();
+                player.MyTarget = currentTarget.Select();//Gives the player new target
+
+                UIManager.MyInstance.ShowTargetFrame(currentTarget);
             }
-            else
+            else//Deselect the target
             {
-                if(currentTarget != null)
+                UIManager.MyInstance.HideTargetFrame();
+
+                if(currentTarget != null)//If we have a current target
                 {
-                    currentTarget.DeSelect();
+                    currentTarget.DeSelect();//We deselect it
                 }
+
+                //Removing the references to the target
                 currentTarget = null;
                 player.MyTarget = null;
             }

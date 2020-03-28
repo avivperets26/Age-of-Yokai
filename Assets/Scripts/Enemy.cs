@@ -5,20 +5,27 @@ using UnityEngine;
 public class Enemy : NPC
 {
     [SerializeField]
-    private CanvasGroup healthGroup;
+    private CanvasGroup healthGroup;//A canvasgroup for the health bar
 
-    public override Transform Select()
+    public override Transform Select()//When the enemy is selected
     {
-        healthGroup.alpha = 1;
+        healthGroup.alpha = 1;//Shows the health bar
 
         return base.Select();
     }
 
-    public override void DeSelect()
+    public override void DeSelect()//When we deselct our enemy
     {
-        healthGroup.alpha = 0;
+        healthGroup.alpha = 0;//Hides the healthbar
 
         base.DeSelect();
+    }
+
+    public override void TakeDamage(float damage)
+    {
+        base.TakeDamage(damage);
+
+        OnHealthChanged(health.MyCurrentValue);
     }
 
 }
