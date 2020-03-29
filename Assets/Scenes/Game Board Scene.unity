@@ -3198,10 +3198,23 @@ MonoBehaviour:
   map: {fileID: 1132821089}
   mapData:
   - {fileID: 2800000, guid: fd7fa17a16ac7b943957355063f52241, type: 3}
+  - {fileID: 2800000, guid: 9caac8efc1e87044aa4986c6ff8cc31a, type: 3}
   mapElements:
   - tileTag: Grass2
     color: {r: 0.24705882, g: 0.50980395, b: 0.19215687, a: 1}
     elemntPrefab: {fileID: 3440877622194410144, guid: ff895ef1caa7d524cbb707e41a5a9761,
+      type: 3}
+  - tileTag: Sand
+    color: {r: 0.75686276, g: 0.6901961, b: 0.11764706, a: 1}
+    elemntPrefab: {fileID: 1878550339929065784, guid: 4461914076f819547be53e71e929f9b8,
+      type: 3}
+  - tileTag: Tree
+    color: {r: 0.60784316, g: 0.30588236, b: 0.015686275, a: 1}
+    elemntPrefab: {fileID: 1311729664483055515, guid: 24a6717153384e74897fc8d8e754d556,
+      type: 3}
+  - tileTag: Tree2
+    color: {r: 0.79607844, g: 0.4117647, b: 0.03529412, a: 1}
+    elemntPrefab: {fileID: 7039928441092631629, guid: 994d5c5051dd95542a2397ce3f955d7f,
       type: 3}
   defaultTile: {fileID: 21300000, guid: 359ef4ae64917054292682bdbb72e658, type: 3}
 --- !u!1 &1125661618
@@ -5708,7 +5721,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2053049312}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.34, y: -0.34, z: 0}
+  m_LocalPosition: {x: 4.22, y: -0.99, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 406596626}

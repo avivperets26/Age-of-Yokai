@@ -38,31 +38,40 @@ public class LevelManager : MonoBehaviour
         
     }
 
-    private void GenerateMap()
+    private void GenerateMap()//Generates our map
     {
-        for (int i = 0; i < mapData.Length; i++)
+        int height = mapData[0].height;
+        int width = mapData[0].width;
+
+        for (int i = 0; i < mapData.Length; i++)//Looks through all our map layers
         {
-            for (int x = 0; x < mapData[i].width ; x++)
+            for (int x = 0; x < mapData[i].width ; x++)//Runs through all pixels on the layer
             {
-                for (int y = 0; y < mapData[i].height; y++)
+                for (int y = 0; y < mapData[i].height; y++)//Runs through all pixels on the layer
                 {
                     Color c = mapData[i].GetPixel(x, y);
 
-                    Debug.Log(ColorUtility.ToHtmlStringRGBA(c));
+                    Debug.Log(ColorUtility.ToHtmlStringRGBA(c));//Gets the color of the current pixel
 
-                    MapElement newElement = Array.Find(mapElements, e => e.Mycolor == c);
+                    MapElement newElement = Array.Find(mapElements, e => e.Mycolor == c);//Checks if we have a tile that suits the color of the pixel on the map
 
-                    if(newElement != null)
+                    if(newElement != null)//If we found an elemnt with the correct color
                     {
+                        //Calculate x and y position of the title
                         float xPos = WorldStartPos.x + (defaultTile.bounds.size.x * x);
 
                         float yPos = WorldStartPos.y + (defaultTile.bounds.size.y * y);
 
-                        GameObject go = Instantiate(newElement.MyElementPrefab);
+                        GameObject go = Instantiate(newElement.MyElementPrefab);//Create the title
 
-                        go.transform.position = new Vector2(xPos,yPos);
+                        go.transform.position = new Vector2(xPos,yPos);//Set the titles position
 
-                        go.transform.parent = map;
+                        if (newElement.MytileTag == "Tree")
+                        {
+                            go.GetComponent<SpriteRenderer>().sortingOrder = height*2 - y*2;
+                        }
+
+                        go.transform.parent = map;//Make the title a child of map
                   
                     }
                 }
