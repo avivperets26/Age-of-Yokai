@@ -73,7 +73,7 @@ public class Stat : MonoBehaviour
 
         MyMaxValue = maxValue;
 
-        MyCurrentValue = currentValue;
+        MyCurrentValue = currentValue;  
 
         content.fillAmount = MyCurrentValue / MyMaxValue;
     }
