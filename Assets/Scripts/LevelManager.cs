@@ -49,9 +49,7 @@ public class LevelManager : MonoBehaviour
             {
                 for (int y = 0; y < mapData[i].height; y++)//Runs through all pixels on the layer
                 {
-                    Color c = mapData[i].GetPixel(x, y);
-
-                    Debug.Log(ColorUtility.ToHtmlStringRGBA(c));//Gets the color of the current pixel
+                    Color c = mapData[i].GetPixel(x, y);                   
 
                     MapElement newElement = Array.Find(mapElements, e => e.Mycolor == c);//Checks if we have a tile that suits the color of the pixel on the map
 

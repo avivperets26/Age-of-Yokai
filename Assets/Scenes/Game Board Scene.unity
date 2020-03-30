@@ -5310,12 +5310,12 @@ PrefabInstance:
     - target: {fileID: 8749254919949873306, guid: 381e0537aef29d649af62027596ba638,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.22
+      value: -4.48
       objectReference: {fileID: 0}
     - target: {fileID: 8749254919949873306, guid: 381e0537aef29d649af62027596ba638,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.99
+      value: -1.22
       objectReference: {fileID: 0}
     - target: {fileID: 8749254919949873306, guid: 381e0537aef29d649af62027596ba638,
         type: 3}
@@ -5397,11 +5397,6 @@ PrefabInstance:
       propertyPath: canvasGroup
       value: 
       objectReference: {fileID: 1387640680}
-    - target: {fileID: 1353291248438684756, guid: 381e0537aef29d649af62027596ba638,
-        type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 381e0537aef29d649af62027596ba638, type: 3}
 --- !u!1001 &9213197564709621335
