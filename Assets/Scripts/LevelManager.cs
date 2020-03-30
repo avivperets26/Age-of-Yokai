@@ -66,9 +66,9 @@ public class LevelManager : MonoBehaviour
 
                         go.transform.position = new Vector2(xPos,yPos);//Set the titles position
 
-                        if (newElement.MytileTag == "Tree")
+                        if (newElement.MytileTag == "Tree")//Checks if we are placing a tree
                         {
-                            go.GetComponent<SpriteRenderer>().sortingOrder = height*2 - y*2;
+                            go.GetComponent<SpriteRenderer>().sortingOrder = height*2 - y*2;//IF we are placing a tree then we need to manage the 
                         }
 
                         go.transform.parent = map;//Make the title a child of map
