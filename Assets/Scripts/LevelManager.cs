@@ -15,9 +15,11 @@ public class LevelManager : MonoBehaviour
     private MapElement[] mapElements;
 
     [SerializeField]
-    private Sprite defaultTile;
+    private Sprite defaultTile;//This title is ised for measuring the distance between tiles
 
-    private Vector3 WorldStartPos
+    private Dictionary<Point, GameObject> waterTiles = new Dictionary<Point, GameObject>();
+
+    private Vector3 WorldStartPos//The position of the bottom left corner of the screen
     {
         get
         {
@@ -64,9 +66,14 @@ public class LevelManager : MonoBehaviour
 
                         go.transform.position = new Vector2(xPos,yPos);//Set the titles position
 
+                        if(newElement.MytileTag == "Water")//Checks if we are placing an Water
+                        {
+                            waterTiles.Add(new Point(x,y),go);//keys x and y have to be uniqe for the Dictionery call,
+                        }
+
                         if (newElement.MytileTag == "Tree")//Checks if we are placing a tree
                         {
-                            go.GetComponent<SpriteRenderer>().sortingOrder = height*2 - y*2;//IF we are placing a tree then we need to manage the 
+                            go.GetComponent<SpriteRenderer>().sortingOrder = height*2 - y*2;//IF we are placing a tree then we need to manage the order
                         }
 
                         go.transform.parent = map;//Make the title a child of map
@@ -75,6 +82,43 @@ public class LevelManager : MonoBehaviour
                 }
             }
         }
+
+        CheckWater();
+    }
+
+    private void CheckWater()
+    {
+        foreach (KeyValuePair <Point,GameObject> tile in waterTiles) //Runs in every single tile in waterTiles
+        {
+            string composition = TileCheck(tile.Key);
+        }  
+    }
+
+    public string TileCheck(Point currentPoint)
+    {
+        string composition = string.Empty;
+
+        for (int x = -1; x <= 1; x++)
+        {
+            for (int y = -1; y <= 1; y++)
+            {
+                if(x != 0 || y != 0)
+                {
+                    if(waterTiles.ContainsKey(new Point(currentPoint.MyX+x,currentPoint.MyY+y)))//If x = -1 we will take the position from the left, If x= +1 we will take the position from the right
+                    {
+                        composition += "W";//W = Water tile
+                    }
+                    else
+                    {
+                        composition += "E";//E = Earth tile
+                    }
+                }
+            }
+        }
+
+        Debug.Log(composition);
+
+        return composition;
     }
 }
 
@@ -82,15 +126,15 @@ public class LevelManager : MonoBehaviour
 public class MapElement
 {
     [SerializeField]
-    private string tileTag;
+    private string tileTag;//This tile tag, used to check what tile we are placing
 
     [SerializeField]
-    private Color color;
+    private Color color;//Tje color of the tiles, this is used to compare the tile with color on the map layer
 
     [SerializeField]
-    private GameObject elemntPrefab;
+    private GameObject elemntPrefab;//Prefab that we use to spawn the tile in our world
 
-    public GameObject MyElementPrefab
+    public GameObject MyElementPrefab//Property for accessing the refab
     {
         get
         {
@@ -98,7 +142,7 @@ public class MapElement
         }
     }
 
-    public string MytileTag
+    public string MytileTag//Property for accessing the tag
     {
         get
         {
@@ -106,7 +150,7 @@ public class MapElement
         }
     }
 
-    public Color Mycolor
+    public Color Mycolor//Property for accessing the color
     {
         get
         {
@@ -114,3 +158,16 @@ public class MapElement
         }
     }
 }
+
+public struct Point
+{
+    public int MyX { get; set; }
+    public int MyY { get; set; }
+
+    public Point(int x, int y)
+    {
+        this.MyX = x;
+        this.MyY = y;
+    }
+}
+
