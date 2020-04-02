@@ -21,8 +21,7 @@ public class LayerSorter : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D collision)//When the player hits an obstacle
-    {
-        Debug.Log("Triger");
+    {       
         if (collision.tag == "Obstacle")//If we hit an obstacle
         {
             Debug.Log("Colision Obstacle");

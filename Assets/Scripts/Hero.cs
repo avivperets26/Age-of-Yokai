@@ -53,7 +53,7 @@ public class Hero : Character
     
     private void GetInput()
     {
-        direction = Vector2.zero;
+        Direction = Vector2.zero;
         if (Input.GetKeyDown(KeyCode.I))//Decrease Stamina by press I
         {
             stamina.MyCurrentValue -= 10;
@@ -66,23 +66,23 @@ public class Hero : Character
         if (Input.GetKey(KeyCode.W))//UP
         {
             exitIndex = 0;
-            direction += Vector2.up;
+            Direction += Vector2.up;
            // targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         }
         else if (Input.GetKey(KeyCode.S))//DOWN
         {
             exitIndex = 2;
-            direction += Vector2.down;
+            Direction += Vector2.down;
         }
         else if (Input.GetKey(KeyCode.D))//RIGHT
         {
             exitIndex = 1;
-            direction += Vector2.right;
+            Direction += Vector2.right;
         }
         else if (Input.GetKey(KeyCode.A))//LEFT
         {
             exitIndex = 3;
-            direction += Vector2.left;
+            Direction += Vector2.left;
         }
         //transform.position = Vector3.MoveTowards(transform.position, targetPosition, Time.deltaTime * 5);
      

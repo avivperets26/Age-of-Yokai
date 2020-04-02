@@ -11,9 +11,9 @@ public abstract class Character : MonoBehaviour
 
     protected Animator myAnimator;//A reference to the character's animator
 
-    protected Vector2 direction;//The palyer's direction
+    private Vector2 direction;//The palyer's direction
 
-    private Rigidbody2D myRigidbody;   
+    private Rigidbody2D myRigidbody;//The character rigidbody
 
     protected bool isAttacking;
 
@@ -33,15 +33,17 @@ public abstract class Character : MonoBehaviour
     [SerializeField]
     private float initHealth;//The Character initial Health
 
-    public bool IsMoving
+    public bool IsMoving//Indicate if Character is moving or not
     {
         get
         {
-            return direction.x != 0 || direction.y != 0;
+            return Direction.x != 0 || Direction.y != 0;
         }
     }
 
-   
+    public Vector2 Direction { get => direction; set => direction = value; }
+    public float Speed { get => speed; set => speed = value; }
+
     protected virtual void Start()
     {
         health.Initialize(initHealth, initHealth);
@@ -64,7 +66,7 @@ public abstract class Character : MonoBehaviour
     //Move the Player
     public void Move()
     {      
-        myRigidbody.velocity = direction.normalized * speed;//make sure that the player moves
+        myRigidbody.velocity = Direction.normalized * Speed;//make sure that the player moves
 
     }
     public void HandleLayers()
@@ -73,11 +75,11 @@ public abstract class Character : MonoBehaviour
         if (IsMoving)//checks if we are moving or standing still, if we are moving then we need to play the move animation
         {
             //Make Player Animate move
-            ActivateLayer("WallkLayer");
+            ActivateLayer("WalkLayer");
 
             //Sets the animation parameter so that he faces the correct direction
-            myAnimator.SetFloat("X", direction.x);
-            myAnimator.SetFloat("Y", direction.y);
+            myAnimator.SetFloat("X", Direction.x);
+            myAnimator.SetFloat("Y", Direction.y);
 
             StopAttack();//Will not able to animate-attack while wallking
         }
