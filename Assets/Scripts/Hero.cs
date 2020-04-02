@@ -23,11 +23,14 @@ public class Hero : Character
 
     private SpellBook spellBook;
 
+    private Vector3 min, max;
+
     public Transform MyTarget { get; set; }//The Player target
 
     protected override void Start()
     {
         spellBook = GetComponent<SpellBook>();
+
         stamina.Initialize(initStamina, initStamina);
         
         //For testing and debugging
@@ -35,10 +38,13 @@ public class Hero : Character
 
         base.Start();
     }
-    // Update is called once per frame
-    protected override void Update()
+
+    protected override void Update()//We are overriding the character update function, so by that we can exectute our own function
     {
-        GetInput();
+        GetInput();//Exectute the GetInput function
+
+        transform.position = new Vector3(Mathf.Clamp(transform.position.x, min.x, max.x), Mathf.Clamp(transform.position.y, min.y, max.y), transform.position.z);
+
         //stamina.MyCurrentValue = 100;
         //health.MyCurrentValue = 100;
         base.Update();
@@ -79,15 +85,20 @@ public class Hero : Character
             direction += Vector2.left;
         }
         //transform.position = Vector3.MoveTowards(transform.position, targetPosition, Time.deltaTime * 5);
-
-      
+     
     }
 
-    private IEnumerator Attack(int spellIndex)//To Call Yield 
+    public void SetLimits(Vector3 min, Vector3 max)
+    {
+        this.min = min;
+        this.max = max;
+    }
+
+    private IEnumerator Attack(int spellIndex)//To Call Yield , A co routine for attacking
     {
         Transform currentTarget = MyTarget;
 
-        Spell newSpell = spellBook.CastSpell(spellIndex);
+        Spell newSpell = spellBook.CastSpell(spellIndex);// creates a new spell, so by that we can use the information form of it to cast it
 
         isAttacking = true;//Indicates if we are attacking
 
@@ -136,7 +147,7 @@ public class Hero : Character
         return false;
     }
 
-    private void Block()//Will Deactivate the block sight of the hero 
+    private void Block()//Will Deactivate the block sight of the hero based on direction
     {
         foreach (Block b in blocks)
         {
@@ -146,10 +157,10 @@ public class Hero : Character
         blocks[exitIndex].Activete();
     }
 
-    public override void StopAttack()
+    public override void StopAttack()//Makes the player stop attacking
     {
-        spellBook.StopCasting();
+        spellBook.StopCasting();//Stop the spellbook from casting
 
-        base.StopAttack();
+        base.StopAttack();//Makes sure that we stop the cast in our character
     }
 }
