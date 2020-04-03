@@ -7,18 +7,29 @@ public class Enemy : NPC
     [SerializeField]
     private CanvasGroup healthGroup;//A canvasgroup for the health bar
 
-    private Transform target;
+    private Transform target;//The enemy target, this is most likely the player
 
-    private IState currentState;
+    private IState currentState;//The enemy current state
 
-    public Transform Target { get => target; set => target = value; }
+    public float MyAttackRange { get; set; }//The enemy attack range
+
+    public float MyAttackTime { get; set; }//The enemy attack Time
+    public Transform Target { get => target; set => target = value; }//A property for accessing the target
 
     protected void Awake()
     {
+        MyAttackRange = 1;
+
         ChangeState(new IdleState());
     }
+
     protected override void Update()//Update is marked as virtual, so that we can override it in the subclasses
     {
+        if (!IsAttacking)
+        {
+            MyAttackTime += Time.deltaTime;
+        }
+
         currentState.Update();
 
         base.Update();

@@ -84,11 +84,15 @@ public class Hero : Character
             exitIndex = 3;
             Direction += Vector2.left;
         }
-        //transform.position = Vector3.MoveTowards(transform.position, targetPosition, Time.deltaTime * 5);
+
+        if (IsMoving)
+        {
+            StopAttack();
+        }
      
     }
 
-    public void SetLimits(Vector3 min, Vector3 max)
+    public void SetLimits(Vector3 min, Vector3 max)//Set's the player limits so that he can't leave the game world
     {
         this.min = min;
         this.max = max;
@@ -100,9 +104,9 @@ public class Hero : Character
 
         Spell newSpell = spellBook.CastSpell(spellIndex);// creates a new spell, so by that we can use the information form of it to cast it
 
-        isAttacking = true;//Indicates if we are attacking
+        IsAttacking = true;//Indicates if we are attacking
 
-        myAnimator.SetBool("attack", isAttacking); //Starts the attack animation
+        MyAnimator.SetBool("attack", IsAttacking); //Starts the attack animation
 
         yield return new WaitForSeconds(newSpell.MyCastTime); //This is an hardcoded cast time, for debugging.    
         
@@ -120,7 +124,7 @@ public class Hero : Character
     {
         Block();
 
-        if (MyTarget != null && !isAttacking && !IsMoving && InLineOfSight())//Check if we are able to attack
+        if (MyTarget != null && !IsAttacking && !IsMoving && InLineOfSight())//Check if we are able to attack
         {
             attackRoutine = StartCoroutine(Attack(spellIndex)); //Coroutine to attack at the same time of other functions, Not fully threading.
         }
@@ -157,10 +161,18 @@ public class Hero : Character
         blocks[exitIndex].Activete();
     }
 
-    public override void StopAttack()//Makes the player stop attacking
+    //Stops the attack
+    public void StopAttack()
     {
         spellBook.StopCasting();//Stop the spellbook from casting
 
-        base.StopAttack();//Makes sure that we stop the cast in our character
+        IsAttacking = false;//Makes sure that we are not attacking
+
+        MyAnimator.SetBool("attack", IsAttacking);//Stops the attack animation
+
+        if (attackRoutine != null)//Checks if we have a reference to an co routine
+        {
+            StopCoroutine(attackRoutine);
+        }
     }
 }

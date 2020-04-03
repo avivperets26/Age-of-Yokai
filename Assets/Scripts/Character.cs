@@ -9,13 +9,13 @@ public abstract class Character : MonoBehaviour
     [SerializeField]
     private float speed;//Player movement speed
 
-    protected Animator myAnimator;//A reference to the character's animator
+    public Animator MyAnimator { get; set; }//A reference to the character's animator
 
     private Vector2 direction;//The palyer's direction
 
     private Rigidbody2D myRigidbody;//The character rigidbody
 
-    protected bool isAttacking;
+    public bool IsAttacking { get; set; }//Indicate if the character is attacking or not
 
     protected Coroutine attackRoutine;//A reference to the attack coroutine
 
@@ -50,11 +50,11 @@ public abstract class Character : MonoBehaviour
 
         myRigidbody = GetComponent<Rigidbody2D>();//Makes a reference to the rigidbody2D
 
-        myAnimator = GetComponent<Animator>();
+        MyAnimator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
-    protected virtual void Update()//Update runs once per frame
+    protected virtual void Update()//Update is marked as virtual, so that we can overide it in the subclasses
     {
         HandleLayers();
     }
@@ -78,12 +78,12 @@ public abstract class Character : MonoBehaviour
             ActivateLayer("WalkLayer");
 
             //Sets the animation parameter so that he faces the correct direction
-            myAnimator.SetFloat("X", Direction.x);
-            myAnimator.SetFloat("Y", Direction.y);
+            MyAnimator.SetFloat("X", Direction.x);
+            MyAnimator.SetFloat("Y", Direction.y);
 
-            StopAttack();//Will not able to animate-attack while wallking
+            //StopAttack();//Will not able to animate-attack while wallking
         }
-        else if(isAttacking)
+        else if(IsAttacking)
         {
             ActivateLayer("AttackLayer");
         }
@@ -97,26 +97,12 @@ public abstract class Character : MonoBehaviour
     //Activates an aimation layer based on a string
     public void ActivateLayer(string layerName)
     {
-        for (int i = 0; i < myAnimator.layerCount; i++)
+        for (int i = 0; i < MyAnimator.layerCount; i++)
         {
-            myAnimator.SetLayerWeight(i, 0);
+            MyAnimator.SetLayerWeight(i, 0);
         }
-        myAnimator.SetLayerWeight(myAnimator.GetLayerIndex(layerName), 1);
+        MyAnimator.SetLayerWeight(MyAnimator.GetLayerIndex(layerName), 1);
 
-    }
-
-    //Stops the attack
-    public virtual void StopAttack()
-    {
-
-        isAttacking = false;//Makes sure that we are not attacking
-
-        myAnimator.SetBool("attack", isAttacking);//Stops the attack animation
-
-        if (attackRoutine != null)//Checks if we have a reference to an co routine
-        {
-            StopCoroutine(attackRoutine);           
-        }        
     }
 
     public virtual void TakeDamage(float damage)
@@ -125,7 +111,7 @@ public abstract class Character : MonoBehaviour
 
         if(health.MyCurrentValue <= 0)
         {
-            myAnimator.SetTrigger("die");
+            MyAnimator.SetTrigger("die");
         }
     }
 }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9057590114436719831}
   - component: {fileID: 3186612911660413706}
   - component: {fileID: 2978707233196656147}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Range
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -184,7 +184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbbe8d56691a94044bfe58115a1e014d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
+  speed: 0.8
   hitBox: {fileID: 9213197566073341377}
   health: {fileID: 9213197564999816812}
   initHealth: 25
@@ -200,7 +200,7 @@ Animator:
   m_GameObject: {fileID: 9213197564329481239}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: b3b4f1e605441e14b9e1623ccd9e67e3, type: 2}
+  m_Controller: {fileID: 9100000, guid: e7f60ffbbdba7f040ab8321b6c653cf2, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
