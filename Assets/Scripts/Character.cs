@@ -44,6 +44,14 @@ public abstract class Character : MonoBehaviour
     public Vector2 Direction { get => direction; set => direction = value; }
     public float Speed { get => speed; set => speed = value; }
 
+    public bool IsAlive
+    {
+        get
+        {
+            return health.MyCurrentValue > 0;
+        }
+    }
+
     protected virtual void Start()
     {
         health.Initialize(initHealth, initHealth);
@@ -65,32 +73,40 @@ public abstract class Character : MonoBehaviour
 
     //Move the Player
     public void Move()
-    {      
-        myRigidbody.velocity = Direction.normalized * Speed;//make sure that the player moves
-
-    }
-    public void HandleLayers()
-    {       
-
-        if (IsMoving)//checks if we are moving or standing still, if we are moving then we need to play the move animation
+    {
+        if (IsAlive)
         {
-            //Make Player Animate move
-            ActivateLayer("WalkLayer");
-
-            //Sets the animation parameter so that he faces the correct direction
-            MyAnimator.SetFloat("X", Direction.x);
-            MyAnimator.SetFloat("Y", Direction.y);
-
-            //StopAttack();//Will not able to animate-attack while wallking
+            myRigidbody.velocity = Direction.normalized * Speed;//make sure that the player moves
         }
-        else if(IsAttacking)
+    }
+    public void HandleLayers()//Makes sure that the right animation layer is playing
+    {
+        if (IsAlive)
         {
-            ActivateLayer("AttackLayer");
+            if (IsMoving)//checks if we are moving or standing still, if we are moving then we need to play the move animation
+            {
+                //Make Player Animate move
+                ActivateLayer("WalkLayer");
+
+                //Sets the animation parameter so that he faces the correct direction
+                MyAnimator.SetFloat("X", Direction.x);
+                MyAnimator.SetFloat("Y", Direction.y);
+
+                //StopAttack();//Will not able to animate-attack while wallking
+            }
+            else if (IsAttacking)
+            {
+                ActivateLayer("AttackLayer");
+            }
+            else
+            {
+                //Make sure that we will go back to idle when we aren't pressing any keys.
+                ActivateLayer("IdleLayer");
+            }
         }
         else
         {
-            //Make sure that we will go back to idle when we aren't pressing any keys.
-            ActivateLayer("IdleLayer");
+            ActivateLayer("DeathLayer");
         }
     }
 
@@ -111,6 +127,10 @@ public abstract class Character : MonoBehaviour
 
         if(health.MyCurrentValue <= 0)
         {
+            Direction = Vector2.zero;
+
+            myRigidbody.velocity = Direction;
+
             MyAnimator.SetTrigger("die");
         }
     }

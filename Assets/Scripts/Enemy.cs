@@ -25,12 +25,16 @@ public class Enemy : NPC
 
     protected override void Update()//Update is marked as virtual, so that we can override it in the subclasses
     {
-        if (!IsAttacking)
+        if (IsAlive)
         {
-            MyAttackTime += Time.deltaTime;
-        }
+            if (!IsAttacking)
+            {
+                MyAttackTime += Time.deltaTime;
+            }
 
-        currentState.Update();
+            currentState.Update();    
+            
+        }
 
         base.Update();
     }
@@ -49,7 +53,7 @@ public class Enemy : NPC
         base.DeSelect();
     }
 
-    public override void TakeDamage(float damage)
+    public override void TakeDamage(float damage)//Makes the enemy take damage when hit
     {
         base.TakeDamage(damage);
 
