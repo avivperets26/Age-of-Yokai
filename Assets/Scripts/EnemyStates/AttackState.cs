@@ -31,9 +31,9 @@ public class AttackState : IState
             parent.StartCoroutine(Attack());
         }
 
-        if(parent.Target != null)//If WE have a target then we need to check if we can attack it or if we need to follow
+        if(parent.MyTarget != null)//If WE have a target then we need to check if we can attack it or if we need to follow
         {
-            float distance = Vector2.Distance(parent.Target.position, parent.transform.position);//calculate the distance between the target and the enemy
+            float distance = Vector2.Distance(parent.MyTarget.position, parent.transform.position);//calculate the distance between the target and the enemy
 
             if(distance >= parent.MyAttackRange+extraRange && !parent.IsAttacking)//if the distance is larger then the attackrange, than we need to move
             {

@@ -190,6 +190,7 @@ MonoBehaviour:
   initHealth: 25
   portrait: {fileID: 21300000, guid: c06cd7d12bec37043b0d4bee13e15945, type: 3}
   healthGroup: {fileID: 9213197565364862354}
+  initAggroRange: 3
 --- !u!95 &9213197564329481235
 Animator:
   serializedVersion: 3

@@ -25,6 +25,8 @@ public abstract class Character : MonoBehaviour
     [SerializeField]
     protected Stat health;
 
+    public Transform MyTarget { get; set; }
+
     public Stat Myhealth
     {
         get { return health; }
@@ -121,11 +123,11 @@ public abstract class Character : MonoBehaviour
 
     }
 
-    public virtual void TakeDamage(float damage)
+    public virtual void TakeDamage(float damage, Transform source)//Make the character take damage
     {
         health.MyCurrentValue -= damage;
 
-        if(health.MyCurrentValue <= 0)
+        if(health.MyCurrentValue <= 0)//Makes sure that the character stops moving when is dead
         {
             Direction = Vector2.zero;
 

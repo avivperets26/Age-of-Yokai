@@ -25,8 +25,6 @@ public class Hero : Character
 
     private Vector3 min, max;
 
-    public Transform MyTarget { get; set; }//The Player target
-
     protected override void Start()
     {
         spellBook = GetComponent<SpellBook>();
@@ -51,9 +49,10 @@ public class Hero : Character
     }
 
     
-    private void GetInput()
+    private void GetInput()//Listen to the player Input
     {
         Direction = Vector2.zero;
+
         if (Input.GetKeyDown(KeyCode.I))//Decrease Stamina by press I
         {
             stamina.MyCurrentValue -= 10;
@@ -114,17 +113,17 @@ public class Hero : Character
         {
             SpellScript s = Instantiate(newSpell.MySpellPrefab, exitPoints[exitIndex].position, Quaternion.identity).GetComponent<SpellScript>();//Make an instanse of Prefabe, position where it start, Quaternion to make sure the object will not rotate while mooving.
 
-            s.Initialized(currentTarget, newSpell.MyDamage);
+            s.Initialized(currentTarget, newSpell.MyDamage, transform);
         }
       
         StopAttack();//Ends the attack
     }
 
-    public void CastSpell(int spellIndex)
+    public void CastSpell(int spellIndex)//Cast a spell
     {
         Block();
 
-        if (MyTarget != null && !IsAttacking && !IsMoving && InLineOfSight())//Check if we are able to attack
+        if (MyTarget != null && MyTarget.GetComponentInParent<Enemy>().IsAlive && !IsAttacking && !IsMoving && InLineOfSight())//Check if we are able to attack
         {
             attackRoutine = StartCoroutine(Attack(spellIndex)); //Coroutine to attack at the same time of other functions, Not fully threading.
         }

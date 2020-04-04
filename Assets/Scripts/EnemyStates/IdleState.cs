@@ -8,9 +8,11 @@ using UnityEngine;
 class IdleState : IState
 {
     private Enemy parent;
-    public void Enter(Enemy parent)
+    public void Enter(Enemy parent)//This is callled whenever we eneter the state
     {
         this.parent = parent;
+
+        this.parent.Reset();
     }
 
     public void Exit()//Called whenever we exit the state
@@ -22,7 +24,7 @@ class IdleState : IState
     {
         Debug.Log("Idle");
 
-        if (parent.Target != null)//If we have a targer, than we need to follow it.
+        if (parent.MyTarget != null)//If we have a targer, than we need to follow it.
         {
             parent.ChangeState(new FollowState());
         }
