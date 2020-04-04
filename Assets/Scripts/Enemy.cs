@@ -13,6 +13,8 @@ public class Enemy : NPC
 
     public float MyAttackTime { get; set; }//How much time has passed since the last attack
 
+    public Vector3 MyStartPosition { get; set; }
+
     [SerializeField]
     private float initAggroRange;
 
@@ -28,6 +30,8 @@ public class Enemy : NPC
 
     protected void Awake()
     {
+        MyStartPosition = transform.position;
+
         MyAggroRange = initAggroRange;
 
         MyAttackRange = 1;
@@ -67,11 +71,14 @@ public class Enemy : NPC
 
     public override void TakeDamage(float damage, Transform source)//Makes the enemy take damage when hit
     {
-        SetTarget(source);
+        if(!(currentState is EvadeState))
+        {
+            SetTarget(source);
 
-        base.TakeDamage(damage,source);
+            base.TakeDamage(damage, source);
 
-        OnHealthChanged(health.MyCurrentValue);
+            OnHealthChanged(health.MyCurrentValue);
+        }       
     }
 
 
@@ -89,7 +96,7 @@ public class Enemy : NPC
 
     public void SetTarget(Transform target)
     {
-        if (MyTarget == null)
+        if (MyTarget == null && !(currentState is EvadeState))
         {
             float distance = Vector2.Distance(transform.position, target.position);
 

@@ -37,7 +37,7 @@ class FollowState : IState//The enemy follow state
         }
         if (!parent.InRange)//we dont have a target, then we need to go back to idle
         {
-            parent.ChangeState(new IdleState());
+            parent.ChangeState(new EvadeState());
         }       
     }
 }
