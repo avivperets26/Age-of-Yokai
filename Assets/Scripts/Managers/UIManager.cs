@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,7 +12,7 @@ public class UIManager : MonoBehaviour
     {
         get
         {
-            if(instance == null)
+            if (instance == null)
             {
                 instance = FindObjectOfType<UIManager>();
             }
@@ -31,7 +32,17 @@ public class UIManager : MonoBehaviour
 
     [SerializeField]
     private Image portraitFrame;
-   
+
+    [SerializeField]
+    private CanvasGroup keybindMenu;
+
+    private GameObject[] keybindButtons;
+
+    private void Awake()
+    {
+        keybindButtons = GameObject.FindGameObjectsWithTag("keybind");
+    }
+
     void Start()//Use it to initialization
     {
         healthStat = targetFrame.GetComponentInChildren<Stat>();//Look for the Stat script in the TargetFrane Object children to initialize it.
@@ -45,7 +56,7 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(action1))
+        if (Input.GetKeyDown(action1))//If we click button 1,2 or 3
         {
             ActionButtonOnClick(0);
         }
@@ -56,6 +67,10 @@ public class UIManager : MonoBehaviour
         else if (Input.GetKeyDown(action3))
         {
             ActionButtonOnClick(2);
+        }
+        else if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            OpenCloseMenu();
         }
     }
     private void ActionButtonOnClick(int btnIndex)//Exectues an action based on the button clicked
@@ -84,5 +99,21 @@ public class UIManager : MonoBehaviour
     public void UpdateTargetFrame(float health)
     {
         healthStat.MyCurrentValue = health;
+    }
+
+    public void OpenCloseMenu()
+    {
+        keybindMenu.alpha = keybindMenu.alpha > 0 ? 0 : 1; //If alpha is >0 than replace to 1
+
+        keybindMenu.blocksRaycasts =keybindMenu.blocksRaycasts == true ? false : true;
+
+        Time.timeScale = Time.timeScale > 0 ? 0 : 1;
+    }
+
+    public void UpdateKetText(string key, KeyCode code)
+    {
+        Text tmp = Array.Find(keybindButtons, x => x.name == key).GetComponentInChildren<Text>();
+
+        tmp.text = code.ToString();
     }
 }
