@@ -4,8 +4,20 @@ using UnityEngine;
 
 public class Hero : Character
 {
+    private static Hero instance;
 
-    
+    public static Hero MyInstance//Singelton Design Pattern
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = FindObjectOfType<Hero>();
+            }
+            return instance;
+        }
+    }
+
     [SerializeField]
     private Stat stamina;//The hero stamina
 
@@ -62,23 +74,23 @@ public class Hero : Character
             stamina.MyCurrentValue += 10;
         }       
 
-        if (Input.GetKey(KeyCode.W))//UP
+        if (Input.GetKey(KeybindManager.MyInstance.Keybinds["UP"]))//UP
         {
             exitIndex = 0;
             Direction += Vector2.up;
            // targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         }
-        else if (Input.GetKey(KeyCode.S))//DOWN
+        else if (Input.GetKey(KeybindManager.MyInstance.Keybinds["DOWN"]))//DOWN
         {
             exitIndex = 2;
             Direction += Vector2.down;
         }
-        else if (Input.GetKey(KeyCode.D))//RIGHT
+        else if (Input.GetKey(KeybindManager.MyInstance.Keybinds["RIGHT"]))//RIGHT
         {
             exitIndex = 1;
             Direction += Vector2.right;
         }
-        else if (Input.GetKey(KeyCode.A))//LEFT
+        else if (Input.GetKey(KeybindManager.MyInstance.Keybinds["LEFT"]))//LEFT
         {
             exitIndex = 3;
             Direction += Vector2.left;
@@ -87,6 +99,14 @@ public class Hero : Character
         if (IsMoving)
         {
             StopAttack();
+        }
+
+        foreach (string action in KeybindManager.MyInstance.ActionBinds.Keys)
+        {
+            if (Input.GetKeyDown(KeybindManager.MyInstance.ActionBinds[action]))
+            {
+                UIManager.MyInstance.ClickActionButton(action);
+            }
         }
      
     }
@@ -97,11 +117,11 @@ public class Hero : Character
         this.max = max;
     }
 
-    private IEnumerator Attack(int spellIndex)//To Call Yield , A co routine for attacking
+    private IEnumerator Attack(string spellName)//To Call Yield , A co routine for attacking
     {
         Transform currentTarget = MyTarget;
 
-        Spell newSpell = spellBook.CastSpell(spellIndex);// creates a new spell, so by that we can use the information form of it to cast it
+        Spell newSpell = spellBook.CastSpell(spellName);// creates a new spell, so by that we can use the information form of it to cast it
 
         IsAttacking = true;//Indicates if we are attacking
 
@@ -119,13 +139,13 @@ public class Hero : Character
         StopAttack();//Ends the attack
     }
 
-    public void CastSpell(int spellIndex)//Cast a spell
+    public void CastSpell(string spellName)//Cast a spell
     {
         Block();
 
         if (MyTarget != null && MyTarget.GetComponentInParent<Enemy>().IsAlive && !IsAttacking && !IsMoving && InLineOfSight())//Check if we are able to attack
         {
-            attackRoutine = StartCoroutine(Attack(spellIndex)); //Coroutine to attack at the same time of other functions, Not fully threading.
+            attackRoutine = StartCoroutine(Attack(spellName)); //Coroutine to attack at the same time of other functions, Not fully threading.
         }
        
     }

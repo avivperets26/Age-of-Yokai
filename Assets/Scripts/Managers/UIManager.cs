@@ -21,9 +21,7 @@ public class UIManager : MonoBehaviour
     }
 
     [SerializeField]
-    private Button[] actionButtons;//A reference to all action buttons
-
-    private KeyCode action1, action2, action3;//Key code used for executing the action buttons
+    private ActionButton[] actionButtons;//A reference to all action buttons
 
     [SerializeField]
     private GameObject targetFrame;
@@ -34,48 +32,31 @@ public class UIManager : MonoBehaviour
     private Image portraitFrame;
 
     [SerializeField]
-    private CanvasGroup keybindMenu;
+    private CanvasGroup keybindMenu;//A reference to the keybiind menu
 
-    private GameObject[] keybindButtons;
+    private GameObject[] keybindButtons;//A reference to all the keybind buttons on the menu
 
     private void Awake()
     {
-        keybindButtons = GameObject.FindGameObjectsWithTag("keybind");
+        keybindButtons = GameObject.FindGameObjectsWithTag("Keybind");
     }
 
     void Start()//Use it to initialization
     {
         healthStat = targetFrame.GetComponentInChildren<Stat>();//Look for the Stat script in the TargetFrane Object children to initialize it.
 
-        //keybinds
-        action1 = KeyCode.Alpha1;
-        action2 = KeyCode.Alpha2;
-        action3 = KeyCode.Alpha3;
+        SetUseable(actionButtons[0],SpellBook.MyInstance.GetSpell("Fireball"));
+        SetUseable(actionButtons[1], SpellBook.MyInstance.GetSpell("Frostbolt"));
+        SetUseable(actionButtons[2], SpellBook.MyInstance.GetSpell("Thunderbolt"));
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(action1))//If we click button 1,2 or 3
-        {
-            ActionButtonOnClick(0);
-        }
-        else if (Input.GetKeyDown(action2))
-        {
-            ActionButtonOnClick(1);
-        }
-        else if (Input.GetKeyDown(action3))
-        {
-            ActionButtonOnClick(2);
-        }
-        else if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             OpenCloseMenu();
         }
-    }
-    private void ActionButtonOnClick(int btnIndex)//Exectues an action based on the button clicked
-    {
-        actionButtons[btnIndex].onClick.Invoke();
     }
 
     public void ShowTargetFrame(NPC target)
@@ -110,10 +91,25 @@ public class UIManager : MonoBehaviour
         Time.timeScale = Time.timeScale > 0 ? 0 : 1;
     }
 
-    public void UpdateKetText(string key, KeyCode code)
+    public void UpdateKetText(string key, KeyCode code)//Updates the text on a keybindbutton after the key has been changed
     {
         Text tmp = Array.Find(keybindButtons, x => x.name == key).GetComponentInChildren<Text>();
 
         tmp.text = code.ToString();
+    }
+
+    public void ClickActionButton(string buttonName)
+    {
+        Array.Find(actionButtons, x => x.gameObject.name == buttonName).MyButton.onClick.Invoke();
+    }
+
+    public void SetUseable(ActionButton btn, IUseable useable)
+    {
+        btn.MyButton.image.sprite = useable.MyIcon;
+
+        btn.MyButton.image.color = Color.white;
+
+        btn.MyUseable = useable;
+
     }
 }

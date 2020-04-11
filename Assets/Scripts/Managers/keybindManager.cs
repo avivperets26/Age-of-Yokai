@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class keybindManager : MonoBehaviour
+public class KeybindManager : MonoBehaviour
 {
-    private static keybindManager instance;
+    private static KeybindManager instance;
 
-    public static keybindManager Instance//Singeltone
+    public static KeybindManager MyInstance//Singeltone
     {
         get
         {
             if(instance == null)
             {
-                instance = FindObjectOfType<keybindManager>();
+                instance = FindObjectOfType<KeybindManager>();
             }
             return instance;
         }
@@ -31,6 +31,8 @@ public class keybindManager : MonoBehaviour
 
         ActionBinds = new Dictionary<string, KeyCode>();
 
+
+        //Generates the default keybinds
         BindKey("UP", KeyCode.W);
         BindKey("LEFT", KeyCode.A);
         BindKey("DOWN", KeyCode.S);
@@ -41,13 +43,7 @@ public class keybindManager : MonoBehaviour
         BindKey("ACT3", KeyCode.Alpha3);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void BindKey(string key, KeyCode keyBind)
+    public void BindKey(string key, KeyCode keyBind)//Bind specific key
     {
         Dictionary<string, KeyCode> currentDictionary = Keybinds;
 

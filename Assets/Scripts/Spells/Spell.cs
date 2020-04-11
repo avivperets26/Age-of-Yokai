@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 
 [Serializable]
-public class Spell
+public class Spell : IUseable
 {
     [SerializeField]
     private string name;//The spell name
@@ -36,4 +36,9 @@ public class Spell
     public float MyCastTime { get => castTime; }//Property for reading the castTime
     public GameObject MySpellPrefab { get => spellPrefab; }//Property for reading the spellPrefab
     public Color MyBarColor { get => barColor;}//porperty for reading the color
+
+    public void Use()
+    {
+        Hero.MyInstance.CastSpell(MyName);
+    }
 }
