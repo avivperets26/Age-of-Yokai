@@ -103,11 +103,11 @@ public class UIManager : MonoBehaviour
         Array.Find(actionButtons, x => x.gameObject.name == buttonName).MyButton.onClick.Invoke();
     }
 
-    public void SetUseable(ActionButton btn, IUseable useable)
+    public void SetUseable(ActionButton btn, IUseable useable)//Sets the useable on an actionbutton
     {
-        btn.MyButton.image.sprite = useable.MyIcon;
+        btn.MyIcon.sprite = useable.MyIcon;
 
-        btn.MyButton.image.color = Color.white;
+        btn.MyIcon.color = Color.white;
 
         btn.MyUseable = useable;
 
