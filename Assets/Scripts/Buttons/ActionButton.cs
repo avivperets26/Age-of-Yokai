@@ -4,31 +4,49 @@ using UnityEngine.UI;
 
 public class ActionButton : MonoBehaviour, IPointerClickHandler
 {
+    /// <summary>
+    /// A reference t o the useable on the actionbutton
+    /// </summary>
+    public IUseable MyUseable { get; set; }
 
-    public IUseable MyUseable { get; set; }//A reference too the useable on the actionbutton
+    /// <summary>
+    /// A reference to the actual button that this button uses
+    /// </summary>
+    public Button MyButton { get; private set; }
 
-    public Button MyButton { get; private set; }//A reference to the actual button that this button uses
+    public Image MyIcon
+    {
+        get
+        {
+            return icon;
+        }
 
-    public Image MyIcon { get => icon; set => icon = value; }
+        set
+        {
+            icon = value;
+        }
+    }
 
     [SerializeField]
     private Image icon;
 
-    // Start is called before the first frame update
+    // Use this for initialization
     void Start()
     {
         MyButton = GetComponent<Button>();
-
         MyButton.onClick.AddListener(OnClick);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    public void OnClick()//This is executed the button clicked
+    /// <summary>
+    /// This is executed the the button is clicked
+    /// </summary>
+    public void OnClick()
     {
         if (MyUseable != null)
         {
@@ -36,8 +54,37 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler
         }
     }
 
+    /// <summary>
+    /// Checks if someone clicked on the actionbutton
+    /// </summary>
+    /// <param name="eventData"></param>
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (eventData.button == PointerEventData.InputButton.Left)
+        {
+            if (HandScript.MyInstance.MyMoveable != null && HandScript.MyInstance.MyMoveable is IUseable)
+            {
+                SetUseable(HandScript.MyInstance.MyMoveable as IUseable);
+            }
+        }
+    }
 
+    /// <summary>
+    /// Sets the useable on an actionbutton
+    /// </summary>
+    public void SetUseable(IUseable useable)
+    {
+        this.MyUseable = useable;
+
+        UpdateVisual();
+    }
+
+    /// <summary>
+    /// Updates the visual representation of the actionbutton
+    /// </summary>
+    public void UpdateVisual()
+    {
+        MyIcon.sprite = HandScript.MyInstance.Put().MyIcon;
+        MyIcon.color = Color.white;
     }
 }

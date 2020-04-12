@@ -4,14 +4,26 @@ using UnityEngine;
 
 public class Enemy : NPC
 {
+    /// <summary>
+    /// A canvasgroup for the healthbar
+    /// </summary>
     [SerializeField]
-    private CanvasGroup healthGroup;//A canvasgroup for the health bar
+    private CanvasGroup healthGroup;
 
-    private IState currentState;//The enemy current state
+    /// <summary>
+    /// The enemys current state
+    /// </summary>
+    private IState currentState;
 
-    public float MyAttackRange { get; set; }//The enemy attack range
+    /// <summary>
+    /// The enemys attack range
+    /// </summary>
+    public float MyAttackRange { get; set; }
 
-    public float MyAttackTime { get; set; }//How much time has passed since the last attack
+    /// <summary>
+    /// How much time has passed since the last attack
+    /// </summary>
+    public float MyAttackTime { get; set; }
 
     public Vector3 MyStartPosition { get; set; }
 
@@ -31,67 +43,84 @@ public class Enemy : NPC
     protected void Awake()
     {
         MyStartPosition = transform.position;
-
         MyAggroRange = initAggroRange;
-
         MyAttackRange = 1;
-
         ChangeState(new IdleState());
     }
 
-    protected override void Update()//Update is marked as virtual, so that we can override it in the subclasses
+    protected override void Update()
     {
         if (IsAlive)
         {
+
             if (!IsAttacking)
             {
                 MyAttackTime += Time.deltaTime;
             }
 
-            currentState.Update();    
-            
+            currentState.Update();
         }
 
         base.Update();
+
     }
 
-    public override Transform Select()//When the enemy is selected
+    /// <summary>
+    /// When the enemy is selected
+    /// </summary>
+    /// <returns></returns>
+    public override Transform Select()
     {
-        healthGroup.alpha = 1;//Shows the health bar
+        //Shows the health bar
+        healthGroup.alpha = 1;
 
         return base.Select();
     }
 
-    public override void DeSelect()//When we deselct our enemy
+    /// <summary>
+    /// When we deselect our enemy
+    /// </summary>
+    public override void DeSelect()
     {
-        healthGroup.alpha = 0;//Hides the healthbar
+        //Hides the healthbar
+        healthGroup.alpha = 0;
 
         base.DeSelect();
     }
 
-    public override void TakeDamage(float damage, Transform source)//Makes the enemy take damage when hit
+    /// <summary>
+    /// Makes the enemy take damage when hit
+    /// </summary>
+    /// <param name="damage"></param>
+    public override void TakeDamage(float damage, Transform source)
     {
-        if(!(currentState is EvadeState))
+        if (!(currentState is EvadeState))
         {
             SetTarget(source);
 
             base.TakeDamage(damage, source);
 
             OnHealthChanged(health.MyCurrentValue);
-        }       
+        }
+
     }
 
-
-    public void ChangeState(IState newState)//Change Enemy state
+    /// <summary>
+    /// Changes the enemys state
+    /// </summary>
+    /// <param name="newState">The new state</param>
+    public void ChangeState(IState newState)
     {
-        if(currentState != null)//Makes sure we have a state before we call exit
+        if (currentState != null) //Makes sure we have a state before we call exit
         {
             currentState.Exit();
         }
 
-        currentState = newState;//Sets the new state
+        //Sets the new state
+        currentState = newState;
 
-        currentState.Enter(this);//Calls enter on the new state
+        //Calls enter on the new state
+        currentState.Enter(this);
     }
 
     public void SetTarget(Transform target)
@@ -99,11 +128,8 @@ public class Enemy : NPC
         if (MyTarget == null && !(currentState is EvadeState))
         {
             float distance = Vector2.Distance(transform.position, target.position);
-
             MyAggroRange = initAggroRange;
-
             MyAggroRange += distance;
-
             MyTarget = target;
         }
     }
@@ -111,11 +137,8 @@ public class Enemy : NPC
     public void Reset()
     {
         this.MyTarget = null;
-
         this.MyAggroRange = initAggroRange;
-
-        this.Myhealth.MyCurrentValue = this.Myhealth.MyMaxValue;
-
+        this.MyHealth.MyCurrentValue = this.MyHealth.MyMaxValue;
         OnHealthChanged(health.MyCurrentValue);
     }
 }

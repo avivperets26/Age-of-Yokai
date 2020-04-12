@@ -37,16 +37,16 @@ public class NPC : Character
 
     public void OnHealthChanged(float health)
     {
-        if(healthChanged != null)
+        if (healthChanged != null)
         {
-           healthChanged(health);
+            healthChanged(health);
         }
-       
+
     }
 
     public void OnCharacterRemoved()
     {
-        if(characterRemoved != null)
+        if (characterRemoved != null)
         {
             characterRemoved();
         }

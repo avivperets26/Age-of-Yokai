@@ -5,67 +5,69 @@ using UnityEngine;
 public class SpellScript : MonoBehaviour
 {
 
-    private Rigidbody2D myRigidbody;//A reference to the spell's rigid body
+    /// <summary>
+    /// A reference to the spell's rigid body
+    /// </summary>
+    private Rigidbody2D myRigidBody;
 
+    /// <summary>
+    /// The spell's movement speed
+    /// </summary>
     [SerializeField]
-    private float speed;//The spell's movement speed
+    private float speed;
 
-
-    public Transform MyTarget { get;private set; }//The spells target
+    /// <summary>
+    /// The spells target
+    /// </summary>
+    public Transform MyTarget { get; private set; }
 
     private Transform source;
 
     private int damage;
 
-    void Start()//Use for initalization
+    // Use this for initialization
+    void Start()
     {
-        myRigidbody = GetComponent<Rigidbody2D>();//Creates a reference to the spell's rigidbody
-
+        //Creates a reference to the spell's rigidbody
+        myRigidBody = GetComponent<Rigidbody2D>();
     }
 
-    public void Initialized(Transform target, int damage, Transform source)
+    public void Initialize(Transform target, int damage, Transform source)
     {
         this.MyTarget = target;
         this.damage = damage;
         this.source = source;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void FixedUpdate()
     {
         if (MyTarget != null)
         {
-            Vector2 direction = MyTarget.position - transform.position; //target = Enemy position, Transform = Fire ball position , by decreasing them we will be able to make sure that the fire ball will follow the enemy.
+            //Calculates the spells direction
+            Vector2 direction = MyTarget.position - transform.position;
 
-            myRigidbody.velocity = direction.normalized * speed;
+            //Moves the spell by using the rigid body
+            myRigidBody.velocity = direction.normalized * speed;
 
+            //Calculates the rotation angle
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
+            //Rotates the spell towards the target
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
-        
+
 
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "HitBox" && collision.transform == MyTarget)
+        if (collision.tag == "HitBox" && collision.transform == MyTarget)
         {
             Character c = collision.GetComponentInParent<Character>();
-
             speed = 0;
-
             c.TakeDamage(damage, source);
-
             GetComponent<Animator>().SetTrigger("impact");
-
-            myRigidbody.velocity = Vector2.zero;
-
+            myRigidBody.velocity = Vector2.zero;
             MyTarget = null;
         }
     }

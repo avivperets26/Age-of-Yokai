@@ -2,22 +2,44 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// This is an abstract class that all characters needs to inherit from
+/// </summary>
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator))]
 public abstract class Character : MonoBehaviour
 {
+
+    /// <summary>
+    /// The Player's movement speed
+    /// </summary>
     [SerializeField]
-    private float speed;//Player movement speed
+    private float speed;
 
-    public Animator MyAnimator { get; set; }//A reference to the character's animator
+    /// <summary>
+    /// A reference to the character's animator
+    /// </summary>
+    public Animator MyAnimator { get; set; }
 
-    private Vector2 direction;//The palyer's direction
+    /// <summary>
+    /// The Player's direction
+    /// </summary>
+    private Vector2 direction;
 
-    private Rigidbody2D myRigidbody;//The character rigidbody
+    /// <summary>
+    /// The Character's rigidbody
+    /// </summary>
+    private Rigidbody2D myRigidbody;
 
-    public bool IsAttacking { get; set; }//Indicate if the character is attacking or not
+    /// <summary>
+    /// indicates if the character is attacking or not
+    /// </summary>
+    public bool IsAttacking { get; set; }
 
-    protected Coroutine attackRoutine;//A reference to the attack coroutine
+    /// <summary>
+    /// A reference to the attack coroutine
+    /// </summary>
+    protected Coroutine attackRoutine;
 
     [SerializeField]
     protected Transform hitBox;
@@ -27,15 +49,21 @@ public abstract class Character : MonoBehaviour
 
     public Transform MyTarget { get; set; }
 
-    public Stat Myhealth
+    public Stat MyHealth
     {
         get { return health; }
     }
 
+    /// <summary>
+    /// The character's initialHealth
+    /// </summary>
     [SerializeField]
-    private float initHealth;//The Character initial Health
+    private float initHealth;
 
-    public bool IsMoving//Indicate if Character is moving or not
+    /// <summary>
+    /// Indicates if character is moving or not
+    /// </summary>
+    public bool IsMoving
     {
         get
         {
@@ -43,8 +71,31 @@ public abstract class Character : MonoBehaviour
         }
     }
 
-    public Vector2 Direction { get => direction; set => direction = value; }
-    public float Speed { get => speed; set => speed = value; }
+    public Vector2 Direction
+    {
+        get
+        {
+            return direction;
+        }
+
+        set
+        {
+            direction = value;
+        }
+    }
+
+    public float Speed
+    {
+        get
+        {
+            return speed;
+        }
+
+        set
+        {
+            speed = value;
+        }
+    }
 
     public bool IsAlive
     {
@@ -58,43 +109,54 @@ public abstract class Character : MonoBehaviour
     {
         health.Initialize(initHealth, initHealth);
 
-        myRigidbody = GetComponent<Rigidbody2D>();//Makes a reference to the rigidbody2D
+        //Makes a reference to the rigidbody2D
+        myRigidbody = GetComponent<Rigidbody2D>();
 
+        //Makes a reference to the character's animator
         MyAnimator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    protected virtual void Update()//Update is marked as virtual, so that we can overide it in the subclasses
+    /// <summary>
+    /// Update is marked as virtual, so that we can override it in the subclasses
+    /// </summary>
+    protected virtual void Update()
     {
         HandleLayers();
     }
-    private void FixedUpdate()//FixedUpdate can run once, zero, or several times per frame, depending on how many physics frames per second are set in the time settings, and how fast/slow the framerate is. fixed Update garanteed to run and if you make them heavy then your framerate will drop. you can easily test it
+
+    private void FixedUpdate()
     {
         Move();
     }
 
-    //Move the Player
+    /// <summary>
+    /// Moves the player
+    /// </summary>
     public void Move()
     {
         if (IsAlive)
         {
-            myRigidbody.velocity = Direction.normalized * Speed;//make sure that the player moves
+            //Makes sure that the player moves
+            myRigidbody.velocity = Direction.normalized * Speed;
         }
+
     }
-    public void HandleLayers()//Makes sure that the right animation layer is playing
+
+    /// <summary>
+    /// Makes sure that the right animation layer is playing
+    /// </summary>
+    public void HandleLayers()
     {
         if (IsAlive)
         {
-            if (IsMoving)//checks if we are moving or standing still, if we are moving then we need to play the move animation
+            //Checks if we are moving or standing still, if we are moving then we need to play the move animation
+            if (IsMoving)
             {
-                //Make Player Animate move
                 ActivateLayer("WalkLayer");
 
                 //Sets the animation parameter so that he faces the correct direction
                 MyAnimator.SetFloat("X", Direction.x);
                 MyAnimator.SetFloat("Y", Direction.y);
-
-                //StopAttack();//Will not able to animate-attack while wallking
             }
             else if (IsAttacking)
             {
@@ -102,7 +164,7 @@ public abstract class Character : MonoBehaviour
             }
             else
             {
-                //Make sure that we will go back to idle when we aren't pressing any keys.
+                //Makes sure that we will go back to idle when we aren't pressing any keys.
                 ActivateLayer("IdleLayer");
             }
         }
@@ -110,30 +172,37 @@ public abstract class Character : MonoBehaviour
         {
             ActivateLayer("DeathLayer");
         }
+
     }
 
-    //Activates an aimation layer based on a string
+    /// <summary>
+    /// Activates an animation layer based on a string
+    /// </summary>
     public void ActivateLayer(string layerName)
     {
         for (int i = 0; i < MyAnimator.layerCount; i++)
         {
             MyAnimator.SetLayerWeight(i, 0);
         }
-        MyAnimator.SetLayerWeight(MyAnimator.GetLayerIndex(layerName), 1);
 
+        MyAnimator.SetLayerWeight(MyAnimator.GetLayerIndex(layerName), 1);
     }
 
-    public virtual void TakeDamage(float damage, Transform source)//Make the character take damage
+    /// <summary>
+    /// Makes the character take damage
+    /// </summary>
+    /// <param name="damage"></param>
+    public virtual void TakeDamage(float damage, Transform source)
     {
         health.MyCurrentValue -= damage;
 
-        if(health.MyCurrentValue <= 0)//Makes sure that the character stops moving when is dead
+        if (health.MyCurrentValue <= 0)
         {
+            //Makes sure that the character stops moving when its dead
             Direction = Vector2.zero;
-
             myRigidbody.velocity = Direction;
-
             MyAnimator.SetTrigger("die");
         }
     }
+
 }

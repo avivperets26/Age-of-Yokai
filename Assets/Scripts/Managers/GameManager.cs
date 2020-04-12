@@ -6,41 +6,38 @@ using UnityEngine.EventSystems;
 public class GameManager : MonoBehaviour
 {
 
-
-
+    /// <summary>
+    /// A reference to the player object
+    /// </summary>
     [SerializeField]
     private Hero player;
-    
 
     private NPC currentTarget;
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
     {
-        ClickTarget();//Executes click target
+        //Executes click target
+        ClickTarget();
     }
 
-    public void ClickTarget()
+    private void ClickTarget()
     {
-        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())//0 = Left Mouse button || 1 = Right Mouse button //EventSystem.current.IsPointerOverGameObject() == if mouse is over Button code not excute.
+        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())//If we click the left mouse button
         {
             //Makes a raycast from the mouse position into the game world
             RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, Mathf.Infinity, 512);
 
-            if (hit.collider != null)// if we hiy something
+            if (hit.collider != null)//If we hit something
             {
-                if(currentTarget != null)//if we  have a current target
+                if (currentTarget != null)//If we have a current target
                 {
-                    currentTarget.DeSelect();//Deselecet the current target
+                    currentTarget.DeSelect(); //deselct the current target
                 }
 
-                currentTarget = hit.collider.GetComponent<NPC>();//Selects the new target
+                currentTarget = hit.collider.GetComponent<NPC>(); //Selects the new target
 
-                player.MyTarget = currentTarget.Select();//Gives the player new target
+                player.MyTarget = currentTarget.Select(); //Gives the player the new target
 
                 UIManager.MyInstance.ShowTargetFrame(currentTarget);
             }
@@ -48,19 +45,16 @@ public class GameManager : MonoBehaviour
             {
                 UIManager.MyInstance.HideTargetFrame();
 
-                if(currentTarget != null)//If we have a current target
+                if (currentTarget != null) //If we have a current target
                 {
-                    currentTarget.DeSelect();//We deselect it
+                    currentTarget.DeSelect(); //We deselct it
                 }
 
-                //Removing the references to the target
+                //We remove the references to the target
                 currentTarget = null;
                 player.MyTarget = null;
             }
-
         }
-        
 
-        
     }
 }

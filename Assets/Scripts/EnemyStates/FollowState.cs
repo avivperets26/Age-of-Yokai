@@ -1,43 +1,59 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 
-class FollowState : IState//The enemy follow state
+/// <summary>
+/// The enmy's follow state
+/// </summary>
+class FollowState : IState
 {
-    private Enemy parent;//A reference to the parent
-    public void Enter(Enemy parent)//Called whenever we enter the state
+    /// <summary>
+    /// A reference to the parent
+    /// </summary>
+    private Enemy parent;
+
+    /// <summary>
+    /// This is called whenever we enter the state
+    /// </summary>
+    /// <param name="parent">The parent enemy</param>
+    public void Enter(Enemy parent)
     {
         this.parent = parent;
     }
 
-    public void Exit()//This is called whenever we exit the state
+    /// <summary>
+    /// This is called whenever we exit the state
+    /// </summary>
+    public void Exit()
     {
         parent.Direction = Vector2.zero;
     }
 
-    public void Update()//This is called as long as we are inside the state
+    /// <summary>
+    /// This is called as long as we are inside the state
+    /// </summary>
+    public void Update()
     {
         Debug.Log("Follow");
 
-        if (parent.MyTarget != null)//As long we have a target, then we need to keep moving
+        if (parent.MyTarget != null)//As long as we have a target, then we need to keep moving
         {
-            parent.Direction = (parent.MyTarget.transform.position - parent.transform.position).normalized;//find the target direction
+            //Find the target's direction
+            parent.Direction = (parent.MyTarget.transform.position - parent.transform.position).normalized;
 
-            parent.transform.position = Vector2.MoveTowards(parent.transform.position, parent.MyTarget.position, parent.Speed * Time.deltaTime);//Moves the enemy towards the target
+            //Moves the enemy towards the target
+            parent.transform.position = Vector2.MoveTowards(parent.transform.position, parent.MyTarget.position, parent.Speed * Time.deltaTime);
 
             float distance = Vector2.Distance(parent.MyTarget.position, parent.transform.position);
 
-            if(distance<= parent.MyAttackRange)
+            if (distance <= parent.MyAttackRange)
             {
                 parent.ChangeState(new AttackState());
             }
+
         }
-        if (!parent.InRange)//we dont have a target, then we need to go back to idle
+        if (!parent.InRange)
         {
             parent.ChangeState(new EvadeState());
-        }       
+        } //if we don't have a target, then we need to go back to idle.
+
     }
 }

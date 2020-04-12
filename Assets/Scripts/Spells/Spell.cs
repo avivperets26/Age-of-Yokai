@@ -2,40 +2,130 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 [Serializable]
-public class Spell : IUseable
+public class Spell : IUseable, IMoveable
 {
+    /// <summary>
+    /// The Spell's name
+    /// </summary>
     [SerializeField]
-    private string name;//The spell name
+    private string name;
 
+    /// <summary>
+    /// The spell's damage
+    /// </summary>
     [SerializeField]
-    private int damage;//The spell damage
+    private int damage;
 
+    /// <summary>
+    /// The spell's icon
+    /// </summary>
     [SerializeField]
-    private Sprite icon;//The spell icon
+    private Sprite icon;
 
+    /// <summary>
+    /// The spell's speed
+    /// </summary>
     [SerializeField]
-    private float speed;//The spell speed
+    private float speed;
 
+    /// <summary>
+    /// The spell's cast time
+    /// </summary>
     [SerializeField]
-    private float castTime; //The spell cast time
+    private float castTime;
 
+    /// <summary>
+    /// The spell's prefab
+    /// </summary>
     [SerializeField]
-    private GameObject spellPrefab;//The spell prefab
+    private GameObject spellPrefab;
 
+    /// <summary>
+    /// The spell's color
+    /// </summary>
     [SerializeField]
-    private Color barColor;//The spell color
+    private Color barColor;
 
-    public string MyName { get => name;}//Property for accessing the spell name
-    public int MyDamage { get => damage;}//Property for reading the damage
-    public Sprite MyIcon { get => icon;}//Property for reading the icon
-    public float MySpeed { get => speed; }//Property for reading the speed
-    public float MyCastTime { get => castTime; }//Property for reading the castTime
-    public GameObject MySpellPrefab { get => spellPrefab; }//Property for reading the spellPrefab
-    public Color MyBarColor { get => barColor;}//porperty for reading the color
+    /// <summary>
+    /// Property for accessing the spell's name
+    /// </summary>
+    public string MyName
+    {
+        get
+        {
+            return name;
+        }
+    }
+
+    /// <summary>
+    /// Property for reading the damage
+    /// </summary>
+    public int MyDamage
+    {
+        get
+        {
+            return damage;
+        }
+
+    }
+
+    /// <summary>
+    /// Property for reading the icon
+    /// </summary>
+    public Sprite MyIcon
+    {
+        get
+        {
+            return icon;
+        }
+    }
+
+    /// <summary>
+    /// Property for reading the speed
+    /// </summary>
+    public float MySpeed
+    {
+        get
+        {
+            return speed;
+        }
+    }
+
+    /// <summary>
+    /// Property for reading the cast time
+    /// </summary>
+    public float MyCastTime
+    {
+        get
+        {
+            return castTime;
+        }
+    }
+
+    /// <summary>
+    /// Property for reading the spell's prefab
+    /// </summary>
+    public GameObject MySpellPrefab
+    {
+        get
+        {
+            return spellPrefab;
+        }
+    }
+
+    /// <summary>
+    /// Property for reading the color
+    /// </summary>
+    public Color MyBarColor
+    {
+        get
+        {
+            return barColor;
+        }
+    }
 
     public void Use()
     {

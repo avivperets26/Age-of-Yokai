@@ -4,64 +4,77 @@ using UnityEngine;
 
 public class LayerSorter : MonoBehaviour
 {
+    /// <summary>
+    /// A reference to the players spriteRenderer
+    /// </summary>
     private SpriteRenderer parentRenderer;
 
+    //A list of all obstacles that the player is colliding with
     private List<Obstacle> obstacles = new List<Obstacle>();
-    
-    // Start is called before the first frame update
+
+    // Use this for initialization
     void Start()
     {
+        //Creates the reference to the players spriterenderer
         parentRenderer = transform.parent.GetComponent<SpriteRenderer>();
     }
 
-    // Update is called once per frame
-    void Update()
+    /// <summary>
+    /// When the player hits an obstacle
+    /// </summary>
+    /// <param name="collision"></param>
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)//When the player hits an obstacle
-    {       
-        if (collision.tag == "Obstacle")//If we hit an obstacle
+        if (collision.tag == "Obstacle") //If we hit an obstacle
         {
-            Debug.Log("Colision Obstacle");
-            Obstacle o = collision.GetComponent<Obstacle>();//Creates a reference to the obstacle
+            //Creates a reference to the obstacle
+            Obstacle o = collision.GetComponent<Obstacle>();
 
+            //Fades out the tree, so that we can see the player beheind it
             o.FadeOut();
-
-            if (obstacles.Count == 0 || o.MySpriteRenderer.sortingOrder - 1 < parentRenderer.sortingOrder)//If we aren't colliding with anything else or we are colliding with
+            //If we aren't colliding with anything else or we are colliding with something with a less sort order
+            if (obstacles.Count == 0 || o.MySpriteRenderer.sortingOrder - 1 < parentRenderer.sortingOrder)
             {
-                parentRenderer.sortingOrder = o.MySpriteRenderer.sortingOrder - 1;//Change the sortorder to be behind waht we just hit
+                //Change the sortorder to be beheind what we just hit
+                parentRenderer.sortingOrder = o.MySpriteRenderer.sortingOrder - 1;
             }
 
-            obstacles.Add(o);//Add the obstacle to the list, so that we can keep track of it
-        }                
-             
+            //Adds the obstacle to the list, so that we can keep track of it
+            obstacles.Add(o);
+        }
+
     }
 
-    private void OnTriggerExit2D(Collider2D collision)//If we stopped colliding with an obstacle
+    /// <summary>
+    /// When we stop colliding with an obstacle
+    /// </summary>
+    /// <param name="collision"></param>
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.tag == "Obstacle")//If we stopped colliding with an obstacle
+        //If we stopped colliding with an obstacle
+        if (collision.tag == "Obstacle")
         {
-            Obstacle o = collision.GetComponent<Obstacle>();//Creates a reference to the obstacle
+            //Creates a reference to the obstacle
+            Obstacle o = collision.GetComponent<Obstacle>();
 
+            //Fades in the tree so that we can't see through it
             o.FadeIn();
+            //Removes the obstacle from the list
+            obstacles.Remove(o);
 
-            obstacles.Remove(o);//Removes the obstacle from the list
-
-            if(obstacles.Count == 0)//We dont have any other obstacles
+            //We don't have any other obstacles
+            if (obstacles.Count == 0)
             {
                 parentRenderer.sortingOrder = 200;
             }
-
-            else
+            else//We have other obstacles and we need to change the sortorder based on those obstacles.
             {
                 obstacles.Sort();
-
                 parentRenderer.sortingOrder = obstacles[0].MySpriteRenderer.sortingOrder - 1;
             }
-          
+
         }
-            
+
+
     }
 }

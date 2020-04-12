@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// This is the player script, it contains functionality that is specific to the Player
+/// </summary>
 public class Hero : Character
 {
     private static Hero instance;
 
-    public static Hero MyInstance//Singelton Design Pattern
+    public static Hero MyInstance
     {
         get
         {
@@ -14,88 +17,103 @@ public class Hero : Character
             {
                 instance = FindObjectOfType<Hero>();
             }
+
             return instance;
         }
     }
 
+    /// <summary>
+    /// The player's mana
+    /// </summary>
     [SerializeField]
-    private Stat stamina;//The hero stamina
+    private Stat stamina;
 
+    /// <summary>
+    /// The player's initial mana
+    /// </summary>
+    private float initStamina = 50;
+
+    /// <summary>
+    /// An array of blocks used for blocking the player's sight
+    /// </summary>
     [SerializeField]
-    private float initStamina; // The Player initial Stamina
+    private Block[] blocks;
 
-
+    /// <summary>
+    /// Exit points for the spells
+    /// </summary>
     [SerializeField]
-    private Block[] blocks; //An array of blocks used for blocking the player's sight.
+    private Transform[] exitPoints;
 
-    [SerializeField]
-    private Transform[] exitPoints; // will store all the exit point of the wizard attack.
-
-    private int exitIndex = 2;//will make sure we are using the right direction, initiate to 2 because defualt state is Down.
-
-    private SpellBook spellBook;
+    /// <summary>
+    /// Index that keeps track of which exit point to use, 2 is default down
+    /// </summary>
+    private int exitIndex = 2;
 
     private Vector3 min, max;
 
     protected override void Start()
     {
-        spellBook = GetComponent<SpellBook>();
-
         stamina.Initialize(initStamina, initStamina);
-        
-        //For testing and debugging
-        //target = GameObject.Find("Enemy Skeleton").transform;
 
         base.Start();
     }
 
-    protected override void Update()//We are overriding the character update function, so by that we can exectute our own function
+    /// <summary>
+    /// We are overriding the characters update function, so that we can execute our own functions
+    /// </summary>
+    protected override void Update()
     {
-        GetInput();//Exectute the GetInput function
+        //Executes the GetInput function
+        GetInput();
 
-        transform.position = new Vector3(Mathf.Clamp(transform.position.x, min.x, max.x), Mathf.Clamp(transform.position.y, min.y, max.y), transform.position.z);
+        //Clamps the player inside the tilemap
+        transform.position = new Vector3(Mathf.Clamp(transform.position.x, min.x, max.x),
+            Mathf.Clamp(transform.position.y, min.y, max.y),
+            transform.position.z);
 
-        //stamina.MyCurrentValue = 100;
-        //health.MyCurrentValue = 100;
         base.Update();
     }
 
-    
-    private void GetInput()//Listen to the player Input
+    /// <summary>
+    /// Listen's to the players input
+    /// </summary>
+    private void GetInput()
     {
         Direction = Vector2.zero;
 
-        if (Input.GetKeyDown(KeyCode.I))//Decrease Stamina by press I
+        ///THIS IS USED FOR DEBUGGING ONLY
+        if (Input.GetKeyDown(KeyCode.I))
         {
+            health.MyCurrentValue -= 10;
             stamina.MyCurrentValue -= 10;
         }
-        else if (Input.GetKeyDown(KeyCode.O))//Increase Stamina by press O
+        if (Input.GetKeyDown(KeyCode.O))
         {
+            health.MyCurrentValue += 10;
             stamina.MyCurrentValue += 10;
-        }       
+        }
 
-        if (Input.GetKey(KeybindManager.MyInstance.Keybinds["UP"]))//UP
+        if (Input.GetKey(KeybindManager.MyInstance.Keybinds["UP"])) //Moves up
         {
             exitIndex = 0;
             Direction += Vector2.up;
-           // targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         }
-        else if (Input.GetKey(KeybindManager.MyInstance.Keybinds["DOWN"]))//DOWN
-        {
-            exitIndex = 2;
-            Direction += Vector2.down;
-        }
-        else if (Input.GetKey(KeybindManager.MyInstance.Keybinds["RIGHT"]))//RIGHT
-        {
-            exitIndex = 1;
-            Direction += Vector2.right;
-        }
-        else if (Input.GetKey(KeybindManager.MyInstance.Keybinds["LEFT"]))//LEFT
+        if (Input.GetKey(KeybindManager.MyInstance.Keybinds["LEFT"])) //Moves left
         {
             exitIndex = 3;
             Direction += Vector2.left;
         }
-
+        if (Input.GetKey(KeybindManager.MyInstance.Keybinds["DOWN"]))
+        {
+            exitIndex = 2;
+            Direction += Vector2.down;
+        }
+        if (Input.GetKey(KeybindManager.MyInstance.Keybinds["RIGHT"])) //Moves right
+        {
+            exitIndex = 1;
+            Direction += Vector2.right;
+        }
         if (IsMoving)
         {
             StopAttack();
@@ -106,90 +124,116 @@ public class Hero : Character
             if (Input.GetKeyDown(KeybindManager.MyInstance.ActionBinds[action]))
             {
                 UIManager.MyInstance.ClickActionButton(action);
+
             }
         }
-     
+
+
     }
 
-    public void SetLimits(Vector3 min, Vector3 max)//Set's the player limits so that he can't leave the game world
+    /// <summary>
+    /// Set's the player's limits so that he can't leave the game world
+    /// </summary>
+    /// <param name="min">The minimum position of the player</param>
+    /// <param name="max">The maximum postion of the player</param>
+    public void SetLimits(Vector3 min, Vector3 max)
     {
         this.min = min;
         this.max = max;
     }
 
-    private IEnumerator Attack(string spellName)//To Call Yield , A co routine for attacking
+    /// <summary>
+    /// A co routine for attacking
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator Attack(string spellName)
     {
         Transform currentTarget = MyTarget;
 
-        Spell newSpell = spellBook.CastSpell(spellName);// creates a new spell, so by that we can use the information form of it to cast it
+        //Creates a new spell, so that we can use the information form it to cast it in the game
+        Spell newSpell = SpellBook.MyInstance.CastSpell(spellName);
 
-        IsAttacking = true;//Indicates if we are attacking
+        IsAttacking = true; //Indicates if we are attacking
 
         MyAnimator.SetBool("attack", IsAttacking); //Starts the attack animation
 
-        yield return new WaitForSeconds(newSpell.MyCastTime); //This is an hardcoded cast time, for debugging.    
-        
-        if(currentTarget != null && InLineOfSight())
-        {
-            SpellScript s = Instantiate(newSpell.MySpellPrefab, exitPoints[exitIndex].position, Quaternion.identity).GetComponent<SpellScript>();//Make an instanse of Prefabe, position where it start, Quaternion to make sure the object will not rotate while mooving.
+        yield return new WaitForSeconds(newSpell.MyCastTime); //This is a hardcoded cast time, for debugging
 
-            s.Initialized(currentTarget, newSpell.MyDamage, transform);
+        if (currentTarget != null && InLineOfSight())
+        {
+            SpellScript s = Instantiate(newSpell.MySpellPrefab, exitPoints[exitIndex].position, Quaternion.identity).GetComponent<SpellScript>();
+
+            s.Initialize(currentTarget, newSpell.MyDamage, transform);
         }
-      
-        StopAttack();//Ends the attack
+
+        StopAttack(); //Ends the attack
     }
 
-    public void CastSpell(string spellName)//Cast a spell
+    /// <summary>
+    /// Casts a spell
+    /// </summary>
+    public void CastSpell(string spellName)
     {
         Block();
 
-        if (MyTarget != null && MyTarget.GetComponentInParent<Enemy>().IsAlive && !IsAttacking && !IsMoving && InLineOfSight())//Check if we are able to attack
+        if (MyTarget != null && MyTarget.GetComponentInParent<Character>().IsAlive && !IsAttacking && !IsMoving && InLineOfSight()) //Chcks if we are able to attack
         {
-            attackRoutine = StartCoroutine(Attack(spellName)); //Coroutine to attack at the same time of other functions, Not fully threading.
+            attackRoutine = StartCoroutine(Attack(spellName));
         }
-       
     }
 
-    private bool InLineOfSight()//Will check if we are in line of sight of our target
+    /// <summary>
+    /// Checks if the target is in line of sight
+    /// </summary>
+    /// <returns></returns>
+    private bool InLineOfSight()
     {
-        if(MyTarget != null)
+        if (MyTarget != null)
         {
             //Calculates the target's direction
-            Vector3 targetDirecion = (MyTarget.transform.position - transform.position).normalized;
+            Vector3 targetDirection = (MyTarget.transform.position - transform.position).normalized;
 
-            //Throws a raycast in the direction of the target
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, MyTarget.position, Vector2.Distance(transform.position, MyTarget.transform.position), 256);
+            //Thorws a raycast in the direction of the target
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, targetDirection, Vector2.Distance(transform.position, MyTarget.transform.position), 256);
 
-            if (hit.collider == null)//If we didn't hit the block, then we can cast a spell
+            //If we didn't hit the block, then we can cast a spell
+            if (hit.collider == null)
             {
                 return true;
-            }           
+            }
+
         }
 
         //If we hit the block we can't cast a spell
         return false;
     }
 
-    private void Block()//Will Deactivate the block sight of the hero based on direction
+    /// <summary>
+    /// Changes the blocks based on the players direction
+    /// </summary>
+    private void Block()
     {
         foreach (Block b in blocks)
         {
-            b.Deactivete();
+            b.Deactivate();
         }
 
-        blocks[exitIndex].Activete();
+        blocks[exitIndex].Activate();
     }
 
-    //Stops the attack
+    /// <summary>
+    /// Stops the attack
+    /// </summary>
     public void StopAttack()
     {
-        spellBook.StopCasting();//Stop the spellbook from casting
+        //Stop the spellbook from casting
+        SpellBook.MyInstance.StopCating();
 
-        IsAttacking = false;//Makes sure that we are not attacking
+        IsAttacking = false; //Makes sure that we are not attacking
 
-        MyAnimator.SetBool("attack", IsAttacking);//Stops the attack animation
+        MyAnimator.SetBool("attack", IsAttacking); //Stops the attack animation
 
-        if (attackRoutine != null)//Checks if we have a reference to an co routine
+        if (attackRoutine != null) //Checks if we have a reference to an co routine
         {
             StopCoroutine(attackRoutine);
         }

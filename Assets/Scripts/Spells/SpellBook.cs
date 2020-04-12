@@ -8,7 +8,7 @@ public class SpellBook : MonoBehaviour
 {
     private static SpellBook instance;
 
-    public static SpellBook MyInstance//Singelton Design Pattern
+    public static SpellBook MyInstance
     {
         get
         {
@@ -16,81 +16,120 @@ public class SpellBook : MonoBehaviour
             {
                 instance = FindObjectOfType<SpellBook>();
             }
+
             return instance;
         }
     }
 
+    /// <summary>
+    /// A reference to the players casting bar
+    /// </summary>
     [SerializeField]
-    private Image castingBar;//A reference to the hero casting bar
+    private Image castingBar;
 
+    /// <summary>
+    /// A reference to the spell name on the casting bar
+    /// </summary>
     [SerializeField]
-    private Text currentSpell;//A reference to the spell name on the casting bar
+    private Text currentSpell;
 
+    /// <summary>
+    /// A reference to the casting time on the casting bar
+    /// </summary>
     [SerializeField]
-    private Text castTime;//A reference to the casting time on the casting bar
+    private Text castTime;
 
+    /// <summary>
+    /// A reference to the icon on the casting bar
+    /// </summary>
     [SerializeField]
     private Image icon;
 
+    /// <summary>
+    /// A canvas group that is sitting on the casting bar, so that we can fade the whole bar
+    /// </summary>
     [SerializeField]
     private CanvasGroup canvasGroup;
 
+    /// <summary>
+    /// All spells in the spellbook
+    /// </summary>
     [SerializeField]
     private Spell[] spells;
-    // Start is called before the first frame update
 
+    /// <summary>
+    /// A reference to the coroutine that throws spells
+    /// </summary>
     private Coroutine spellRoutine;
 
+    /// <summary>
+    /// A reference to the coroutine that fades out the bar
+    /// </summary>
     private Coroutine fadeRoutine;
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
-    public Spell CastSpell(string spellName)//Cast a spell at an enemy
+    /// <summary>
+    /// Cast a spell at an enemy
+    /// </summary>
+    /// <param name="index">The index of the spell you would like to cast, the first spells is index 0</param>
+    /// <returns></returns>
+    public Spell CastSpell(string spellName)
     {
         Spell spell = Array.Find(spells, x => x.MyName == spellName);
 
-        castingBar.fillAmount = 0;//Reset the fillamount
+        //Resets the fillamount on the bar
+        castingBar.fillAmount = 0;
 
-        castingBar.color = spell.MyBarColor;//Changes the bars color to fit the current spell
-        
-        currentSpell.text = spell.MyName;//Changes the text on the bar so that we can read what spell we are casting
+        //Changes the bars color to fit the current spell
+        castingBar.color = spell.MyBarColor;
 
-        icon.sprite = spell.MyIcon;//Changes the icon on the casting bar
+        //Changes the text on the bar so that we can read what spell we are casting
+        currentSpell.text = spell.MyName;
 
-        spellRoutine = StartCoroutine(Progress(spell));//Starts casting the spells
+        //Changes the icon on the casting bar
+        icon.sprite = spell.MyIcon;
 
-        fadeRoutine = StartCoroutine(FadeBar());//Start fading the bar
+        //Starts casting the spells
+        spellRoutine = StartCoroutine(Progress(spell));
 
-        return spell;//Return the spell that we just cast
+        //Starts fading the bar
+        fadeRoutine = StartCoroutine(FadeBar());
+
+        //Returns the spell that we just  cast.
+        return spell;
     }
 
-    private IEnumerator Progress(Spell spell)//Updates the casting bar according to the current progress of the cast
+    /// <summary>
+    /// Updates the castingbar accoring to the current progress of the cast
+    /// </summary>
+    /// <param name="index">Index of the spell to cast</param>
+    /// <returns></returns>
+    private IEnumerator Progress(Spell spell)
     {
-        float timePassed = Time.deltaTime;// How much time has passed since we started castig the spell
+        //How much time has passed since we started casting the spell
+        float timePassed = Time.deltaTime;
 
-        float rate = 1.0f / spell.MyCastTime;// How fast are we gooing to move the bar
+        //How fast are we going to move the bar
+        float rate = 1.0f / spell.MyCastTime;
 
-        float progress = 0.0f;//The current progress of the cast
+        //The current progress of the cast 
+        float progress = 0.0f;
 
-        while(progress <= 1.0)//As long as we are not done casting
+        while (progress <= 1.0)//As long as we are not done casting
         {
-            castingBar.fillAmount = Mathf.Lerp(0, 1,progress);//Updates the bar based on the progress
+            //Updates the bar based on the progress
+            castingBar.fillAmount = Mathf.Lerp(0, 1, progress);
 
-            progress += rate * Time.deltaTime;// Increases the progress
+            //Increases the progress
+            progress += rate * Time.deltaTime;
 
-            timePassed += Time.deltaTime;//Updates the time passed
+            //Updates the time passed
+            timePassed += Time.deltaTime;
 
-            castTime.text = (spell.MyCastTime - timePassed).ToString("F2");//Updates the cast time text
+            //Updates the cast time text
+            castTime.text = (spell.MyCastTime - timePassed).ToString("F2");
 
-            if(spell.MyCastTime - timePassed < 0)//Makes sure that the time doesnt go below 0
+            if (spell.MyCastTime - timePassed < 0) //Makes sure that the time doesn't go below 0
             {
                 castTime.text = "0.00";
             }
@@ -98,38 +137,47 @@ public class SpellBook : MonoBehaviour
             yield return null;
         }
 
-        StopCasting();//Stops our cast when we ae done
+        StopCating();//Stops our cast when we are done
     }
 
-    private IEnumerator FadeBar()//Fades the bar in on the screen when we start casting
+    /// <summary>
+    /// Fades the bar in on the screen when we start casting
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator FadeBar()
     {
+        //How fast are we going to fade the bar
+        float rate = 1.0f / 0.50f;
 
-        float rate = 1.0f / 0.25f;//How fast are we going to fade the bar
-
+        //The current fade progress
         float progress = 0.0f;
 
         while (progress <= 1.0)//As long as we are not done fading
         {
+            //Updates the alpha on the canvasgroup
+            canvasGroup.alpha = Mathf.Lerp(0, 1, progress);
 
-            canvasGroup.alpha = Mathf.Lerp(0, 1, progress);//Update the alpha on the cnavasgroup
-
-            progress += rate * Time.deltaTime;//Update the progress
+            //Updates the progress
+            progress += rate * Time.deltaTime;
 
             yield return null;
         }
     }
 
-
-    public void StopCasting()//stops a cast
+    /// <summary>
+    /// Stops a cast
+    /// </summary>
+    public void StopCating()
     {
-       if(fadeRoutine != null)//stops the faderoutine
+        //Stops the faderoutine
+        if (fadeRoutine != null)
         {
             StopCoroutine(fadeRoutine);
             canvasGroup.alpha = 0;
             fadeRoutine = null;
         }
-
-       if(spellRoutine != null)//Stops the spellroutine
+        //Stops the spellroutine
+        if (spellRoutine != null)
         {
             StopCoroutine(spellRoutine);
             spellRoutine = null;

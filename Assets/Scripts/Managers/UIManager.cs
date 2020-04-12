@@ -1,5 +1,5 @@
-﻿using System.Collections;
-using System;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,7 +8,7 @@ public class UIManager : MonoBehaviour
 {
     private static UIManager instance;
 
-    public static UIManager MyInstance//Singelton Design Pattern
+    public static UIManager MyInstance
     {
         get
         {
@@ -16,12 +16,16 @@ public class UIManager : MonoBehaviour
             {
                 instance = FindObjectOfType<UIManager>();
             }
+
             return instance;
         }
     }
 
+    /// <summary>
+    /// A reference to all the action buttons
+    /// </summary>
     [SerializeField]
-    private ActionButton[] actionButtons;//A reference to all action buttons
+    private ActionButton[] actionButtons;
 
     [SerializeField]
     private GameObject targetFrame;
@@ -31,23 +35,29 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private Image portraitFrame;
 
+    /// <summary>
+    /// A reference to the keybind menu
+    /// </summary>
     [SerializeField]
-    private CanvasGroup keybindMenu;//A reference to the keybiind menu
+    private CanvasGroup keybindMenu;
 
-    private GameObject[] keybindButtons;//A reference to all the keybind buttons on the menu
+    [SerializeField]
+    private CanvasGroup spellBook;
+
+    /// <summary>
+    /// A reference to all the kibind buttons on the menu
+    /// </summary>
+    private GameObject[] keybindButtons;
 
     private void Awake()
     {
         keybindButtons = GameObject.FindGameObjectsWithTag("Keybind");
     }
 
-    void Start()//Use it to initialization
+    // Use this for initialization
+    void Start()
     {
-        healthStat = targetFrame.GetComponentInChildren<Stat>();//Look for the Stat script in the TargetFrane Object children to initialize it.
-
-        SetUseable(actionButtons[0],SpellBook.MyInstance.GetSpell("Fireball"));
-        SetUseable(actionButtons[1], SpellBook.MyInstance.GetSpell("Frostbolt"));
-        SetUseable(actionButtons[2], SpellBook.MyInstance.GetSpell("Thunderbolt"));
+        healthStat = targetFrame.GetComponentInChildren<Stat>();
     }
 
     // Update is called once per frame
@@ -55,7 +65,11 @@ public class UIManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            OpenCloseMenu();
+            OpenClose(keybindMenu);
+        }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            OpenClose(spellBook);
         }
     }
 
@@ -63,7 +77,7 @@ public class UIManager : MonoBehaviour
     {
         targetFrame.SetActive(true);
 
-        healthStat.Initialize(target.Myhealth.MyCurrentValue, target.Myhealth.MyMaxValue);
+        healthStat.Initialize(target.MyHealth.MyCurrentValue, target.MyHealth.MyMaxValue);
 
         portraitFrame.sprite = target.MyPortrait;
 
@@ -77,24 +91,23 @@ public class UIManager : MonoBehaviour
         targetFrame.SetActive(false);
     }
 
+    /// <summary>
+    /// Updates the targetframe
+    /// </summary>
+    /// <param name="health"></param>
     public void UpdateTargetFrame(float health)
     {
         healthStat.MyCurrentValue = health;
     }
 
-    public void OpenCloseMenu()
-    {
-        keybindMenu.alpha = keybindMenu.alpha > 0 ? 0 : 1; //If alpha is >0 than replace to 1
-
-        keybindMenu.blocksRaycasts =keybindMenu.blocksRaycasts == true ? false : true;
-
-        Time.timeScale = Time.timeScale > 0 ? 0 : 1;
-    }
-
-    public void UpdateKetText(string key, KeyCode code)//Updates the text on a keybindbutton after the key has been changed
+    /// <summary>
+    /// Updates the text on a keybindbutton after the key has been changed
+    /// </summary>
+    /// <param name="key"></param>
+    /// <param name="code"></param>
+    public void UpdateKeyText(string key, KeyCode code)
     {
         Text tmp = Array.Find(keybindButtons, x => x.name == key).GetComponentInChildren<Text>();
-
         tmp.text = code.ToString();
     }
 
@@ -103,13 +116,9 @@ public class UIManager : MonoBehaviour
         Array.Find(actionButtons, x => x.gameObject.name == buttonName).MyButton.onClick.Invoke();
     }
 
-    public void SetUseable(ActionButton btn, IUseable useable)//Sets the useable on an actionbutton
+    public void OpenClose(CanvasGroup canvasGroup)
     {
-        btn.MyIcon.sprite = useable.MyIcon;
-
-        btn.MyIcon.color = Color.white;
-
-        btn.MyUseable = useable;
-
+        canvasGroup.alpha = canvasGroup.alpha > 0 ? 0 : 1;
+        canvasGroup.blocksRaycasts = canvasGroup.blocksRaycasts == true ? false : true;
     }
 }

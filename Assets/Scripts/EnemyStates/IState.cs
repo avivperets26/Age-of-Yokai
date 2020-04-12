@@ -4,9 +4,10 @@ using UnityEngine;
 
 public interface IState
 {
-    void Enter(Enemy parent);//Prepare the State
+    //Prepare the state
+    void Enter(Enemy parent);
 
     void Update();
 
-    void Exit();//Will clean everything this state did.
+    void Exit();
 }

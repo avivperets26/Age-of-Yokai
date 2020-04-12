@@ -5,32 +5,48 @@ using UnityEngine;
 
 public class KeybindManager : MonoBehaviour
 {
+    /// <summary>
+    /// A reference to the singleton instance
+    /// </summary>
     private static KeybindManager instance;
 
-    public static KeybindManager MyInstance//Singeltone
+    /// <summary>
+    /// Property for accessing the singleton instance
+    /// </summary>
+    public static KeybindManager MyInstance
     {
         get
         {
-            if(instance == null)
+            if (instance == null)
             {
                 instance = FindObjectOfType<KeybindManager>();
             }
+
             return instance;
         }
     }
 
-    public Dictionary<string , KeyCode> Keybinds { get; set; }
+    /// <summary>
+    /// A dictionary for all movement keybinds
+    /// </summary>
+    public Dictionary<string, KeyCode> Keybinds { get; private set; }
 
+    /// <summary>
+    /// A dictionary for all actionKeybinds
+    /// </summary>
     public Dictionary<string, KeyCode> ActionBinds { get; private set; }
 
+    /// <summary>
+    /// The name of the keybind we are trying to set or change
+    /// </summary>
     private string bindName;
 
+    // Use this for initialization
     void Start()
     {
         Keybinds = new Dictionary<string, KeyCode>();
 
         ActionBinds = new Dictionary<string, KeyCode>();
-
 
         //Generates the default keybinds
         BindKey("UP", KeyCode.W);
@@ -43,50 +59,61 @@ public class KeybindManager : MonoBehaviour
         BindKey("ACT3", KeyCode.Alpha3);
     }
 
-    public void BindKey(string key, KeyCode keyBind)//Bind specific key
+    /// <summary>
+    /// Binds a specific key
+    /// </summary>
+    /// <param name="key">Key to bind</param>
+    /// <param name="keyBind">Keybind to set</param>
+    public void BindKey(string key, KeyCode keyBind)
     {
+        //Sets the default dictionary to the keybinds
         Dictionary<string, KeyCode> currentDictionary = Keybinds;
 
-        if (key.Contains("ACT"))
+        if (key.Contains("ACT")) //If we are trying to bind an actionbutton, then we use the actionbinds dictionary instead
         {
             currentDictionary = ActionBinds;
         }
-        else if (!currentDictionary.ContainsKey(key))//Checks if the key is new
+        if (!currentDictionary.ContainsKey(key))//Checks if the key is new
         {
-            currentDictionary.Add(key, keyBind);//If the key is new we add it
+            //If the key is new we add it
+            currentDictionary.Add(key, keyBind);
 
-            UIManager.MyInstance.UpdateKetText(key, keyBind);//We update the text on the button
+            //We update the text on the button
+            UIManager.MyInstance.UpdateKeyText(key, keyBind);
         }
-        else if (currentDictionary.ContainsValue(keyBind))//If we already have the keybind, then we need to change it to the new bind
+        else if (currentDictionary.ContainsValue(keyBind)) //If we already have the keybind, then we need to change it to the new bind
         {
-            string myKey = currentDictionary.FirstOrDefault(x => x.Value == keyBind).Key;//Looks for the old keybind
+            //Looks for the old keybind
+            string myKey = currentDictionary.FirstOrDefault(x => x.Value == keyBind).Key;
 
             //Unassigns the old keybind
             currentDictionary[myKey] = KeyCode.None;
-
-            UIManager.MyInstance.UpdateKetText(key, KeyCode.None);
+            UIManager.MyInstance.UpdateKeyText(key, KeyCode.None);
         }
+
         //Makes sure the new key is bound
         currentDictionary[key] = keyBind;
-
-        UIManager.MyInstance.UpdateKetText(key, keyBind);
-
+        UIManager.MyInstance.UpdateKeyText(key, keyBind);
         bindName = string.Empty;
-
     }
 
-    public void keyBindOnClick(string bindName)//Function for setting a keybind, this is called whenever a keybind button is clicked on the keybind menu
+    /// <summary>
+    /// Function for setting a keybind, this is called whenever a keybind button is clicked on the keybind menu
+    /// </summary>
+    /// <param name="bindName"></param>
+    public void KeyBindOnClick(string bindName)
     {
         this.bindName = bindName;
     }
 
+
     private void OnGUI()
     {
-        if(bindName != string.Empty)
+        if (bindName != string.Empty)//Checks if we are going to save a keybind
         {
-            Event e = Event.current;
+            Event e = Event.current; //Listens for an event
 
-            if (e.isKey)
+            if (e.isKey) //If the event is a key, then we change the keybind
             {
                 BindKey(bindName, e.keyCode);
             }

@@ -2,29 +2,41 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 class IdleState : IState
 {
+    /// <summary>
+    /// A reference to the parent
+    /// </summary>
     private Enemy parent;
-    public void Enter(Enemy parent)//This is callled whenever we eneter the state
+
+    /// <summary>
+    /// This is called whenever we enter the state
+    /// </summary>
+    /// <param name="parent">The parent enemy</param>
+    public void Enter(Enemy parent)
     {
         this.parent = parent;
 
         this.parent.Reset();
     }
 
-    public void Exit()//Called whenever we exit the state
+    /// <summary>
+    /// This is called whenever we exit the state
+    /// </summary>
+    public void Exit()
     {
-        
+
     }
 
-    public void Update()//This is called as long as we are inside the state
+    /// <summary>
+    /// This is called as long as we are inside the state
+    /// </summary>
+    public void Update()
     {
-        Debug.Log("Idle");
-
-        if (parent.MyTarget != null)//If we have a targer, than we need to follow it.
+        //Change into follow state if the player is close
+        if (parent.MyTarget != null)//If we have a target , the nwe need to follow it.
         {
             parent.ChangeState(new FollowState());
         }
