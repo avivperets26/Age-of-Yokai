@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8016863773978041542
+--- !u!1 &1709383964264890297
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,8 +8,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8016863773978041541}
-  - component: {fileID: 3508765571873631291}
+  - component: {fileID: 1709383964264890298}
+  - component: {fileID: 5208640820119113540}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -17,39 +17,39 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8016863773978041541
+--- !u!4 &1709383964264890298
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8016863773978041542}
+  m_GameObject: {fileID: 1709383964264890297}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 8347216866809403382}
+  - {fileID: 973535699126415624}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3508765571873631291
+--- !u!114 &5208640820119113540
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8016863773978041542}
+  m_GameObject: {fileID: 1709383964264890297}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: baf3221aaae53e645b6759b81992bf4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   unitName: BladeKnight
-  unitLevel: 999
-  damage: 10
-  maxHP: 25
-  currentHP: 20
---- !u!1 &8501893312061425815
+  unitLevel: 3
+  damage: 5
+  maxHP: 30
+  currentHP: 30
+--- !u!1 &8105090957225665293
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -57,8 +57,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8347216866809403382}
-  - component: {fileID: 4785862519506288688}
+  - component: {fileID: 973535699126415624}
+  - component: {fileID: 6543412791738940892}
   m_Layer: 0
   m_Name: Wizard
   m_TagString: Untagged
@@ -66,27 +66,27 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8347216866809403382
+--- !u!4 &973535699126415624
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8501893312061425815}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.516, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_GameObject: {fileID: 8105090957225665293}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.372, z: 0}
+  m_LocalScale: {x: 2.7830186, y: 2.8018866, z: 1}
   m_Children: []
-  m_Father: {fileID: 8016863773978041541}
+  m_Father: {fileID: 1709383964264890298}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &4785862519506288688
+--- !u!212 &6543412791738940892
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8501893312061425815}
+  m_GameObject: {fileID: 8105090957225665293}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -116,7 +116,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: d9e60c718febb144f84ab6379bc2dd5a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
