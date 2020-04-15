@@ -67,9 +67,13 @@ public class UIManager : MonoBehaviour
         {
             OpenClose(keybindMenu);
         }
-        if (Input.GetKeyDown(KeyCode.P))
+        else if (Input.GetKeyDown(KeyCode.P))
         {
             OpenClose(spellBook);
+        }
+        else if (Input.GetKeyDown(KeyCode.B))
+        {
+            InventoryScript.MyInstance.OpenClose();
         }
     }
 
@@ -120,5 +124,13 @@ public class UIManager : MonoBehaviour
     {
         canvasGroup.alpha = canvasGroup.alpha > 0 ? 0 : 1;
         canvasGroup.blocksRaycasts = canvasGroup.blocksRaycasts == true ? false : true;
+    }
+
+    public void UpdateStackSize(IClickable clickable)
+    {
+        if (clickable.MyCount == 0)
+        {
+            clickable.MyIcon.color = new Color(0, 0, 0, 0);
+        }
     }
 }

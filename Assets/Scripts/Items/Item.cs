@@ -2,17 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Item : ScriptableObject
+public abstract class Item : ScriptableObject//Superclass for all items
 {
     [SerializeField]
-    private Sprite icon;
+    private Sprite icon;//Icon used when moving and placing the items
 
     [SerializeField]
-    private int stackSize;
+    private int stackSize;//The size of the stack, less then 2 is not stackable
 
-    protected SlotScript slot;
+    protected SlotScript slot;//A reference to the slot that this item is sitting on
 
-    public Sprite Icon { get => icon; }
-    public int StackSize { get => stackSize; }
-    public SlotScript Slot { get => slot; set => slot = value; }
+    public Sprite MyIcon { get => icon; }//Property for accessing the icon
+    public int StackSize { get => stackSize; }//Property for accessing the stacksize
+    public SlotScript MySlot { get => slot; set => slot = value; }
+
+    public void Remove()
+    {
+        if (MySlot != null)
+        {
+            MySlot.RemoveItem(this);
+        }
+    }
 }

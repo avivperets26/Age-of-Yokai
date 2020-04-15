@@ -5,10 +5,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName ="Bag",menuName ="Item/Bag",order = 1)]
 public class Bag : Item, IUseable
 {
-    private int slots;
+    private int slots;//The amount of slots this bag has
     
     [SerializeField]
-    private GameObject bagPrefab;
+    private GameObject bagPrefab;//A reference to a bag prefab, so that we can instanitate a bag in the game
 
     public BagScript MyBagScript { get; set; }
     public int Slots { get => slots; }
@@ -18,9 +18,17 @@ public class Bag : Item, IUseable
         this.slots = slots;
     }
 
-    public void Use()
+    public void Use()//Equip the Bag
     {
-        MyBagScript = Instantiate(bagPrefab,InventoryScript.MyInstance.transform).GetComponent<BagScript>();
-        MyBagScript.AddSlots(slots);
+        if (InventoryScript.MyInstance.CanAddBag)//Only if less than 5 bags exist
+        {
+            Remove();
+
+            MyBagScript = Instantiate(bagPrefab, InventoryScript.MyInstance.transform).GetComponent<BagScript>();
+
+            MyBagScript.AddSlots(slots);
+
+            InventoryScript.MyInstance.AddBag(this);
+        }
     }
 }
