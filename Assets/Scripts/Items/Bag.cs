@@ -10,8 +10,9 @@ public class Bag : Item, IUseable
     [SerializeField]
     private GameObject bagPrefab;//A reference to a bag prefab, so that we can instanitate a bag in the game
 
-    public BagScript MyBagScript { get; set; }
-    public int Slots { get => slots; }
+    public BagScript MyBagScript { get; set; }//A reference to the bagScript, this bag belong to
+
+    public int Slots { get => slots; }//Property for getting the slots
 
     public void Initialize(int slots)
     {

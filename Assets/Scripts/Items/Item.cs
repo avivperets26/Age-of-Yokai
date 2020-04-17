@@ -13,7 +13,7 @@ public abstract class Item : ScriptableObject//Superclass for all items
     protected SlotScript slot;//A reference to the slot that this item is sitting on
 
     public Sprite MyIcon { get => icon; }//Property for accessing the icon
-    public int StackSize { get => stackSize; }//Property for accessing the stacksize
+    public int MyStackSize { get => stackSize; }//Property for accessing the stacksize
     public SlotScript MySlot { get => slot; set => slot = value; }
 
     public void Remove()

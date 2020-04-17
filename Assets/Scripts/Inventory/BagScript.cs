@@ -19,6 +19,8 @@ public class BagScript : MonoBehaviour
         }
     }
 
+    public List<SlotScript> MySlots { get => slots; }
+
     private void Awake()
     {
         canvasGroup = GetComponent<CanvasGroup>();//Create reference to the canvasGroup
@@ -30,13 +32,13 @@ public class BagScript : MonoBehaviour
         {
             SlotScript slot = Instantiate(slotPrefab, transform).GetComponent<SlotScript>();
 
-            slots.Add(slot);
+            MySlots.Add(slot);
         }
     }
 
     public bool AddItem(Item item)
     {
-        foreach (SlotScript slot in slots)
+        foreach (SlotScript slot in MySlots)
         {
             if (slot.IsEmpty)
             {

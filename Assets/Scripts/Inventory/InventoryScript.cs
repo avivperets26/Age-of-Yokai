@@ -53,7 +53,7 @@ public class InventoryScript : MonoBehaviour
             bag.Use();
         }
 
-        else if (Input.GetKeyDown(KeyCode.K))
+        else if (Input.GetKeyDown(KeyCode.K))//for debug
         {
             Debug.Log("pressed K");
 
@@ -62,6 +62,13 @@ public class InventoryScript : MonoBehaviour
             bag.Initialize(20);
 
             AddItem(bag);
+        }
+
+        else if (Input.GetKeyDown(KeyCode.L))
+        {
+            HealthPotion potion = (HealthPotion)Instantiate(items[1]);
+
+            AddItem(potion);
         }
     }
 
@@ -80,7 +87,20 @@ public class InventoryScript : MonoBehaviour
         }
     }
 
-    public void AddItem(Item item)
+    public void AddItem(Item item)//Add an item to the inventory
+    {
+        if (item.MyStackSize > 0)
+        {
+            if (PlaceInStack(item))
+            {
+                return;
+            }
+        }
+
+        PlaceInEmpty(item);
+    }
+
+    private void PlaceInEmpty(Item item)
     {
         foreach (Bag bag in bags)
         {
@@ -89,6 +109,22 @@ public class InventoryScript : MonoBehaviour
                 return;
             }
         }
+    }
+
+    private bool PlaceInStack(Item item)
+    {
+        foreach (Bag bag in bags)
+        {
+            foreach (SlotScript slots in bag.MyBagScript.MySlots)
+            {
+                if (slots.StackItem(item))
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     public void OpenClose()//Open and closes all bags
