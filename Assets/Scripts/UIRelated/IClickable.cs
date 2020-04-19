@@ -16,5 +16,10 @@ public interface IClickable
     {
         get;
     }
+
+    Text MyStackText
+    {
+        get;
+    }
 }
 

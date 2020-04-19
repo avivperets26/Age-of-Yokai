@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Item : ScriptableObject//Superclass for all items
+public abstract class Item : ScriptableObject, IMoveable//Superclass for all items
 {
     [SerializeField]
     private Sprite icon;//Icon used when moving and placing the items

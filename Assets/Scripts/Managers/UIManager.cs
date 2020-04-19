@@ -126,11 +126,25 @@ public class UIManager : MonoBehaviour
         canvasGroup.blocksRaycasts = canvasGroup.blocksRaycasts == true ? false : true;
     }
 
-    public void UpdateStackSize(IClickable clickable)
+    public void UpdateStackSize(IClickable clickable)//Updates the stacksize on a clickable slot
     {
-        if (clickable.MyCount == 0)
+        if (clickable.MyCount >1)
+        {
+            clickable.MyStackText.text = clickable.MyCount.ToString();
+
+            clickable.MyStackText.color = Color.white;
+
+            clickable.MyIcon.color = Color.white;
+        }
+        else if (clickable.MyCount == 0)//If the slot is empty, then we need to hide the icon
         {
             clickable.MyIcon.color = new Color(0, 0, 0, 0);
+
+            clickable.MyStackText.color = new Color(0, 0, 0, 0);
+        }
+        else
+        {
+            clickable.MyStackText.color = new Color(0, 0, 0, 0);
         }
     }
 }
