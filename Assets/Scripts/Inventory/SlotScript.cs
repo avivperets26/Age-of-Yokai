@@ -14,11 +14,13 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler,IClickable
     [SerializeField]
     private Text stackSize;
 
+    public BagScript MyBag { get; set; }//A reference to the bag that this slot belong to
+
     public bool IsEmpty//Checks if the item is empty
     {
         get
         {
-            return items.Count == 0;
+            return MyItems.Count == 0;
         }
     }
 
@@ -41,14 +43,14 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler,IClickable
         {
             if (!IsEmpty)
             {
-                return items.Peek();
+                return MyItems.Peek();
             }
 
             return null;
         }
     }
 
-    public Image MyIcon
+    public Image MyIcon//The icon on the slot
     {
         get
         {
@@ -65,7 +67,7 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler,IClickable
 
     public int MyCount
     {
-        get { return items.Count; }
+        get { return MyItems.Count; }
     }
 
     public Text MyStackText
@@ -76,19 +78,21 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler,IClickable
         }
     }
 
+    public ObservableStack<Item> MyItems { get => items; }
+
     private void Awake()
     {
         //Assigns all the event on our observable stack to the updateSlot function
-        items.OnPop += new UpdateStackEvent(UpdateSlot);
+        MyItems.OnPop += new UpdateStackEvent(UpdateSlot);
 
-        items.OnPush += new UpdateStackEvent(UpdateSlot);
+        MyItems.OnPush += new UpdateStackEvent(UpdateSlot);
 
-        items.OnClear += new UpdateStackEvent(UpdateSlot);
+        MyItems.OnClear += new UpdateStackEvent(UpdateSlot);
     }
 
     public bool AddItem(Item item)//Adds an Item to the slot
     {
-        items.Push(item);
+        MyItems.Push(item);
 
         icon.sprite = item.MyIcon;
 
@@ -123,19 +127,32 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler,IClickable
     }
     public void OnPointerClick(PointerEventData eventData)//When the slot is clicked
     {
-        if (eventData.button == PointerEventData.InputButton.Left)//If we dont have somthing to move yet
+        if (eventData.button == PointerEventData.InputButton.Left)
         {
-            if (InventoryScript.MyInstance.FromSlot == null && !IsEmpty)
+            if (InventoryScript.MyInstance.FromSlot == null && !IsEmpty)//If we dont have somthing to move yet
             {
                 HandScript.MyInstance.TakeMoveable(MyItem as IMoveable);
 
                 InventoryScript.MyInstance.FromSlot = this;
             }
+            else if (InventoryScript.MyInstance.FromSlot == null && IsEmpty && (HandScript.MyInstance.MyMoveable is Bag))
+            {
+                Bag bag = (Bag)HandScript.MyInstance.MyMoveable;//Dequips a bag from the inventory
 
+                if (bag.MyBagScript != MyBag && InventoryScript.MyInstance.MyEmptySlotCount - bag.Slots > 0)
+                {
+                    AddItem(bag);
+
+                    bag.MyBagButton.RemovBag();
+
+                    HandScript.MyInstance.Drop();
+                }
+
+            }
             else if (InventoryScript.MyInstance.FromSlot != null)//If we have somthiing to move
             {
                 //We will try to do different things to place the item back into the inventory
-                if (PutItemBack() || MergeItems(InventoryScript.MyInstance.FromSlot) ||SwapItems(InventoryScript.MyInstance.FromSlot) || AddItems(InventoryScript.MyInstance.FromSlot.items))
+                if (PutItemBack() || MergeItems(InventoryScript.MyInstance.FromSlot) ||SwapItems(InventoryScript.MyInstance.FromSlot) || AddItems(InventoryScript.MyInstance.FromSlot.MyItems))
                 {
                     HandScript.MyInstance.Drop();
 
@@ -155,15 +172,15 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler,IClickable
     {
         if (!IsEmpty)
         {
-            items.Pop();
+            MyItems.Pop();
         }
     }
 
     public void Clear()
     {
-        if (items.Count > 0)
+        if (MyItems.Count > 0)
         {
-            items.Clear();
+            MyItems.Clear();
         }
     }
 
@@ -179,9 +196,9 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler,IClickable
     public bool StackItem(Item item)
     {
 
-        if (!IsEmpty && item.name == MyItem.name && items.Count < MyItem.MyStackSize)
+        if (!IsEmpty && item.name == MyItem.name && MyItems.Count < MyItem.MyStackSize)
         {
-            items.Push(item);
+            MyItems.Push(item);
 
             item.MySlot = this;
 
@@ -215,16 +232,16 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler,IClickable
         else if (from.MyItem.GetType() != MyItem.GetType() || from.MyCount+MyCount > MyItem.MyStackSize)
         {
             //Copy all the itmes we need to swap from A
-            ObservableStack<Item> tmpFrom = new ObservableStack<Item>(from.items);
+            ObservableStack<Item> tmpFrom = new ObservableStack<Item>(from.MyItems);
 
             //Clear slot A
-            from.items.Clear();
+            from.MyItems.Clear();
 
             //All itmes from slot B and copy them into A
-            from.AddItems(items);
+            from.AddItems(MyItems);
 
             //Clear B
-            items.Clear();
+            MyItems.Clear();
 
             //Move the items from A copy to B
             AddItems(tmpFrom);
@@ -235,7 +252,7 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler,IClickable
         return false;
     }
 
-    private bool MergeItems(SlotScript from)
+    private bool MergeItems(SlotScript from)//Merges two identical stack of items
     {
         if (IsEmpty)
         {
@@ -249,7 +266,7 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler,IClickable
 
             for (int i = 0; i < free; i++)
             {
-                AddItem(from.items.Pop());
+                AddItem(from.MyItems.Pop());
             }
 
             return true;

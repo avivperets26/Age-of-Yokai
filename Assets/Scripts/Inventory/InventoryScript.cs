@@ -35,6 +35,20 @@ public class InventoryScript : MonoBehaviour
         get { return bags.Count < 5; }
     }
 
+    public int MyEmptySlotCount
+    {
+        get
+        {
+            int count = 0;
+
+            foreach (Bag bag in bags)
+            {
+                count += bag.MyBagScript.MyEmptySlotCount;
+            }
+            return count;
+        }
+    }
+
     public SlotScript FromSlot { get
         {
             return fromSlot;
@@ -90,7 +104,7 @@ public class InventoryScript : MonoBehaviour
         }
     }
 
-    public void AddBag(Bag bag)
+    public void AddBag(Bag bag)//Equips a bag to the inventory
     {
         foreach (BagButton bagButton in bagButtons)
         {
@@ -100,9 +114,18 @@ public class InventoryScript : MonoBehaviour
 
                 bags.Add(bag);
 
+                bag.MyBagButton = bagButton;
+
                 break;
             }
         }
+    }
+
+    public void RemoveBag(Bag bag)
+    {
+        bags.Remove(bag);
+
+        Destroy(bag.MyBagScript.gameObject);
     }
 
     public void AddItem(Item item)//Add an item to the inventory

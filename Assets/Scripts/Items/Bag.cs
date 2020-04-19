@@ -12,6 +12,8 @@ public class Bag : Item, IUseable
 
     public BagScript MyBagScript { get; set; }//A reference to the bagScript, this bag belong to
 
+    public BagButton MyBagButton { get; set; }
+
     public int Slots { get => slots; }//Property for getting the slots
 
     public void Initialize(int slots)
