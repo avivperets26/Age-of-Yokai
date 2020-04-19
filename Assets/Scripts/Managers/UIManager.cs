@@ -21,9 +21,8 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// A reference to all the action buttons
-    /// </summary>
+
+    // A reference to all the action buttons
     [SerializeField]
     private ActionButton[] actionButtons;
 
@@ -35,18 +34,16 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private Image portraitFrame;
 
-    /// <summary>
-    /// A reference to the keybind menu
-    /// </summary>
+
+    // A reference to the keybind menu
     [SerializeField]
     private CanvasGroup keybindMenu;
 
     [SerializeField]
     private CanvasGroup spellBook;
 
-    /// <summary>
-    /// A reference to all the kibind buttons on the menu
-    /// </summary>
+
+    // A reference to all the kibind buttons on the menu
     private GameObject[] keybindButtons;
 
     private void Awake()
@@ -95,20 +92,15 @@ public class UIManager : MonoBehaviour
         targetFrame.SetActive(false);
     }
 
-    /// <summary>
-    /// Updates the targetframe
-    /// </summary>
-    /// <param name="health"></param>
+
+    // Updates the targetframe
     public void UpdateTargetFrame(float health)
     {
         healthStat.MyCurrentValue = health;
     }
 
-    /// <summary>
-    /// Updates the text on a keybindbutton after the key has been changed
-    /// </summary>
-    /// <param name="key"></param>
-    /// <param name="code"></param>
+
+    // Updates the text on a keybindbutton after the key has been changed
     public void UpdateKeyText(string key, KeyCode code)
     {
         Text tmp = Array.Find(keybindButtons, x => x.name == key).GetComponentInChildren<Text>();
@@ -128,7 +120,7 @@ public class UIManager : MonoBehaviour
 
     public void UpdateStackSize(IClickable clickable)//Updates the stacksize on a clickable slot
     {
-        if (clickable.MyCount >1)
+        if (clickable.MyCount >1)//If our slot has more than one tem on it
         {
             clickable.MyStackText.text = clickable.MyCount.ToString();
 
@@ -142,9 +134,11 @@ public class UIManager : MonoBehaviour
 
             clickable.MyStackText.color = new Color(0, 0, 0, 0);
         }
-        else
+        else//If it only has 1 item on it
         {
             clickable.MyStackText.color = new Color(0, 0, 0, 0);
+
+            clickable.MyIcon.color = Color.white;
         }
     }
 }

@@ -78,6 +78,7 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler,IClickable
 
     private void Awake()
     {
+        //Assigns all the event on our observable stack to the updateSlot function
         items.OnPop += new UpdateStackEvent(UpdateSlot);
 
         items.OnPush += new UpdateStackEvent(UpdateSlot);
@@ -99,7 +100,7 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler,IClickable
     }
 
 
-    public bool AddItems(ObservableStack<Item> newItems)
+    public bool AddItems(ObservableStack<Item> newItems)//Add a stack of items to the slot
     {
         if (IsEmpty || newItems.Peek().GetType() == MyItem.GetType())
         {
@@ -133,7 +134,8 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler,IClickable
 
             else if (InventoryScript.MyInstance.FromSlot != null)//If we have somthiing to move
             {
-                if (PutItemBack() ||SwapItems(InventoryScript.MyInstance.FromSlot) || AddItems(InventoryScript.MyInstance.FromSlot.items))
+                //We will try to do different things to place the item back into the inventory
+                if (PutItemBack() || MergeItems(InventoryScript.MyInstance.FromSlot) ||SwapItems(InventoryScript.MyInstance.FromSlot) || AddItems(InventoryScript.MyInstance.FromSlot.items))
                 {
                     HandScript.MyInstance.Drop();
 
@@ -157,7 +159,15 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler,IClickable
         }
     }
 
-    public void UseItem()
+    public void Clear()
+    {
+        if (items.Count > 0)
+        {
+            items.Clear();
+        }
+    }
+
+    public void UseItem()//Uses the item if it useable
     {
         if (MyItem is IUseable)
         {
@@ -196,7 +206,7 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler,IClickable
         }
     }
 
-    private bool SwapItems(SlotScript from)
+    private bool SwapItems(SlotScript from)//Swap two itmes in the inventory
     {
         if (IsEmpty)
         {
@@ -225,7 +235,30 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler,IClickable
         return false;
     }
 
-    private void UpdateSlot()
+    private bool MergeItems(SlotScript from)
+    {
+        if (IsEmpty)
+        {
+            return false;
+
+        }
+        else if (from.MyItem.GetType() == MyItem.GetType() && !IsFull)
+        {
+            //How many free slots do we have in the stack
+            int free = MyItem.MyStackSize - MyCount;
+
+            for (int i = 0; i < free; i++)
+            {
+                AddItem(from.items.Pop());
+            }
+
+            return true;
+        }
+
+        return false;
+    }
+
+    private void UpdateSlot()//Update the slot
     {
         UIManager.MyInstance.UpdateStackSize(this);
     }
