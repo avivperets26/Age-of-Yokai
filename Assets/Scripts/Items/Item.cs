@@ -16,7 +16,7 @@ public abstract class Item : ScriptableObject, IMoveable//Superclass for all ite
     public int MyStackSize { get => stackSize; }//Property for accessing the stacksize
     public SlotScript MySlot { get => slot; set => slot = value; }
 
-    public void Remove()
+    public void Remove()//Removes the item from the inventory
     {
         if (MySlot != null)
         {

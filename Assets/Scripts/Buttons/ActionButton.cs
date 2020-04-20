@@ -4,14 +4,17 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ActionButton : MonoBehaviour, IPointerClickHandler
+public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable
 {
     /// <summary>
     /// A reference t o the useable on the actionbutton
     /// </summary>
     public IUseable MyUseable { get; set; }
 
-    private Stack<IUseable> useables;
+    [SerializeField]
+    private Text stackSize;
+
+    private Stack<IUseable> useables = new Stack<IUseable>();
 
     private int count;
 
@@ -33,6 +36,22 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler
         }
     }
 
+    public int MyCount
+    {
+        get
+        {
+            return count;
+        }
+    }
+
+    public Text MyStackText
+    {
+        get
+        {
+            return stackSize;
+        }
+    }
+
     [SerializeField]
     private Image icon;
 
@@ -40,7 +59,10 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler
     void Start()
     {
         MyButton = GetComponent<Button>();
+
         MyButton.onClick.AddListener(OnClick);
+
+        InventoryScript.MyInstance.itemCountChangedEvent += new ItemCountChanged(UpdateItemCount);
     }
 
     // Update is called once per frame
@@ -62,7 +84,7 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler
             }
             else if (useables != null && useables.Count > 0)
             {
-                useables.Pop().Use();
+                useables.Peek().Use();
             }
         }
     }
@@ -111,6 +133,27 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler
     public void UpdateVisual()
     {
         MyIcon.sprite = HandScript.MyInstance.Put().MyIcon;
+
         MyIcon.color = Color.white;
+
+        if (count > 1)
+        {
+            UIManager.MyInstance.UpdateStackSize(this);
+        }
+    }
+
+    public void UpdateItemCount(Item item)
+    {
+        if (item is IUseable && useables.Count > 0)
+        {
+            if(useables.Peek().GetType() == item.GetType())
+            {
+                useables = InventoryScript.MyInstance.GetUseables(item as IUseable);
+
+                count = useables.Count;
+
+                UIManager.MyInstance.UpdateStackSize(this);
+            }
+        }
     }
 }
