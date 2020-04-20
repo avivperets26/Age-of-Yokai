@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -8,6 +10,10 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler
     /// A reference t o the useable on the actionbutton
     /// </summary>
     public IUseable MyUseable { get; set; }
+
+    private Stack<IUseable> useables;
+
+    private int count;
 
     /// <summary>
     /// A reference to the actual button that this button uses
@@ -48,9 +54,16 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler
     /// </summary>
     public void OnClick()
     {
-        if (MyUseable != null)
+        if (HandScript.MyInstance.MyMoveable == null)
         {
-            MyUseable.Use();
+            if (MyUseable != null)
+            {
+                MyUseable.Use();
+            }
+            else if (useables != null && useables.Count > 0)
+            {
+                useables.Pop().Use();
+            }
         }
     }
 
@@ -74,7 +87,20 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler
     /// </summary>
     public void SetUseable(IUseable useable)
     {
-        this.MyUseable = useable;
+        if (useable is Item)
+        {
+            useables = InventoryScript.MyInstance.GetUseables(useable);
+
+            count = useables.Count;
+
+            InventoryScript.MyInstance.FromSlot.MyIcon.color = Color.white;
+
+            InventoryScript.MyInstance.FromSlot = null;
+        }
+        else
+        {
+            this.MyUseable = useable;
+        }      
 
         UpdateVisual();
     }

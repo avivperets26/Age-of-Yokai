@@ -49,6 +49,29 @@ public class InventoryScript : MonoBehaviour
         }
     }
 
+    public int MyTotalSlotCount
+    {
+        get
+        {
+            int count = 0;
+
+            foreach (Bag bag  in bags)
+            {
+                count += bag.MyBagScript.MySlots.Count;
+            }
+
+            return count;
+        }
+    }
+
+    public int MyFullSlotCount
+    {
+        get
+        {
+            return MyTotalSlotCount - MyEmptySlotCount;
+        }
+    }
+
     public SlotScript FromSlot { get
         {
             return fromSlot;
@@ -121,11 +144,49 @@ public class InventoryScript : MonoBehaviour
         }
     }
 
-    public void RemoveBag(Bag bag)
+    public void AddBag(Bag bag, BagButton bagButton)//Overload func
+    {
+        bags.Add(bag);
+
+        bagButton.MyBag = bag;
+    }
+
+    public void RemoveBag(Bag bag)//Removes the bag from the inventory
     {
         bags.Remove(bag);
 
         Destroy(bag.MyBagScript.gameObject);
+    }
+
+    public void SwapBags(Bag oldBag, Bag newBag)
+    {
+        int newSlotCount = (MyEmptySlotCount - oldBag.Slots) + newBag.Slots;
+
+        if (newSlotCount - MyFullSlotCount >= 0)
+        {
+            //Do swaping
+            List<Item> bagItems = oldBag.MyBagScript.GetItems();
+
+            RemoveBag(oldBag);
+
+            newBag.MyBagButton = oldBag.MyBagButton;
+
+            newBag.Use();
+
+            foreach (Item item in bagItems)
+            {
+                if (item != newBag)//To make sure we dont get dubplicate bags
+                {
+                    AddItem(item);
+                }
+            }
+
+            AddItem(oldBag);
+
+            HandScript.MyInstance.Drop();
+
+            MyInstance.fromSlot = null;
+        }
     }
 
     public void AddItem(Item item)//Add an item to the inventory
@@ -141,31 +202,31 @@ public class InventoryScript : MonoBehaviour
         PlaceInEmpty(item);
     }
 
-    private void PlaceInEmpty(Item item)
+    private void PlaceInEmpty(Item item)//Places an item on an empty slot in the game
     {
-        foreach (Bag bag in bags)
+        foreach (Bag bag in bags)//Checks all bags
         {
-            if (bag.MyBagScript.AddItem(item))
+            if (bag.MyBagScript.AddItem(item))//Tries to add the item
             {
-                return;
+                return;//possible to add the item
             }
         }
     }
 
-    private bool PlaceInStack(Item item)
+    private bool PlaceInStack(Item item)//Tries to stack an item on another
     {
-        foreach (Bag bag in bags)
+        foreach (Bag bag in bags)//Checks all bags
         {
-            foreach (SlotScript slots in bag.MyBagScript.MySlots)
+            foreach (SlotScript slots in bag.MyBagScript.MySlots)//Checks all slots on the current bag
             {
-                if (slots.StackItem(item))
+                if (slots.StackItem(item))//Tries to stack the item
                 {
-                    return true;
+                    return true;//It was possible to stack the item
                 }
             }
         }
 
-        return false;
+        return false;// It wasn't possible to stack the item
     }
 
     public void OpenClose()//Open and closes all bags
@@ -185,4 +246,25 @@ public class InventoryScript : MonoBehaviour
         }
     }
 
+    public Stack<IUseable> GetUseables(IUseable type)
+    {
+        Stack<IUseable> useables = new Stack<IUseable>();
+
+        foreach (Bag bag in bags)
+        {
+            foreach (SlotScript slot in bag.MyBagScript.MySlots)
+            {
+                if (!slot.IsEmpty && slot.MyItem.GetType() == type.GetType())
+                {
+                    foreach (Item item in slot.MyItems)
+                    {
+                        useables.Push(item as IUseable);
+                    }
+                }
+            }
+        }
+
+        return useables;
+    }
+    
 }
