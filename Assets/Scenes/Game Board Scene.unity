@@ -2700,7 +2700,7 @@ Tilemap:
   - first: {x: 9, y: -7, z: 0}
     second:
       m_TileIndex: 0
-      m_TileSpriteIndex: 8
+      m_TileSpriteIndex: 9
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_ObjectToInstantiate: {fileID: 0}
@@ -2925,7 +2925,7 @@ Tilemap:
   - first: {x: -16, y: -2, z: 0}
     second:
       m_TileIndex: 0
-      m_TileSpriteIndex: 9
+      m_TileSpriteIndex: 18
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_ObjectToInstantiate: {fileID: 0}
@@ -2961,7 +2961,7 @@ Tilemap:
   - first: {x: -6, y: -2, z: 0}
     second:
       m_TileIndex: 0
-      m_TileSpriteIndex: 8
+      m_TileSpriteIndex: 18
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_ObjectToInstantiate: {fileID: 0}
@@ -3006,7 +3006,7 @@ Tilemap:
   - first: {x: -19, y: -1, z: 0}
     second:
       m_TileIndex: 0
-      m_TileSpriteIndex: 9
+      m_TileSpriteIndex: 8
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_ObjectToInstantiate: {fileID: 0}
@@ -3024,7 +3024,7 @@ Tilemap:
   - first: {x: -17, y: -1, z: 0}
     second:
       m_TileIndex: 0
-      m_TileSpriteIndex: 18
+      m_TileSpriteIndex: 9
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_ObjectToInstantiate: {fileID: 0}
@@ -3951,8 +3951,8 @@ Tilemap:
     m_Data: {fileID: 21300000, guid: 5496d7dd2c1a0644b9aa1aa90ecf7512, type: 3}
   - m_RefCount: 12
     m_Data: {fileID: 21300000, guid: 07d06050f97ae3b40a8022834b138c3b, type: 3}
-  - m_RefCount: 3
-    m_Data: {fileID: 21300000, guid: 5595cbe7794fde64c92264fdbcca6494, type: 3}
+  - m_RefCount: 2
+    m_Data: {fileID: 21300000, guid: d49893fe18b88fe46a7bc19adf7c23f4, type: 3}
   - m_RefCount: 9
     m_Data: {fileID: 21300000, guid: 10ca68d6ccae9b044834179e9abf4794, type: 3}
   - m_RefCount: 9
@@ -3971,8 +3971,8 @@ Tilemap:
     m_Data: {fileID: 21300000, guid: ec506b2d1e5b6eb449f3833dc7da66a8, type: 3}
   - m_RefCount: 2
     m_Data: {fileID: 21300000, guid: 8ded63c64f1a92842956711d6453ef89, type: 3}
-  - m_RefCount: 1
-    m_Data: {fileID: 21300000, guid: d49893fe18b88fe46a7bc19adf7c23f4, type: 3}
+  - m_RefCount: 2
+    m_Data: {fileID: 21300000, guid: 5595cbe7794fde64c92264fdbcca6494, type: 3}
   - m_RefCount: 4
     m_Data: {fileID: 21300000, guid: 236a6a6d4c968fd43b0e3663f5c73171, type: 3}
   - m_RefCount: 4
@@ -22462,7 +22462,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 83.5, y: 0.0000012716}
+  m_AnchoredPosition: {x: 83.5, y: 0}
   m_SizeDelta: {x: 30.73, y: 24}
   m_Pivot: {x: 0.49999866, y: 0.5}
 --- !u!114 &1922629566
@@ -22982,7 +22982,7 @@ GameObject:
   - component: {fileID: 1999035982}
   - component: {fileID: 1999035983}
   m_Layer: 0
-  m_Name: KeybindManager
+  m_Name: keyBindManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23510,6 +23510,46 @@ PrefabInstance:
       propertyPath: stamina
       value: 
       objectReference: {fileID: 1040089243}
+    - target: {fileID: 8749254919949873309, guid: 381e0537aef29d649af62027596ba638,
+        type: 3}
+      propertyPath: castingBar
+      value: 
+      objectReference: {fileID: 1690431649}
+    - target: {fileID: 8749254919949873309, guid: 381e0537aef29d649af62027596ba638,
+        type: 3}
+      propertyPath: icon
+      value: 
+      objectReference: {fileID: 1923592067}
+    - target: {fileID: 8749254919949873309, guid: 381e0537aef29d649af62027596ba638,
+        type: 3}
+      propertyPath: castTime
+      value: 
+      objectReference: {fileID: 1922629567}
+    - target: {fileID: 8749254919949873309, guid: 381e0537aef29d649af62027596ba638,
+        type: 3}
+      propertyPath: currentSpell
+      value: 
+      objectReference: {fileID: 742430645}
+    - target: {fileID: 8749254919949873309, guid: 381e0537aef29d649af62027596ba638,
+        type: 3}
+      propertyPath: canvasGroup
+      value: 
+      objectReference: {fileID: 1387640680}
+    - target: {fileID: 8749254919949873309, guid: 381e0537aef29d649af62027596ba638,
+        type: 3}
+      propertyPath: spells.Array.data[0].description
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8749254919949873309, guid: 381e0537aef29d649af62027596ba638,
+        type: 3}
+      propertyPath: spells.Array.data[1].description
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8749254919949873309, guid: 381e0537aef29d649af62027596ba638,
+        type: 3}
+      propertyPath: spells.Array.data[2].description
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 381e0537aef29d649af62027596ba638, type: 3}
 --- !u!1001 &9213197564709621335

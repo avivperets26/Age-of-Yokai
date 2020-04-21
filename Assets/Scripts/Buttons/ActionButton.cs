@@ -161,11 +161,12 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable, IPo
         if (MyUseable != null && MyUseable is IDescribable)
         {
             tmp = (IDescribable)MyUseable;
-            //UIManager.MyInstance.ShowTooltip(transform.position);
+
+            UIManager.MyInstance.ShowTooltip(transform.position, tmp);
         }
         else if (useables.Count > 0)
         {
-            //UIManager.MyInstance.ShowTooltip(transform.position);
+            UIManager.MyInstance.ShowTooltip(transform.position, tmp);
         }
         else if (tmp != null)
         {

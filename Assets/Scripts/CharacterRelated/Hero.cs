@@ -94,22 +94,22 @@ public class Hero : Character
             stamina.MyCurrentValue += 10;
         }
 
-        if (Input.GetKey(KeybindManager.MyInstance.Keybinds["UP"])) //Moves up
+        if (Input.GetKey(keyBindManager.MyInstance.Keybinds["UP"])) //Moves up
         {
             exitIndex = 0;
             Direction += Vector2.up;
         }
-        if (Input.GetKey(KeybindManager.MyInstance.Keybinds["LEFT"])) //Moves left
+        if (Input.GetKey(keyBindManager.MyInstance.Keybinds["LEFT"])) //Moves left
         {
             exitIndex = 3;
             Direction += Vector2.left;
         }
-        if (Input.GetKey(KeybindManager.MyInstance.Keybinds["DOWN"]))
+        if (Input.GetKey(keyBindManager.MyInstance.Keybinds["DOWN"]))
         {
             exitIndex = 2;
             Direction += Vector2.down;
         }
-        if (Input.GetKey(KeybindManager.MyInstance.Keybinds["RIGHT"])) //Moves right
+        if (Input.GetKey(keyBindManager.MyInstance.Keybinds["RIGHT"])) //Moves right
         {
             exitIndex = 1;
             Direction += Vector2.right;
@@ -119,9 +119,9 @@ public class Hero : Character
             StopAttack();
         }
 
-        foreach (string action in KeybindManager.MyInstance.ActionBinds.Keys)
+        foreach (string action in keyBindManager.MyInstance.ActionBinds.Keys)
         {
-            if (Input.GetKeyDown(KeybindManager.MyInstance.ActionBinds[action]))
+            if (Input.GetKeyDown(keyBindManager.MyInstance.ActionBinds[action]))
             {
                 UIManager.MyInstance.ClickActionButton(action);
 
