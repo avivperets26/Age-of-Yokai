@@ -38,7 +38,7 @@ public class BattleSystem : MonoBehaviour
         GameObject enemyGO = Instantiate(enemyPrefab, enemyBattleStation);
         enemyGO.GetComponent<Unit>();
 
-        dialogueText.text = enemyUnit.unitName;
+        //dialogueText.text = enemyUnit.unitName;
 
         yield return new WaitForSeconds(2f);
 
@@ -103,7 +103,7 @@ public class BattleSystem : MonoBehaviour
 
     void PlayerTurn()
     {
-        dialogueText.text = "Choose enemy to attack";
+        //dialogueText.text = "Choose enemy to attack";
     }
 
     public void OnAttackButton()

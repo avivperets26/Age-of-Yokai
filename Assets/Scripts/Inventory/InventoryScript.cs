@@ -129,6 +129,17 @@ public class InventoryScript : MonoBehaviour
 
             AddItem(potion);
         }
+
+        else if (Input.GetKeyDown(KeyCode.H))
+        {
+            AddItem((Armor)Instantiate(items[2]));
+
+            AddItem((Armor)Instantiate(items[3]));
+
+            AddItem((Armor)Instantiate(items[4]));
+
+            AddItem((Armor)Instantiate(items[5]));
+        }
     }
 
     public void AddBag(Bag bag)//Equips a bag to the inventory

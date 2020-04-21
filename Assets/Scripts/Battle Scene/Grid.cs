@@ -7,8 +7,11 @@ using CodeMonkey.Utils;
 public class Grid
 {
     private int width;
+
     private int height;
+
     private float cellSize;
+
     private Vector3 originPosition;
     private int[,] gridArray;
      private TextMesh[,] debugTextArray;
