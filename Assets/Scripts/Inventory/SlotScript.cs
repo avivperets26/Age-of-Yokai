@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class SlotScript : MonoBehaviour, IPointerClickHandler,IClickable
+public class SlotScript : MonoBehaviour, IPointerClickHandler,IClickable,IPointerEnterHandler,IPointerExitHandler
 {
     private ObservableStack<Item> items = new ObservableStack<Item>();//A stack for all items on this slot
 
@@ -65,12 +65,12 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler,IClickable
         
     
 
-    public int MyCount
+    public int MyCount//The item count on the slot
     {
         get { return MyItems.Count; }
     }
 
-    public Text MyStackText
+    public Text MyStackText//The stack text
     {
         get
         {
@@ -206,7 +206,7 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler,IClickable
         
     }
 
-    public bool StackItem(Item item)
+    public bool StackItem(Item item)//Stack two items
     {
 
         if (!IsEmpty && item.name == MyItem.name && MyItems.Count < MyItem.MyStackSize)
@@ -291,5 +291,18 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler,IClickable
     private void UpdateSlot()//Update the slot
     {
         UIManager.MyInstance.UpdateStackSize(this);
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)//Show tooltip
+    {
+        if (!IsEmpty)//if there is an item on the inventory slot
+        {
+            UIManager.MyInstance.ShowTooltip(transform.position, MyItem);
+        }
+    }
+
+    public void OnPointerExit(PointerEventData eventData)//Hide tooltip
+    {
+        UIManager.MyInstance.HideTooltip();
     }
 }

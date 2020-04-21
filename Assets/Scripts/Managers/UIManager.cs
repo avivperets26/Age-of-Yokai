@@ -42,6 +42,10 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private CanvasGroup spellBook;
 
+    [SerializeField]
+    private GameObject tooltip;
+
+    private Text tooltipText;
 
     // A reference to all the kibind buttons on the menu
     private GameObject[] keybindButtons;
@@ -49,6 +53,8 @@ public class UIManager : MonoBehaviour
     private void Awake()
     {
         keybindButtons = GameObject.FindGameObjectsWithTag("Keybind");
+
+        tooltipText = tooltip.GetComponentInChildren<Text>();
     }
 
     // Use this for initialization
@@ -140,5 +146,19 @@ public class UIManager : MonoBehaviour
 
             clickable.MyIcon.color = Color.white;
         }
+    }
+
+    public void ShowTooltip(Vector3 position, IDescribable description)//Shows the tooltip
+    {
+        tooltip.SetActive(true);
+
+        tooltip.transform.position = position;
+
+        tooltipText.text = description.GetDescription();
+    }
+
+    public void HideTooltip()//Hides the tooltip
+    {
+        tooltip.SetActive(false);
     }
 }

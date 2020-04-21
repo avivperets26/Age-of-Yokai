@@ -4,11 +4,10 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable
+public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable, IPointerEnterHandler, IPointerExitHandler
 {
-    /// <summary>
-    /// A reference t o the useable on the actionbutton
-    /// </summary>
+
+    // A reference t o the useable on the actionbutton
     public IUseable MyUseable { get; set; }
 
     [SerializeField]
@@ -18,9 +17,7 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable
 
     private int count;
 
-    /// <summary>
-    /// A reference to the actual button that this button uses
-    /// </summary>
+    // A reference to the actual button that this button uses
     public Button MyButton { get; private set; }
 
     public Image MyIcon
@@ -155,5 +152,30 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable
                 UIManager.MyInstance.UpdateStackSize(this);
             }
         }
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        IDescribable tmp = null;
+
+        if (MyUseable != null && MyUseable is IDescribable)
+        {
+            tmp = (IDescribable)MyUseable;
+            //UIManager.MyInstance.ShowTooltip(transform.position);
+        }
+        else if (useables.Count > 0)
+        {
+            //UIManager.MyInstance.ShowTooltip(transform.position);
+        }
+        else if (tmp != null)
+        {
+            UIManager.MyInstance.ShowTooltip(transform.position, tmp);
+        }
+
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        UIManager.MyInstance.HideTooltip();
     }
 }

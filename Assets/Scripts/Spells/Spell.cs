@@ -5,7 +5,7 @@ using System.Text;
 using UnityEngine;
 
 [Serializable]
-public class Spell : IUseable, IMoveable
+public class Spell : IUseable, IMoveable, IDescribable
 {
     /// <summary>
     /// The Spell's name
@@ -42,6 +42,9 @@ public class Spell : IUseable, IMoveable
     /// </summary>
     [SerializeField]
     private GameObject spellPrefab;
+
+    [SerializeField]
+    private string description;
 
     /// <summary>
     /// The spell's color
@@ -125,6 +128,11 @@ public class Spell : IUseable, IMoveable
         {
             return barColor;
         }
+    }
+
+    public string GetDescription()
+    {
+        return string.Format("{0}\nCast time: {1} seconds(s)\n<color=#ffd111>{2}\nthat causes {3} damage</color>", name, castTime,description,damage);
     }
 
     public void Use()
