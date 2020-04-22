@@ -45,6 +45,9 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private GameObject tooltip;
 
+    [SerializeField]
+    private CharacterPanel charPanel;
+
     private Text tooltipText;
 
     // A reference to all the kibind buttons on the menu
@@ -78,6 +81,11 @@ public class UIManager : MonoBehaviour
         {
             InventoryScript.MyInstance.OpenClose();
         }
+        else if (Input.GetKeyDown(KeyCode.C))
+        {
+            charPanel.OpenClose();
+        }
+
     }
 
     public void ShowTargetFrame(NPC target)
