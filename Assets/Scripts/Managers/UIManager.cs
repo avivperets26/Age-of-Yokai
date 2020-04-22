@@ -121,6 +121,7 @@ public class UIManager : MonoBehaviour
     public void OpenClose(CanvasGroup canvasGroup)
     {
         canvasGroup.alpha = canvasGroup.alpha > 0 ? 0 : 1;
+
         canvasGroup.blocksRaycasts = canvasGroup.blocksRaycasts == true ? false : true;
     }
 

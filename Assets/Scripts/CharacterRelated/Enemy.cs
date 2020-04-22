@@ -10,19 +10,16 @@ public class Enemy : NPC
     [SerializeField]
     private CanvasGroup healthGroup;
 
-    /// <summary>
-    /// The enemys current state
-    /// </summary>
+    // The enemys current state
     private IState currentState;
 
-    /// <summary>
-    /// The enemys attack range
-    /// </summary>
+    [SerializeField]
+    private LootTable lootTable;
+
+    // The enemys attack range
     public float MyAttackRange { get; set; }
 
-    /// <summary>
-    /// How much time has passed since the last attack
-    /// </summary>
+    // How much time has passed since the last attack
     public float MyAttackTime { get; set; }
 
     public Vector3 MyStartPosition { get; set; }
@@ -140,5 +137,13 @@ public class Enemy : NPC
         this.MyAggroRange = initAggroRange;
         this.MyHealth.MyCurrentValue = this.MyHealth.MyMaxValue;
         OnHealthChanged(health.MyCurrentValue);
+    }
+
+    public override void Interact()
+    {
+        if (!IsAlive)
+        {
+            lootTable.ShowLoot();
+        }
     }
 }

@@ -5,10 +5,31 @@ using UnityEngine.UI;
 
 public class LootWindow : MonoBehaviour
 {
+    private static LootWindow instance;
+
+    public static LootWindow MyInstance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = GameObject.FindObjectOfType<LootWindow>();
+
+                instance = GameObject.FindObjectOfType<LootWindow>();
+            }
+
+            return instance;
+        }
+    }
+
     [SerializeField]
     private LootButton[] lootButtons;
 
+    private CanvasGroup canvasGroup;
+
     private List<List<Item>> pages = new List<List<Item>>();
+
+    private List<Item> droppedLoot = new List<Item>();
 
     private int pageIndex = 0;
 
@@ -20,35 +41,42 @@ public class LootWindow : MonoBehaviour
 
     [SerializeField]//for debuging , will removed later
     private Item[] items;
-    // Start is called before the first frame update
-    void Start()
-    {
-        List<Item> tmp = new List<Item>();//for debuging
 
-        for (int i = 0; i < items.Length; i++)
-        {
-            tmp.Add(items[i]);
-        }
-        CreatePages(tmp);
+    public bool IsOpen
+    {
+        get { return canvasGroup.alpha > 0; }
+        
+    }
+
+    private void Awake()
+    {
+        canvasGroup = GetComponent<CanvasGroup>();
     }
 
     public void CreatePages(List<Item> items)
     {
-        List<Item> page = new List<Item>();
-
-        for (int i = 0; i < items.Count; i++)
+        if (!IsOpen)
         {
-            page.Add(items[i]);
+            List<Item> page = new List<Item>();
 
-            if (page.Count == 4 || i == items.Count - 1)//1.Makes sure there is only 4 items in 1 LootWindow page, 2. make sure we added the last item to the Lootwindow page
+            droppedLoot = items;
+
+            for (int i = 0; i < items.Count; i++)
             {
-                pages.Add(page);
+                page.Add(items[i]);
 
-                page = new List<Item>();
+                if (page.Count == 4 || i == items.Count - 1)//1.Makes sure there is only 4 items in 1 LootWindow page, 2. make sure we added the last item to the Lootwindow page
+                {
+                    pages.Add(page);
+
+                    page = new List<Item>();
+                }
             }
-        }
 
-        AddLoot();
+            AddLoot();
+
+            Open();
+        }
     }
 
     private void AddLoot()
@@ -112,5 +140,43 @@ public class LootWindow : MonoBehaviour
 
             AddLoot();
         }
+    }
+
+    public void TakeLoot(Item loot)
+    {
+        pages[pageIndex].Remove(loot);
+
+        droppedLoot.Remove(loot);
+
+        if (pages[pageIndex].Count == 0)
+        {
+            //Removes the empty page
+            pages.Remove(pages[pageIndex]);
+
+            if (pageIndex == pages.Count && pageIndex > 0)
+            {
+                pageIndex--;
+            }
+
+            AddLoot();
+        }
+    }
+    public void Close()
+    {
+        pages.Clear();
+
+        canvasGroup.alpha = 0;
+
+        canvasGroup.blocksRaycasts = false;
+
+        ClearButtons();
+    }
+
+
+    public void Open()
+    {
+        canvasGroup.alpha = 1;
+
+        canvasGroup.blocksRaycasts = true;
     }
 }

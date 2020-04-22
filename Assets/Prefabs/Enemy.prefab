@@ -71,6 +71,7 @@ GameObject:
   - component: {fileID: 9213197564329481238}
   - component: {fileID: 9213197564329481237}
   - component: {fileID: 9213197564329481236}
+  - component: {fileID: 7674172109212830366}
   - component: {fileID: 9213197564329481233}
   - component: {fileID: 9213197564329481235}
   - component: {fileID: 9213197564329481234}
@@ -172,6 +173,29 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5175, y: 1.12}
   m_EdgeRadius: 0
+--- !u!114 &7674172109212830366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9213197564329481239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f82d754a43722e4f8bca06faf39e400, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loot:
+  - item: {fileID: 11400000, guid: 9c91909cede856a4a9d9d3e533c5ad6d, type: 2}
+    dropChance: 100
+  - item: {fileID: 11400000, guid: 97133c6759ec03d4ca4464be75419029, type: 2}
+    dropChance: 50
+  - item: {fileID: 11400000, guid: 1b87f1c9468f27c4b879114927e2b6c6, type: 2}
+    dropChance: 20
+  - item: {fileID: 11400000, guid: ddda28a9dcf16ff4fbd8a1e15dd3b1d4, type: 2}
+    dropChance: 70
+  - item: {fileID: 11400000, guid: 03a6f5e433c89554b97346e81dfcf63c, type: 2}
+    dropChance: 10
 --- !u!114 &9213197564329481233
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,9 +211,10 @@ MonoBehaviour:
   speed: 0.8
   hitBox: {fileID: 9213197566073341377}
   health: {fileID: 9213197564999816812}
-  initHealth: 25
+  initHealth: 10
   portrait: {fileID: 21300000, guid: c06cd7d12bec37043b0d4bee13e15945, type: 3}
   healthGroup: {fileID: 9213197565364862354}
+  lootTable: {fileID: 7674172109212830366}
   initAggroRange: 3
 --- !u!95 &9213197564329481235
 Animator:
@@ -320,7 +345,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statValue: {fileID: 0}
   lerpSpeed: 1
-  currentValue: 100
 --- !u!1 &9213197565364862356
 GameObject:
   m_ObjectHideFlags: 0
