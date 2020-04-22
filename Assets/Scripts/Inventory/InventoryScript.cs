@@ -204,20 +204,20 @@ public class InventoryScript : MonoBehaviour
         }
     }
 
-    public void AddItem(Item item)//Add an item to the inventory
+    public bool AddItem(Item item)//Add an item to the inventory
     {
         if (item.MyStackSize > 0)
         {
             if (PlaceInStack(item))
             {
-                return;
+                return true;
             }
         }
 
-        PlaceInEmpty(item);
+        return PlaceInEmpty(item);
     }
 
-    private void PlaceInEmpty(Item item)//Places an item on an empty slot in the game
+    private bool PlaceInEmpty(Item item)//Places an item on an empty slot in the game
     {
         foreach (Bag bag in bags)//Checks all bags
         {
@@ -225,9 +225,11 @@ public class InventoryScript : MonoBehaviour
             {
                 OnItemCountChanged(item);
 
-                return;//possible to add the item
+                return true;//possible to add the item
             }
         }
+
+        return false;
     }
 
     private bool PlaceInStack(Item item)//Tries to stack an item on another

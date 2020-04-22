@@ -27,11 +27,11 @@ public class Armor : Item
         {
             stats += string.Format("\n +{0} intelect", intellect);
         }
-        else if (strength > 0)
+        if (strength > 0)
         {
             stats += string.Format("\n +{0} strength", strength);
         }
-        else if (stamina > 0)
+        if (stamina > 0)
         {
             stats += string.Format("\n +{0} stamina", stamina);
         }

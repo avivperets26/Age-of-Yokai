@@ -23,6 +23,8 @@ public abstract class Item : ScriptableObject, IMoveable,IDescribable//Superclas
     public Sprite MyIcon { get => icon; }//Property for accessing the icon
     public int MyStackSize { get => stackSize; }//Property for accessing the stacksize
     public SlotScript MySlot { get => slot; set => slot = value; }
+    public Quality MyQuality { get => quality;}
+    public string MyTitle { get => title;}
 
     public void Remove()//Removes the item from the inventory
     {
@@ -34,6 +36,6 @@ public abstract class Item : ScriptableObject, IMoveable,IDescribable//Superclas
 
     public virtual string GetDescription()//Return a description of this specific item, Virtual to override it by other items
     {
-        return string.Format("<color={0}>{1}</color>",QualityColor.MyColors[quality], title);
+        return string.Format("<color={0}>{1}</color>",QualityColor.MyColors[MyQuality], MyTitle);
     }
 }
