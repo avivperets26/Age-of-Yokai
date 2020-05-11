@@ -26,6 +26,16 @@ public class CharButton : MonoBehaviour,IPointerClickHandler, IPointerEnterHandl
                 {
                     EquipArmor(tmp);
                 }
+
+                UIManager.MyInstance.RefreshToolTip(tmp);
+            }
+            else if (HandScript.MyInstance.MyMoveable == null && equippedArmor != null)
+            {
+                HandScript.MyInstance.TakeMoveable(equippedArmor);
+
+                CharacterPanel.MyInstance.MySelectedButton = this;
+
+                icon.color = Color.grey;
             }
         }
     }
@@ -36,7 +46,11 @@ public class CharButton : MonoBehaviour,IPointerClickHandler, IPointerEnterHandl
 
         if (equippedArmor != null)
         {
-            armor.MySlot.AddItem(equippedArmor);
+
+            if (equippedArmor != armor)
+            {
+                armor.MySlot.AddItem(equippedArmor);
+            }          
 
             UIManager.MyInstance.RefreshToolTip(equippedArmor);
         }
@@ -48,6 +62,8 @@ public class CharButton : MonoBehaviour,IPointerClickHandler, IPointerEnterHandl
         icon.enabled = true;
 
         icon.sprite = armor.MyIcon;
+
+        icon.color = Color.white;
 
         this.equippedArmor = armor;// A reference to the equipped armor
 
@@ -68,5 +84,14 @@ public class CharButton : MonoBehaviour,IPointerClickHandler, IPointerEnterHandl
     public void OnPointerExit(PointerEventData eventData)
     {
         UIManager.MyInstance.HideTooltip();
+    }
+
+    public void DequipArmor()
+    {
+        icon.color = Color.white;
+
+        icon.enabled = false;
+
+        equippedArmor = null;
     }
 }
