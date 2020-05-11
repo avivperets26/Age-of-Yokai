@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 729542e523eb04747893cd4c1646becb, type: 3}
-  m_Name: Shoulders
+  m_Name: Sword
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: ada397f9e501869418e533a482b1bfe2, type: 3}
+  icon: {fileID: 21300000, guid: da641a37d6ddd31489313d6f7fdcea6c, type: 3}
   stackSize: 0
-  title: Noob Shoulder
-  quality: 0
-  armorType: 1
-  intellect: 1
-  strength: 2
-  stamina: 1
+  title: Mighty Sword
+  quality: 2
+  armorType: 6
+  intellect: 4
+  strength: 20
+  stamina: 5

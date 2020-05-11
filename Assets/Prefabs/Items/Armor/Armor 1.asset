@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 729542e523eb04747893cd4c1646becb, type: 3}
-  m_Name: Armor
+  m_Name: Armor 1
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 68a03393a2974a64facce009410dc21b, type: 3}
   stackSize: 0
-  title: Tshirt
-  quality: 1
-  armorType: 1
-  intellect: 4
-  strength: 2
-  stamina: 6
+  title: Heroic Armor
+  quality: 2
+  armorType: 2
+  intellect: 3
+  strength: 1
+  stamina: 5

@@ -50,6 +50,10 @@ public class UIManager : MonoBehaviour
 
     private Text tooltipText;
 
+
+    [SerializeField]
+    private RectTransform tooltipRect;
+
     // A reference to all the kibind buttons on the menu
     private GameObject[] keybindButtons;
 
@@ -157,8 +161,10 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void ShowTooltip(Vector3 position, IDescribable description)//Shows the tooltip
+    public void ShowTooltip(Vector2 pivot, Vector3 position, IDescribable description)//Shows the tooltip
     {
+        tooltipRect.pivot = pivot;
+
         tooltip.SetActive(true);
 
         tooltip.transform.position = position;
@@ -169,5 +175,10 @@ public class UIManager : MonoBehaviour
     public void HideTooltip()//Hides the tooltip
     {
         tooltip.SetActive(false);
+    }
+
+    public void RefreshToolTip(IDescribable description)
+    {
+        tooltipText.text = description.GetDescription();
     }
 }

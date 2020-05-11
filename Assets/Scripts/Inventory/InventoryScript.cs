@@ -94,7 +94,7 @@ public class InventoryScript : MonoBehaviour
 
     private void Awake()
     {
-        Bag bag = (Bag)Instantiate(items[0]);
+        Bag bag = (Bag)Instantiate(items[3]);
 
         bag.Initialize(20);
 
@@ -105,7 +105,7 @@ public class InventoryScript : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.J))
         {
-            Bag bag = (Bag)Instantiate(items[0]);
+            Bag bag = (Bag)Instantiate(items[3]);
 
             bag.Initialize(20);
 
@@ -116,7 +116,7 @@ public class InventoryScript : MonoBehaviour
         {
             Debug.Log("pressed K");
 
-            Bag bag = (Bag)Instantiate(items[0]);
+            Bag bag = (Bag)Instantiate(items[3]);
 
             bag.Initialize(20);
 
@@ -125,20 +125,26 @@ public class InventoryScript : MonoBehaviour
 
         else if (Input.GetKeyDown(KeyCode.L))
         {
-            HealthPotion potion = (HealthPotion)Instantiate(items[1]);
+            HealthPotion potion = (HealthPotion)Instantiate(items[4]);
 
             AddItem(potion);
         }
 
         else if (Input.GetKeyDown(KeyCode.H))
         {
+            AddItem((Armor)Instantiate(items[1]));
+
             AddItem((Armor)Instantiate(items[2]));
 
-            AddItem((Armor)Instantiate(items[3]));
-
-            AddItem((Armor)Instantiate(items[4]));
-
             AddItem((Armor)Instantiate(items[5]));
+
+            AddItem((Armor)Instantiate(items[6]));
+
+            AddItem((Armor)Instantiate(items[7]));           
+
+            AddItem((Armor)Instantiate(items[0]));
+
+            AddItem((Armor)Instantiate(items[8]));//Armor 1
         }
     }
 

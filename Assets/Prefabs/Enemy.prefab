@@ -196,6 +196,10 @@ MonoBehaviour:
     dropChance: 70
   - item: {fileID: 11400000, guid: 03a6f5e433c89554b97346e81dfcf63c, type: 2}
     dropChance: 10
+  - item: {fileID: 11400000, guid: c466341005a4fd44e906660fe3ac84d8, type: 2}
+    dropChance: 20
+  - item: {fileID: 11400000, guid: a969a7592ac551e4db2a942af3d78fe4, type: 2}
+    dropChance: 10
 --- !u!114 &9213197564329481233
 MonoBehaviour:
   m_ObjectHideFlags: 0
