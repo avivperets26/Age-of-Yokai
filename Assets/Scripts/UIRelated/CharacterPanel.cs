@@ -12,6 +12,8 @@ public class CharacterPanel : MonoBehaviour
     [SerializeField]
     private CharButton Head, Chest, MainHand, Offhand, Charm1, Charm2, Charm3;
 
+    public CharButton MySelectedButton { get; set; }
+
     public static CharacterPanel MyInstance
     {
         get

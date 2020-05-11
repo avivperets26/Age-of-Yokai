@@ -131,11 +131,23 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler,IClickable,IPointe
         {
             if (InventoryScript.MyInstance.FromSlot == null && !IsEmpty)//If we dont have somthing to move yet
             {
-                if (HandScript.MyInstance.MyMoveable != null && HandScript.MyInstance.MyMoveable is Bag)
+                if (HandScript.MyInstance.MyMoveable != null)
                 {
-                    if (MyItem is Bag)
+                    if (HandScript.MyInstance.MyMoveable is Bag)
                     {
-                        InventoryScript.MyInstance.SwapBags(HandScript.MyInstance.MyMoveable as Bag, MyItem as Bag);
+                        if (MyItem is Bag)
+                        {
+                            InventoryScript.MyInstance.SwapBags(HandScript.MyInstance.MyMoveable as Bag, MyItem as Bag);
+                        }
+                    }
+                    else if (HandScript.MyInstance.MyMoveable is Armor)
+                    {
+                        if (MyItem is Armor && (MyItem as Armor).MyArmorType == (HandScript.MyInstance.MyMoveable as Armor).MyArmorType)
+                        {
+                            (MyItem as Armor).Equip();
+
+                            HandScript.MyInstance.Drop();
+                        }
                     }
                 }
                 else
@@ -146,18 +158,31 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler,IClickable,IPointe
                 }
 
             }
-            else if (InventoryScript.MyInstance.FromSlot == null && IsEmpty && (HandScript.MyInstance.MyMoveable is Bag))
+            else if (InventoryScript.MyInstance.FromSlot == null && IsEmpty)
             {
-                Bag bag = (Bag)HandScript.MyInstance.MyMoveable;//Dequips a bag from the inventory
 
-                if (bag.MyBagScript != MyBag && InventoryScript.MyInstance.MyEmptySlotCount - bag.Slots > 0)
+                if (HandScript.MyInstance.MyMoveable is Bag)
                 {
-                    AddItem(bag);
+                    Bag bag = (Bag)HandScript.MyInstance.MyMoveable;//Dequips a bag from the inventory
 
-                    bag.MyBagButton.RemovBag();
+                    if (bag.MyBagScript != MyBag && InventoryScript.MyInstance.MyEmptySlotCount - bag.Slots > 0)
+                    {
+                        AddItem(bag);
+
+                        CharacterPanel.MyInstance.MySelectedButton.DequipArmor();
+
+                        bag.MyBagButton.RemovBag();                       
+                    }
+                }
+                else if (HandScript.MyInstance.MyMoveable is Armor)
+                {
+                    Armor armor = (Armor)HandScript.MyInstance.MyMoveable;
+
+                    AddItem(armor);
 
                     HandScript.MyInstance.Drop();
                 }
+                
 
             }
             else if (InventoryScript.MyInstance.FromSlot != null)//If we have somthiing to move
@@ -173,7 +198,7 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler,IClickable,IPointe
 
         }
 
-        if (eventData.button == PointerEventData.InputButton.Right)//If we Rightclick on the slot
+        if (eventData.button == PointerEventData.InputButton.Right && HandScript.MyInstance.MyMoveable == null)//If we Rightclick on the slot
         {
             UseItem();
         }
