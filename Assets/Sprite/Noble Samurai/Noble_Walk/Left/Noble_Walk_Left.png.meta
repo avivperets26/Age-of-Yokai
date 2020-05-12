@@ -1,0 +1,483 @@
+fileFormatVersion: 2
+guid: 3668769555a3d074c8af380458530a0b
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 1710787272323102747
+    second: Noble_Walk_Left_0
+  - first:
+      213: 6688134898440234468
+    second: Noble_Walk_Left_1
+  - first:
+      213: 995961416538066535
+    second: Noble_Walk_Left_2
+  - first:
+      213: 6652321431612667346
+    second: Noble_Walk_Left_3
+  - first:
+      213: 1580765859670622662
+    second: Noble_Walk_Left_4
+  - first:
+      213: 8291140230715261518
+    second: Noble_Walk_Left_5
+  - first:
+      213: 6155998800436051517
+    second: Noble_Walk_Left_6
+  - first:
+      213: 7347279627808139137
+    second: Noble_Walk_Left_7
+  - first:
+      213: 5530555869038015129
+    second: Noble_Walk_Left_8
+  - first:
+      213: -2356947891284216580
+    second: Noble_Walk_Left_9
+  - first:
+      213: 8077247125022160709
+    second: Noble_Walk_Left_10
+  - first:
+      213: 4525739101909889586
+    second: Noble_Walk_Left_11
+  - first:
+      213: -8397886576917144357
+    second: Noble_Walk_Left_12
+  - first:
+      213: -8800050906820954969
+    second: Noble_Walk_Left_13
+  - first:
+      213: -4305356134399675323
+    second: Noble_Walk_Left_14
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 250
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 2
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Noble_Walk_Left_0
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 1662
+        width: 196
+        height: 258
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0bcfdd9fe329e8546901c526b4aebe47
+      internalID: 1710787272323102747
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Noble_Walk_Left_1
+      rect:
+        serializedVersion: 2
+        x: 635
+        y: 1662
+        width: 200
+        height: 258
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d8e7e6977784944aaf3442e584d1ff5
+      internalID: 6688134898440234468
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Noble_Walk_Left_2
+      rect:
+        serializedVersion: 2
+        x: 1144
+        y: 1663
+        width: 203
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07cb2deed489903499b6ebbab3e69d57
+      internalID: 995961416538066535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Noble_Walk_Left_3
+      rect:
+        serializedVersion: 2
+        x: 1657
+        y: 1664
+        width: 202
+        height: 255
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22e1e4baacf76de49ab3ce86434e63e9
+      internalID: 6652321431612667346
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Noble_Walk_Left_4
+      rect:
+        serializedVersion: 2
+        x: 142
+        y: 1150
+        width: 200
+        height: 257
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81c44fbfcbb5d564780442921eab18cd
+      internalID: 1580765859670622662
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Noble_Walk_Left_5
+      rect:
+        serializedVersion: 2
+        x: 651
+        y: 1150
+        width: 200
+        height: 258
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a6346121ea70194c837cadb223dac72
+      internalID: 8291140230715261518
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Noble_Walk_Left_6
+      rect:
+        serializedVersion: 2
+        x: 1160
+        y: 1150
+        width: 200
+        height: 258
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c6a1238fa8a26dd46af724a52a45acf2
+      internalID: 6155998800436051517
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Noble_Walk_Left_7
+      rect:
+        serializedVersion: 2
+        x: 1670
+        y: 1150
+        width: 199
+        height: 259
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ddf7093784642e4ea8a49e5e1eb65f5
+      internalID: 7347279627808139137
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Noble_Walk_Left_8
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 638
+        width: 199
+        height: 259
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b897a0a640714b74ab986a4825e76f5d
+      internalID: 5530555869038015129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Noble_Walk_Left_9
+      rect:
+        serializedVersion: 2
+        x: 649
+        y: 638
+        width: 200
+        height: 258
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 260cc39c5f84da54287f1552bd423a37
+      internalID: -2356947891284216580
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Noble_Walk_Left_10
+      rect:
+        serializedVersion: 2
+        x: 1164
+        y: 638
+        width: 200
+        height: 258
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eeba6899f7fb7e74d96a9c676808a2da
+      internalID: 8077247125022160709
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Noble_Walk_Left_11
+      rect:
+        serializedVersion: 2
+        x: 1679
+        y: 639
+        width: 201
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43388aee7746dbd4c9b1f3c8b06f0b15
+      internalID: 4525739101909889586
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Noble_Walk_Left_12
+      rect:
+        serializedVersion: 2
+        x: 633
+        y: 126
+        width: 202
+        height: 258
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d4c4bb66c3a339348a0dec4309304d30
+      internalID: -8397886576917144357
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Noble_Walk_Left_13
+      rect:
+        serializedVersion: 2
+        x: 1149
+        y: 126
+        width: 198
+        height: 258
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b496147882660ee40a81d4d3dd4351a9
+      internalID: -8800050906820954969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Noble_Walk_Left_14
+      rect:
+        serializedVersion: 2
+        x: 1666
+        y: 126
+        width: 197
+        height: 259
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a1c9764a70412943b2cb67dbbbb765f
+      internalID: -4305356134399675323
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 69fda889497ee4f41ab628293b24bb54
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
