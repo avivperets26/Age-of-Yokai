@@ -12,6 +12,9 @@ public class BagButton : MonoBehaviour,IPointerClickHandler
     [SerializeField]
     private Sprite full, empty;//Sprites to indicate if the bag is full or empty
 
+    [SerializeField]
+    private int bagIndex;
+
     public Bag MyBag {//A property for accessing the specific bag
         get
         {
@@ -31,6 +34,8 @@ public class BagButton : MonoBehaviour,IPointerClickHandler
             bag = value;
         }
     }
+
+    public int MyBagIndex { get => bagIndex; set => bagIndex = value; }
 
     public void OnPointerClick(PointerEventData eventData)//If we click the specific bag button
     {

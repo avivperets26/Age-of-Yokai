@@ -50,6 +50,8 @@ public class Hero : Character
     /// </summary>
     private int exitIndex = 2;
 
+    private IInteractable interactable;
+
     private Vector3 min, max;
 
     protected override void Start()
@@ -236,6 +238,35 @@ public class Hero : Character
         if (attackRoutine != null) //Checks if we have a reference to an co routine
         {
             StopCoroutine(attackRoutine);
+        }
+    }
+
+    public void Interact()
+    {
+        if (interactable != null)
+        {
+            interactable.Interact();
+        }
+    }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Enemy" || collision.tag == "Interactable")
+        {
+            interactable = collision.GetComponent<IInteractable>();
+        }
+    }
+
+    public void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == "Enemy" || collision.tag == "Interactable")
+        {
+            if (interactable != null)
+            {
+                interactable.StopInteract();
+
+                interactable = null;
+            }
         }
     }
 }

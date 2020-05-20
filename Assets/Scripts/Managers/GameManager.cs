@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
             //Makes a raycast from the mouse position into the game world
             RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, Mathf.Infinity, 512);
 
-            if (hit.collider != null)//If we hit something
+            if (hit.collider != null && hit.collider.tag =="Enemy")//If we hit something
             {
                 if (currentTarget != null)//If we have a current target
                 {
@@ -60,9 +60,9 @@ public class GameManager : MonoBehaviour
             //Makes a raycast from the mouse position into the game world
             RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, Mathf.Infinity, 512);
 
-            if (hit.collider != null && hit.collider.tag == "Enemy")
+            if (hit.collider != null && (hit.collider.tag == "Enemy" || hit.collider.tag == "Interactable"))
             {
-                hit.collider.GetComponent<NPC>().Interact();
+                player.Interact();
             }
         }
 

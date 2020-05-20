@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName ="Bag",menuName ="Item/Bag",order = 1)]
 public class Bag : Item, IUseable
 {
+    [SerializeField]
     private int slots;//The amount of slots this bag has
     
     [SerializeField]
@@ -14,6 +15,7 @@ public class Bag : Item, IUseable
 
     public BagButton MyBagButton { get; set; }
 
+    
     public int Slots { get => slots; }//Property for getting the slots
 
     public void Initialize(int slots)

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -7574463047219510628}
   - component: {fileID: 3386367201876716422}
   - component: {fileID: 8722212124482990514}
-  - component: {fileID: 8485847817579071913}
+  - component: {fileID: 2634319899165530794}
   m_Layer: 5
   m_Name: Bag
   m_TagString: Untagged
@@ -86,9 +86,9 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3831981067946565779}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!114 &3386367201876716422
 MonoBehaviour:
@@ -113,7 +113,7 @@ MonoBehaviour:
   m_CellSize: {x: 23, y: 23}
   m_Spacing: {x: 2, y: 2}
   m_Constraint: 1
-  m_ConstraintCount: 4
+  m_ConstraintCount: 8
 --- !u!114 &8722212124482990514
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,7 +128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 1
   m_VerticalFit: 1
---- !u!114 &8485847817579071913
+--- !u!114 &2634319899165530794
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -137,7 +137,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3831981067946565779}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c4c6d94e6350f94bba31fbef2a897c3, type: 3}
+  m_Script: {fileID: 11500000, guid: 22720b0367c06784680be0f32a31ea27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   slotPrefab: {fileID: 6331362768638719281, guid: 7d6fadf2dd9cb6e41817fc4783690df6,

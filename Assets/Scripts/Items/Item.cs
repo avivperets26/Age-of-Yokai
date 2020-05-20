@@ -20,6 +20,8 @@ public abstract class Item : ScriptableObject, IMoveable,IDescribable//Superclas
 
     protected SlotScript slot;//A reference to the slot that this item is sitting on
 
+    public CharButton MyCharButton { get; set; }
+
     public Sprite MyIcon { get => icon; }//Property for accessing the icon
     public int MyStackSize { get => stackSize; }//Property for accessing the stacksize
     public SlotScript MySlot { get => slot; set => slot = value; }
@@ -31,6 +33,8 @@ public abstract class Item : ScriptableObject, IMoveable,IDescribable//Superclas
         if (MySlot != null)
         {
             MySlot.RemoveItem(this);
+
+            MySlot = null;
         }
     }
 

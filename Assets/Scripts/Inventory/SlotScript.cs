@@ -169,9 +169,11 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler,IClickable,IPointe
                     {
                         AddItem(bag);
 
-                        CharacterPanel.MyInstance.MySelectedButton.DequipArmor();
+                        //CharacterPanel.MyInstance.MySelectedButton.DequipArmor();
 
-                        bag.MyBagButton.RemovBag();                       
+                        bag.MyBagButton.RemovBag();
+
+                        HandScript.MyInstance.Drop();
                     }
                 }
                 else if (HandScript.MyInstance.MyMoveable is Armor)
