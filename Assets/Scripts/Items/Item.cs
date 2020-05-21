@@ -20,21 +20,33 @@ public abstract class Item : ScriptableObject, IMoveable,IDescribable//Superclas
 
     protected SlotScript slot;//A reference to the slot that this item is sitting on
 
-    public CharButton MyCharButton { get; set; }
+    private CharButton charButton;
 
     public Sprite MyIcon { get => icon; }//Property for accessing the icon
     public int MyStackSize { get => stackSize; }//Property for accessing the stacksize
     public SlotScript MySlot { get => slot; set => slot = value; }
     public Quality MyQuality { get => quality;}
     public string MyTitle { get => title;}
+    public CharButton MyCharButton
+    {
+        get
+        {
+            return charButton;
+        }
+        set
+        {
+            MySlot = null;
+
+            charButton = value;
+
+        }
+    }
 
     public void Remove()//Removes the item from the inventory
     {
         if (MySlot != null)
         {
-            MySlot.RemoveItem(this);
-
-            MySlot = null;
+            MySlot.RemoveItem(this);           
         }
     }
 
