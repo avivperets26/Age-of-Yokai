@@ -61,7 +61,6 @@ public class BagScript : MonoBehaviour
                 {
                     items.Add(item);
                 }
-
             }
         }
 

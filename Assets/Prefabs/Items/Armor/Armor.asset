@@ -16,6 +16,7 @@ MonoBehaviour:
   stackSize: 0
   title: Tshirt
   quality: 1
+  price: 6
   armorType: 2
   intellect: 4
   strength: 2

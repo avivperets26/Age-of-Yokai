@@ -14,7 +14,7 @@ public class VendorItem
     [SerializeField]
     private bool unlimited;
 
-    public Item Item { get => item;}
-    public int Quantity { get => quantity; set => quantity = value; }
+    public Item MyItem { get => item;}
+    public int MyQuantity { get => quantity; set => quantity = value; }
     public bool Unlimited { get => unlimited;}
 }

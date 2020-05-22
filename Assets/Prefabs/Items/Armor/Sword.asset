@@ -16,6 +16,7 @@ MonoBehaviour:
   stackSize: 0
   title: Mighty Sword
   quality: 2
+  price: 5
   armorType: 6
   intellect: 4
   strength: 20

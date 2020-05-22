@@ -16,6 +16,7 @@ MonoBehaviour:
   stackSize: 0
   title: Key of Heaven
   quality: 0
+  price: 5
   armorType: 9
   intellect: 1
   strength: 2

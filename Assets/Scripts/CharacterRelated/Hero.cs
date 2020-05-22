@@ -54,8 +54,13 @@ public class Hero : Character
 
     private Vector3 min, max;
 
+    public int MyGold { get; set; }
+    public IInteractable MyInteractable { get => interactable; set => interactable = value; }
+
     protected override void Start()
     {
+        MyGold = 20;
+
         stamina.Initialize(initStamina, initStamina);
 
         base.Start();
@@ -243,9 +248,9 @@ public class Hero : Character
 
     public void Interact()
     {
-        if (interactable != null)
+        if (MyInteractable != null)
         {
-            interactable.Interact();
+            MyInteractable.Interact();
         }
     }
 
@@ -253,7 +258,7 @@ public class Hero : Character
     {
         if (collision.tag == "Enemy" || collision.tag == "Interactable")
         {
-            interactable = collision.GetComponent<IInteractable>();
+            MyInteractable = collision.GetComponent<IInteractable>();
         }
     }
 
@@ -261,11 +266,11 @@ public class Hero : Character
     {
         if (collision.tag == "Enemy" || collision.tag == "Interactable")
         {
-            if (interactable != null)
+            if (MyInteractable != null)
             {
-                interactable.StopInteract();
+                MyInteractable.StopInteract();
 
-                interactable = null;
+                MyInteractable = null;
             }
         }
     }

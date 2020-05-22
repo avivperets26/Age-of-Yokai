@@ -16,6 +16,7 @@ MonoBehaviour:
   stackSize: 0
   title: Heroic Armor
   quality: 2
+  price: 12
   armorType: 2
   intellect: 3
   strength: 1

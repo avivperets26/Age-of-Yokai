@@ -47,7 +47,7 @@ public class Bag : Item, IUseable
 
     public override string GetDescription()
     {
-        return base.GetDescription() + string.Format("\n{0}slot bag", slots);
+        return base.GetDescription() + string.Format("\n{0} slot bag", slots);
 
     }
 }

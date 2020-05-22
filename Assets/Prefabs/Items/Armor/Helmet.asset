@@ -16,6 +16,7 @@ MonoBehaviour:
   stackSize: 0
   title: Hollyshit Helmet
   quality: 3
+  price: 10
   armorType: 0
   intellect: 15
   strength: 5

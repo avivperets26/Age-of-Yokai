@@ -182,6 +182,8 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler,IClickable,IPointe
 
                     AddItem(armor);
 
+                    CharacterPanel.MyInstance.MySelectedButton.DequipArmor();
+
                     HandScript.MyInstance.Drop();
                 }
                 

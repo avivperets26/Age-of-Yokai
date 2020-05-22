@@ -49,6 +49,20 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable, IPo
         }
     }
 
+    public Stack<IUseable> MyUseables
+    {
+        get
+        {
+            return useables;
+        }
+        set
+        {
+            MyUseable = value.Peek();
+
+            useables = value;
+        }
+    }
+
     [SerializeField]
     private Image icon;
 
@@ -79,9 +93,9 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable, IPo
             {
                 MyUseable.Use();
             }
-            else if (useables != null && useables.Count > 0)
+            else if (MyUseables != null && MyUseables.Count > 0)
             {
-                useables.Peek().Use();
+                MyUseables.Peek().Use();
             }
         }
     }
@@ -108,9 +122,7 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable, IPo
     {
         if (useable is Item)
         {
-            useables = InventoryScript.MyInstance.GetUseables(useable);
-
-            count = useables.Count;
+            MyUseables = InventoryScript.MyInstance.GetUseables(useable);
 
             InventoryScript.MyInstance.FromSlot.MyIcon.color = Color.white;
 
@@ -118,10 +130,16 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable, IPo
         }
         else
         {
+            MyUseables.Clear();
+
             this.MyUseable = useable;
-        }      
+        }
+
+        count = MyUseables.Count;
 
         UpdateVisual();
+
+        UIManager.MyInstance.RefreshToolTip(MyUseable as IDescribable);
     }
 
     /// <summary>
@@ -141,13 +159,13 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable, IPo
 
     public void UpdateItemCount(Item item)
     {
-        if (item is IUseable && useables.Count > 0)
+        if (item is IUseable && MyUseables.Count > 0)
         {
-            if(useables.Peek().GetType() == item.GetType())
+            if(MyUseables.Peek().GetType() == item.GetType())
             {
-                useables = InventoryScript.MyInstance.GetUseables(item as IUseable);
+                MyUseables = InventoryScript.MyInstance.GetUseables(item as IUseable);
 
-                count = useables.Count;
+                count = MyUseables.Count;
 
                 UIManager.MyInstance.UpdateStackSize(this);
             }
@@ -164,7 +182,7 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable, IPo
 
             //UIManager.MyInstance.ShowTooltip(transform.position, tmp);
         }
-        else if (useables.Count > 0)
+        else if (MyUseables.Count > 0)
         {
             //UIManager.MyInstance.ShowTooltip(transform.position, tmp);
         }

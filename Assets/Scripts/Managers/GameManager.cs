@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour
             //Makes a raycast from the mouse position into the game world
             RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, Mathf.Infinity, 512);
 
-            if (hit.collider != null && (hit.collider.tag == "Enemy" || hit.collider.tag == "Interactable"))
+            if (hit.collider != null && (hit.collider.tag == "Enemy" || hit.collider.tag == "Interactable") && hit.collider.gameObject.GetComponent<IInteractable>() == player.MyInteractable)
             {
                 player.Interact();
             }

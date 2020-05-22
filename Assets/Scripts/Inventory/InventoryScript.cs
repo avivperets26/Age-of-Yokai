@@ -76,7 +76,9 @@ public class InventoryScript : MonoBehaviour
         }
     }
 
-    public SlotScript FromSlot { get
+    public SlotScript FromSlot
+    {
+        get
         {
             return fromSlot;
         }
@@ -109,13 +111,11 @@ public class InventoryScript : MonoBehaviour
 
             bag.Initialize(20);
 
-            bag.Use();
+            AddItem(bag);
         }
 
         else if (Input.GetKeyDown(KeyCode.K))//for debug
         {
-            Debug.Log("pressed K");
-
             Bag bag = (Bag)Instantiate(items[3]);
 
             bag.Initialize(20);
@@ -213,8 +213,8 @@ public class InventoryScript : MonoBehaviour
             MyInstance.fromSlot = null;
         }
     }
-
-    public bool AddItem(Item item)//Add an item to the inventory
+    //Add an item to the inventory
+    public bool AddItem(Item item)
     {
         if (item.MyStackSize > 0)
         {
@@ -226,7 +226,7 @@ public class InventoryScript : MonoBehaviour
 
         return PlaceInEmpty(item);
     }
-
+    
     private bool PlaceInEmpty(Item item)//Places an item on an empty slot in the game
     {
         foreach (Bag bag in bags)//Checks all bags
@@ -238,7 +238,6 @@ public class InventoryScript : MonoBehaviour
                 return true;//possible to add the item
             }
         }
-
         return false;
     }
 
