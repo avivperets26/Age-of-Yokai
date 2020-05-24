@@ -31,7 +31,7 @@ public class VendorButton : MonoBehaviour,IPointerEnterHandler, IPointerExitHand
             title.text = string.Format("<color={0}>{1}</color>", QualityColor.MyColors[vendorItem.MyItem.MyQuality], vendorItem.MyItem.MyTitle);          
         }     
 
-        if (vendorItem.Unlimited)
+        if (!vendorItem.Unlimited)
         {
             quantity.text = vendorItem.MyQuantity.ToString();
         }
