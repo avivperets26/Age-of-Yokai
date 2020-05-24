@@ -92,7 +92,7 @@ public class UIManager : MonoBehaviour
 
     }
 
-    public void ShowTargetFrame(NPC target)
+    public void ShowTargetFrame(Enemy target)
     {
         targetFrame.SetActive(true);
 

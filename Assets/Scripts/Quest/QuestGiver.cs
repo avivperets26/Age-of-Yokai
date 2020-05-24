@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Vendor : NPC,IInteractable
+public class QuestGiver : NPC
 {
     [SerializeField]
-    private VendorItem[] items;
+    private Quest[] quests;
 
-    public VendorItem[] MyItems
+    public Quest[] MyQuests
     {
         get
         {
-            return items;
+            return quests;
         }
     }
 }

@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private Hero player;
 
-    private NPC currentTarget;
+    private Enemy currentTarget;
 
     // Update is called once per frame
     void Update()
@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
                     currentTarget.DeSelect(); //deselct the current target
                 }
 
-                currentTarget = hit.collider.GetComponent<NPC>(); //Selects the new target
+                currentTarget = hit.collider.GetComponent<Enemy>(); //Selects the new target
 
                 player.MyTarget = currentTarget.Select(); //Gives the player the new target
 

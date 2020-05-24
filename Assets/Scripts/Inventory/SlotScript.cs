@@ -178,11 +178,11 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler,IClickable,IPointe
                 }
                 else if (HandScript.MyInstance.MyMoveable is Armor)
                 {
-                    Armor armor = (Armor)HandScript.MyInstance.MyMoveable;
-
-                    AddItem(armor);
+                    Armor armor = (Armor)HandScript.MyInstance.MyMoveable;                    
 
                     CharacterPanel.MyInstance.MySelectedButton.DequipArmor();
+
+                    AddItem(armor);
 
                     HandScript.MyInstance.Drop();
                 }
@@ -218,11 +218,14 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler,IClickable,IPointe
 
     public void Clear()
     {
-        if (MyItems.Count > 0)
-        {
-            InventoryScript.MyInstance.OnItemCountChanged(MyItems.Pop());
+        int initCount = MyItems.Count;
 
-            MyItems.Clear();
+        if (initCount > 0)
+        {
+            for (int i = 0; i < initCount; i++)
+            {
+                InventoryScript.MyInstance.OnItemCountChanged(MyItems.Pop());
+            }
         }
     }
 
