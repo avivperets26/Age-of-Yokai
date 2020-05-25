@@ -19,6 +19,14 @@ public class QuestLog : MonoBehaviour
     [SerializeField]
     private CanvasGroup canvasGroup;
 
+    [SerializeField]
+    private Text questCountTxt;
+
+    [SerializeField]
+    private int maxCount;
+  
+    private int currentCount;
+
     private List<QuestScript> questScripts = new List<QuestScript>();
 
     private List<Quest> quests = new List<Quest>();
@@ -38,6 +46,24 @@ public class QuestLog : MonoBehaviour
         }
     }
 
+    public List<Quest> MyQuests
+    {
+        get
+        {
+            return quests;
+        }
+
+        set
+        {
+            quests = value;
+        }
+    }
+
+    private void Start()
+    {
+        questCountTxt.text = currentCount + "/" + maxCount;
+    }
+
     public void Update()
     {
         if (Input.GetKeyDown(KeyCode.L))
@@ -48,31 +74,38 @@ public class QuestLog : MonoBehaviour
 
     public void AcceptQuest(Quest quest)
     {
-        foreach (CollectObjective o in quest.MyCollectObjectives)
+        if (currentCount < maxCount)
         {
-            InventoryScript.MyInstance.itemCountChangedEvent += new ItemCountChanged(o.UpdateItemCount);
+            currentCount++;
 
-            o.UpdateItemCount();
+            questCountTxt.text = currentCount + "/" + maxCount;
+
+            foreach (CollectObjective o in quest.MyCollectObjectives)
+            {
+                InventoryScript.MyInstance.itemCountChangedEvent += new ItemCountChanged(o.UpdateItemCount);
+
+                o.UpdateItemCount();
+            }
+
+            foreach (KillObjective o in quest.MyKillObjectives)
+            {
+                GameManager.MyInstance.killConfirmedEvent += new KillConfirmed(o.UpdateKillCount);
+            }
+
+            quests.Add(quest);
+
+            GameObject go = Instantiate(questPrefab, questParent);
+
+            QuestScript qs = go.GetComponent<QuestScript>();
+
+            quest.MyQuestScript = qs;
+
+            qs.MyQuest = quest;
+
+            go.GetComponent<Text>().text = quest.MyTitle;
+
+            CheckCompletion();
         }
-
-        foreach (KillObjective o in quest.MyKillObjectives)
-        {
-            GameManager.MyInstance.killConfirmedEvent += new KillConfirmed(o.UpdateKillCount);
-        }
-
-        quests.Add(quest);
-
-        GameObject go = Instantiate(questPrefab, questParent);
-
-        QuestScript qs = go.GetComponent<QuestScript>();
-
-        quest.MyQuestScript = qs;
-
-        qs.MyQuest = quest;
-
-        go.GetComponent<Text>().text = quest.MyTitle;
-
-        CheckCompletion();
     }
 
     public void UpdateSelected()
@@ -113,6 +146,8 @@ public class QuestLog : MonoBehaviour
     {
         foreach (QuestScript qs in questScripts)
         {
+            qs.MyQuest.MyQuestGiver.UpdateQuestStatus();
+
             qs.IsComplete();
         }
     }
@@ -140,7 +175,39 @@ public class QuestLog : MonoBehaviour
 
     public void AbondonQuest()//Remove the quest from the quest log
     {
+        foreach (CollectObjective o in selected.MyCollectObjectives)
+        {
+            InventoryScript.MyInstance.itemCountChangedEvent -= new ItemCountChanged(o.UpdateItemCount);
+        }
 
+        foreach (KillObjective o in selected.MyKillObjectives)
+        {
+            GameManager.MyInstance.killConfirmedEvent -= new KillConfirmed(o.UpdateKillCount);
+        }
+
+        RemoveQuest(selected.MyQuestScript);
+
+    }
+
+    public void RemoveQuest(QuestScript qs)
+    {
+        questScripts.Remove(qs);
+
+        Destroy(qs.gameObject);
+
+        quests.Remove(qs.MyQuest);
+
+        questDescription.text = string.Empty;
+
+        selected = null; // Deselecting
+
+        currentCount--;
+
+        questCountTxt.text = currentCount + "/" + maxCount;
+
+        qs.MyQuest.MyQuestGiver.UpdateQuestStatus();
+
+        qs = null;
     }
 
     public bool HasQuest(Quest quest)

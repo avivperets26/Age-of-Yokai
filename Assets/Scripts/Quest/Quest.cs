@@ -19,6 +19,8 @@ public class Quest
 
     public QuestScript MyQuestScript { get; set; }
 
+    public QuestGiver MyQuestGiver { get; set; }
+
     public string MyTitle
     {
         get
@@ -83,6 +85,10 @@ public class Quest
         {
             return killObjectives;
         }
+        set
+        {
+            killObjectives = value;
+        }
     }
 }
 
@@ -144,23 +150,35 @@ public class CollectObjective : Objective
         {
             MyCurrentAmount = InventoryScript.MyInstance.GetItemCount(item.MyTitle);
 
-            QuestLog.MyInstance.UpdateSelected();
-
+            if (MyCurrentAmount <= MyAmount)
+            {
+                MessageFeedManager.MyInstance.WriteMessage(string.Format("{0}: {1}/{2}", item.MyTitle, MyCurrentAmount, MyAmount));
+            } 
+           
             QuestLog.MyInstance.CheckCompletion();
+
+            QuestLog.MyInstance.UpdateSelected();
         }
     }
 
     public void UpdateItemCount()
     {
         MyCurrentAmount = InventoryScript.MyInstance.GetItemCount(MyType);
+      
+        QuestLog.MyInstance.CheckCompletion();
 
         QuestLog.MyInstance.UpdateSelected();
-
-        QuestLog.MyInstance.CheckCompletion();
     }
 
+    public void Complete()
+    {
+        Stack<Item> items = InventoryScript.MyInstance.GetItems(MyType, MyAmount);
 
-
+        foreach (Item item in items)
+        {
+            item.Remove();
+        }
+    }
 
 }
 
@@ -172,15 +190,17 @@ public class KillObjective : Objective
     {
         if (MyType == character.MyType)
         {
-            MyCurrentAmount++;
+            if (MyCurrentAmount < MyAmount)
+            {
+                MyCurrentAmount++;
 
+                MessageFeedManager.MyInstance.WriteMessage(string.Format("{0}: {1}/{2}", character.MyType, MyCurrentAmount, MyAmount));
 
-            QuestLog.MyInstance.UpdateSelected();
+                QuestLog.MyInstance.CheckCompletion();
 
-            QuestLog.MyInstance.CheckCompletion();
+                QuestLog.MyInstance.UpdateSelected();
+            }
+         
         }
     }
- 
-
-
 }

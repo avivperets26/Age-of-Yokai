@@ -54,7 +54,7 @@ public class QuestGiverWindow : Window
             {
                 GameObject go = Instantiate(questPrfab, questArea);
 
-                go.GetComponent<Text>().text = quest.MyTitle;
+                //go.GetComponent<Text>().text = quest.MyTitle;
 
                 go.GetComponent<QGQuestScript>().MyQuest = quest;
 
@@ -62,7 +62,8 @@ public class QuestGiverWindow : Window
 
                 if (QuestLog.MyInstance.HasQuest(quest) && quest.IsComplete)
                 {
-                    go.GetComponent<Text>().text += "(Complete)";
+                    //go.GetComponent<Text>().text += "(Complete)";
+                    go.GetComponent<Text>().text = quest.MyTitle + "<color=#ffbb04> <size=12>?</size></color>";
                 }
                 else if (QuestLog.MyInstance.HasQuest(quest))
                 {
@@ -71,6 +72,8 @@ public class QuestGiverWindow : Window
                     c.a = 0.5f;
 
                     go.GetComponent<Text>().color = c;
+
+                    go.GetComponent<Text>().text = quest.MyTitle + "<color=#c0c0c0ff> <size=12>?</size></color>";
                 }
             }           
         }
@@ -147,9 +150,27 @@ public class QuestGiverWindow : Window
             {
                 if (selectedQuest == questGiver.MyQuests[i])
                 {
+                    questGiver.MyCompltedQuests.Add(selectedQuest.MyTitle);
                     questGiver.MyQuests[i] = null;
+                    selectedQuest.MyQuestGiver.UpdateQuestStatus();
                 }
             }
+
+            foreach (CollectObjective o in selectedQuest.MyCollectObjectives)
+            {
+                InventoryScript.MyInstance.itemCountChangedEvent -= new ItemCountChanged(o.UpdateItemCount);
+
+                o.Complete();
+            }
+
+            foreach (KillObjective o in selectedQuest.MyKillObjectives)
+            {
+                GameManager.MyInstance.killConfirmedEvent -= new KillConfirmed(o.UpdateKillCount);
+
+                
+            }
+
+            QuestLog.MyInstance.RemoveQuest(selectedQuest.MyQuestScript);
 
             Back();
         }

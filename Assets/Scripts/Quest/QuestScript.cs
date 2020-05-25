@@ -9,18 +9,6 @@ public class QuestScript : MonoBehaviour
 
     private bool markedComplete = false;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void Select()
     {
         GetComponent<Text>().color = Color.red;
@@ -39,9 +27,12 @@ public class QuestScript : MonoBehaviour
         {
             markedComplete = true;
 
-            GetComponent<Text>().text += "(Complete)";
-        }
+            GetComponent<Text>().text = MyQuest.MyTitle + "(C)";
 
+            //GetComponent<Text>().text += "(Complete)";
+
+            MessageFeedManager.MyInstance.WriteMessage(string.Format("{0} (Complete)", MyQuest.MyTitle));
+        }
         else if (!MyQuest.IsComplete)
         {
             markedComplete = false;
