@@ -123,7 +123,7 @@ public class InventoryScript : MonoBehaviour
             AddItem(bag);
         }
 
-        else if (Input.GetKeyDown(KeyCode.L))
+        else if (Input.GetKeyDown(KeyCode.P))
         {
             HealthPotion potion = (HealthPotion)Instantiate(items[4]);
 

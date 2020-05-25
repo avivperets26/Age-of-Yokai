@@ -16,6 +16,9 @@ public abstract class Character : MonoBehaviour
     [SerializeField]
     private float speed;
 
+    [SerializeField]
+    private string type;
+
     /// <summary>
     /// A reference to the character's animator
     /// </summary>
@@ -102,6 +105,19 @@ public abstract class Character : MonoBehaviour
         get
         {
             return health.MyCurrentValue > 0;
+        }
+    }
+
+    public string MyType
+    {
+        get
+        {
+            return type;
+        }
+
+        set
+        {
+            type = value;
         }
     }
 
@@ -200,7 +216,11 @@ public abstract class Character : MonoBehaviour
         {
             //Makes sure that the character stops moving when its dead
             Direction = Vector2.zero;
+
             myRigidbody.velocity = Direction;
+
+            GameManager.MyInstance.OnKillConfirmed(this);
+
             MyAnimator.SetTrigger("die");
         }
     }

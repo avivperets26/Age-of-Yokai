@@ -14,6 +14,9 @@ public class Quest
     [SerializeField]
     private CollectObjective[] collectObjectives;
 
+    [SerializeField]
+    private KillObjective[] killObjectives;
+
     public QuestScript MyQuestScript { get; set; }
 
     public string MyTitle
@@ -62,21 +65,24 @@ public class Quest
                 }
             }
 
+            foreach (Objective o in MyKillObjectives)
+            {
+                if (!o.IsComplete)
+                {
+                    return false;
+                }
+            }
+
             return true;
         }
     }
 
-
-    // Start is called before the first frame update
-    void Start()
+    public KillObjective[] MyKillObjectives
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        get
+        {
+            return killObjectives;
+        }
     }
 }
 
@@ -143,4 +149,38 @@ public class CollectObjective : Objective
             QuestLog.MyInstance.CheckCompletion();
         }
     }
+
+    public void UpdateItemCount()
+    {
+        MyCurrentAmount = InventoryScript.MyInstance.GetItemCount(MyType);
+
+        QuestLog.MyInstance.UpdateSelected();
+
+        QuestLog.MyInstance.CheckCompletion();
+    }
+
+
+
+
+}
+
+
+[System.Serializable]
+public class KillObjective : Objective
+{
+    public void UpdateKillCount(Character character)
+    {
+        if (MyType == character.MyType)
+        {
+            MyCurrentAmount++;
+
+
+            QuestLog.MyInstance.UpdateSelected();
+
+            QuestLog.MyInstance.CheckCompletion();
+        }
+    }
+ 
+
+
 }

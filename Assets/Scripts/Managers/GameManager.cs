@@ -3,8 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+public delegate void KillConfirmed(Character character);
+
 public class GameManager : MonoBehaviour
 {
+
+    public event KillConfirmed killConfirmedEvent;
+
+    private static GameManager instance;
 
     /// <summary>
     /// A reference to the player object
@@ -13,6 +19,19 @@ public class GameManager : MonoBehaviour
     private Hero player;
 
     private Enemy currentTarget;
+
+    public static GameManager MyInstance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = FindObjectOfType<GameManager>();
+            }
+
+            return instance;
+        }
+    }
 
     // Update is called once per frame
     void Update()
@@ -66,5 +85,13 @@ public class GameManager : MonoBehaviour
             }
         }
 
+    }
+
+    public void OnKillConfirmed(Character character)
+    {
+        if (killConfirmedEvent != null)
+        {
+            killConfirmedEvent(character);
+        }
     }
 }
