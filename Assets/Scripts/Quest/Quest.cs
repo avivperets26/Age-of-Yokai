@@ -153,8 +153,8 @@ public class CollectObjective : Objective
             if (MyCurrentAmount <= MyAmount)
             {
                 MessageFeedManager.MyInstance.WriteMessage(string.Format("{0}: {1}/{2}", item.MyTitle, MyCurrentAmount, MyAmount));
-            } 
-           
+            }
+
             QuestLog.MyInstance.CheckCompletion();
 
             QuestLog.MyInstance.UpdateSelected();
@@ -164,7 +164,7 @@ public class CollectObjective : Objective
     public void UpdateItemCount()
     {
         MyCurrentAmount = InventoryScript.MyInstance.GetItemCount(MyType);
-      
+
         QuestLog.MyInstance.CheckCompletion();
 
         QuestLog.MyInstance.UpdateSelected();

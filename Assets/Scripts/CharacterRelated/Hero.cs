@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// This is the player script, it contains functionality that is specific to the Player
@@ -27,6 +28,12 @@ public class Hero : Character
     /// </summary>
     [SerializeField]
     private Stat stamina;
+
+    [SerializeField]//The player Xp
+    private Stat xpStat;
+
+    [SerializeField]
+    private Text levelText;
 
     /// <summary>
     /// The player's initial mana
@@ -63,6 +70,10 @@ public class Hero : Character
 
         stamina.Initialize(initStamina, initStamina);
 
+        xpStat.Initialize(0,Mathf.Floor( 100 * MyLevel * Mathf.Pow(MyLevel, 0.5f)));//y=100*x*x^0.5 Algorithm
+
+        levelText.text = MyLevel.ToString();
+
         base.Start();
     }
 
@@ -94,6 +105,10 @@ public class Hero : Character
         {
             health.MyCurrentValue -= 10;
             stamina.MyCurrentValue -= 10;
+        }
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            GainXP(10);
         }
         if (Input.GetKeyDown(KeyCode.O))
         {
@@ -252,6 +267,38 @@ public class Hero : Character
         {
             MyInteractable.Interact();
         }
+    }
+
+    public void GainXP(int xp)
+    {
+        xpStat.MyCurrentValue += xp;
+
+        CombatTextManager.MyInstace.CreatText(transform.position, xp.ToString(), SCTTYPE.XP, false);
+
+        if (xpStat.MyCurrentValue >= xpStat.MyMaxValue)
+        {
+            StartCoroutine(Ding());
+        }
+    }
+
+    private IEnumerator Ding()
+    {
+        while (!xpStat.IsFull)
+        {
+            yield return null;
+        }
+
+        MyLevel++;
+
+        levelText.text = MyLevel.ToString();
+
+        xpStat.MyMaxValue = 100 * MyLevel * Mathf.Pow(MyLevel, 0.5f);
+
+        xpStat.MyMaxValue = Mathf.Floor(xpStat.MyMaxValue);
+
+        xpStat.MyCurrentValue = xpStat.MyOverflow;//Keeps the rest of the xp after level up
+
+        xpStat.Reset();
     }
 
     public void OnTriggerEnter2D(Collider2D collision)

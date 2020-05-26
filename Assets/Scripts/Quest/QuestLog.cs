@@ -102,6 +102,8 @@ public class QuestLog : MonoBehaviour
 
             qs.MyQuest = quest;
 
+            questScripts.Add(qs);
+
             go.GetComponent<Text>().text = quest.MyTitle;
 
             CheckCompletion();
@@ -148,6 +150,7 @@ public class QuestLog : MonoBehaviour
         {
             qs.MyQuest.MyQuestGiver.UpdateQuestStatus();
 
+            Debug.Log("Checking if complete");
             qs.IsComplete();
         }
     }

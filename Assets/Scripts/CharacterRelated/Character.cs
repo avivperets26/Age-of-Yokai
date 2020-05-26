@@ -19,6 +19,9 @@ public abstract class Character : MonoBehaviour
     [SerializeField]
     private string type;
 
+    [SerializeField]
+    private int level;
+
     /// <summary>
     /// A reference to the character's animator
     /// </summary>
@@ -121,6 +124,19 @@ public abstract class Character : MonoBehaviour
         }
     }
 
+    public int MyLevel
+    {
+        get
+        {
+            return level;
+        }
+
+        set
+        {
+            level = value;
+        }
+    }
+
     protected virtual void Start()
     {
         health.Initialize(initHealth, initHealth);
@@ -212,6 +228,8 @@ public abstract class Character : MonoBehaviour
     {
         health.MyCurrentValue -= damage;
 
+        CombatTextManager.MyInstace.CreatText(transform.position, damage.ToString(), SCTTYPE.DAMAGE,false);
+
         if (health.MyCurrentValue <= 0)
         {
             //Makes sure that the character stops moving when its dead
@@ -222,7 +240,19 @@ public abstract class Character : MonoBehaviour
             GameManager.MyInstance.OnKillConfirmed(this);
 
             MyAnimator.SetTrigger("die");
+
+            if (this is Enemy)
+            {
+                Hero.MyInstance.GainXP(XPManager.CalculateXP((this as Enemy)));
+            }
         }
+    }
+
+    public void GetHealth(int health)
+    {
+        MyHealth.MyCurrentValue += health;
+
+        CombatTextManager.MyInstace.CreatText(transform.position, health.ToString(), SCTTYPE.HEAL,true);
     }
 
 }

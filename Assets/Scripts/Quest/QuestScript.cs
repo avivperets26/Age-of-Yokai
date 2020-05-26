@@ -23,6 +23,7 @@ public class QuestScript : MonoBehaviour
 
     public void IsComplete()
     {
+        Debug.Log("Before Complete!!!!");
         if (MyQuest.IsComplete && !markedComplete)
         {
             markedComplete = true;
@@ -30,6 +31,7 @@ public class QuestScript : MonoBehaviour
             GetComponent<Text>().text = MyQuest.MyTitle + "(C)";
 
             //GetComponent<Text>().text += "(Complete)";
+            Debug.Log("Complete!!!!");
 
             MessageFeedManager.MyInstance.WriteMessage(string.Format("{0} (Complete)", MyQuest.MyTitle));
         }

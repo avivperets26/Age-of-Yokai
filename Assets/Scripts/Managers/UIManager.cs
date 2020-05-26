@@ -32,6 +32,9 @@ public class UIManager : MonoBehaviour
     private Stat healthStat;
 
     [SerializeField]
+    private Text levelTexet;
+
+    [SerializeField]
     private Image portraitFrame;
 
 
@@ -77,7 +80,7 @@ public class UIManager : MonoBehaviour
         {
             OpenClose(keybindMenu);
         }
-        else if (Input.GetKeyDown(KeyCode.P))
+        else if (Input.GetKeyDown(KeyCode.M))
         {
             OpenClose(spellBook);
         }
@@ -100,9 +103,32 @@ public class UIManager : MonoBehaviour
 
         portraitFrame.sprite = target.MyPortrait;
 
+        levelTexet.text = target.MyLevel.ToString();
+
         target.healthChanged += new HealthChanged(UpdateTargetFrame);
 
         target.characterRemoved += new CharacterRemoved(HideTargetFrame);
+
+        if (target.MyLevel >= Hero.MyInstance.MyLevel +5)
+        {
+            levelTexet.color = Color.red;
+        }
+        else if (target.MyLevel == Hero.MyInstance.MyLevel + 3 || target.MyLevel == Hero.MyInstance.MyLevel + 4)
+        {
+            levelTexet.color = new Color32(255,124,0,255);
+        }
+        else if (target.MyLevel >= Hero.MyInstance.MyLevel - 2 && target.MyLevel <= Hero.MyInstance.MyLevel + 2)
+        {
+            levelTexet.color = Color.yellow;
+        }
+        else if (target.MyLevel <= Hero.MyInstance.MyLevel-3 && target.MyLevel > XPManager.CalculateGrayLevel())
+        {
+            levelTexet.color = Color.green;
+        }
+        else
+        {
+            levelTexet.color = Color.grey;
+        }
     }
 
     public void HideTargetFrame()
