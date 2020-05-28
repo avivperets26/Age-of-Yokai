@@ -1,0 +1,292 @@
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+using UnityEngine;
+
+public class SaveManager : MonoBehaviour
+{
+    [SerializeField]
+    private Item[] items;
+
+    private Chest[] chests;
+
+    private CharButton[] equipment;
+
+    [SerializeField]
+    private ActionButton[] actionButtons;
+
+    void Awake()
+    {
+        chests = FindObjectsOfType<Chest>();
+
+        equipment = FindObjectsOfType<CharButton>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            Save();
+        }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Load();
+        }
+    }
+
+    private void Save()
+    {
+        try
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+
+            FileStream file = File.Open(Application.persistentDataPath + "/" + "SaveTest.dat", FileMode.Create);
+
+            SaveData data = new SaveData();
+
+            SaveEquipment(data);
+
+            SaveBags(data);
+
+            SaveInventory(data);
+
+            SavePlayer(data);
+
+            SaveChests(data);
+
+            SaveActionButtons(data);
+
+            SaveQuest(data);
+
+            bf.Serialize(file, data);
+
+            file.Close();//!!remember to close() alaways!!
+        }
+        catch (System.Exception)
+        {
+
+            //This is for handling errors
+            throw;
+        }
+    }
+
+    private void SavePlayer(SaveData data)
+    {
+        data.MyPlayerData = new PlayerData(Hero.MyInstance.MyLevel,
+            Hero.MyInstance.MyXp.MyCurrentValue, Hero.MyInstance.MyXp.MyMaxValue,
+            Hero.MyInstance.MyHealth.MyCurrentValue,Hero.MyInstance.MyHealth.MyMaxValue,
+            Hero.MyInstance.MyStamina.MyCurrentValue,Hero.MyInstance.MyStamina.MyMaxValue,
+            Hero.MyInstance.transform.position);
+    }
+
+    private void SaveChests(SaveData data)
+    {
+        for (int i = 0; i < chests.Length; i++)
+        {
+            data.MyChestData.Add(new ChestData(chests[i].name));
+
+            foreach (Item item in chests[i].MyItems)
+            {
+                if (chests[i].MyItems.Count > 0)
+                {
+                    data.MyChestData[i].MyItems.Add(new ItemData(item.MyTitle, item.MySlot.MyItems.Count,item.MySlot.MyIndex));
+                }
+            }
+        }
+    }
+
+    private void SaveBags(SaveData data)
+    {
+        for (int i = 1; i < InventoryScript.MyInstance.MyBags.Count; i++)//First bag is the standert so we will pass it
+        {
+            data.MyInventoryData.MyBags.Add(new BagData(InventoryScript.MyInstance.MyBags[i].MySlotCount, InventoryScript.MyInstance.MyBags[i].MyBagButton.MyBagIndex));
+        }
+    }
+
+    private void SaveEquipment(SaveData data)
+    {
+        foreach (CharButton charButton in equipment)
+        {
+            if (charButton.MyEquippedArmor != null)
+            {
+                data.MyEquipmentData.Add(new EquipmenntData(charButton.MyEquippedArmor.MyTitle, charButton.name));
+            }
+        }
+    }
+
+    private void SaveActionButtons(SaveData data)
+    {
+        for (int i = 0; i < actionButtons.Length; i++)
+        {
+            if (actionButtons[i].MyUseable != null)
+            {
+                ActionButtonData action;
+
+                if (actionButtons[i].MyUseable is Spell)
+                {
+                    action = new ActionButtonData((actionButtons[i].MyUseable as Spell).MyName, false, i);
+                }
+                else
+                {
+                    action = new ActionButtonData((actionButtons[i].MyUseable as Item).MyTitle, true, i);
+                }
+
+                data.MyActionButtonData.Add(action);
+            }
+        }
+    }
+
+    private void SaveInventory(SaveData data)
+    {
+        List<SlotScript> slots = InventoryScript.MyInstance.GetAllItems();
+
+        foreach (SlotScript slot in slots)
+        {
+            data.MyInventoryData.MyItems.Add(new ItemData(slot.MyItem.MyTitle, slot.MyItems.Count, slot.MyIndex, slot.MyBag.MyBagIndex));
+        }
+    }
+
+    private void SaveQuest(SaveData data)
+    {
+        foreach (Quest quest in QuestLog.MyInstance.MyQuests)
+        {
+            data.MyQuestData.Add(new QuestData(quest.MyTitle, quest.MyDescription, quest.MyCollectObjectives, quest.MyKillObjectives,quest.MyQuestGiver.MyQuestGiverID));
+        }
+    }
+
+    private void Load()
+    {
+        try
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+
+            FileStream file = File.Open(Application.persistentDataPath + "/" + "SaveTest.dat", FileMode.Open);
+
+            SaveData data = (SaveData)bf.Deserialize(file);
+
+            file.Close();//!!remember to close() alaways!!
+
+            LoadEquipment(data);
+
+            LoadBags(data);
+
+            LoadInventory(data);//Inventory load must be after bag !!
+
+            LoadPlayer(data);
+
+            LoadChest(data);
+
+            LoadActionButtons(data);
+
+            LoadQuests(data);
+
+        }
+        catch (System.Exception)
+        {
+            throw;
+            //This is for handling errors
+        }
+    }
+
+    private void LoadPlayer(SaveData data)
+    {
+        Hero.MyInstance.MyLevel = data.MyPlayerData.MyLevel;
+
+        Hero.MyInstance.UpdateLevel();
+
+        Hero.MyInstance.MyHealth.Initialize(data.MyPlayerData.MyHealth, data.MyPlayerData.MyMaxHealth);
+
+        Hero.MyInstance.MyStamina.Initialize(data.MyPlayerData.MyStamina, data.MyPlayerData.MyMaxStamina);
+
+        Hero.MyInstance.MyXp.Initialize(data.MyPlayerData.MyXp, data.MyPlayerData.MyMaxXp);
+
+        Hero.MyInstance.transform.position = new Vector2(data.MyPlayerData.MyX, data.MyPlayerData.MyY);
+    }
+
+    private void LoadChest(SaveData data)
+    {
+        foreach (ChestData chest in data.MyChestData)
+        {
+            Chest c = Array.Find(chests, x => x.name == chest.MyName);
+
+            foreach (ItemData itemData in chest.MyItems)
+            {
+                Item item = Array.Find(items, x => x.MyTitle == itemData.MyTitle);
+
+                item.MySlot = c.MyBag.MySlots.Find(x => x.MyIndex == itemData.MySlotIndex);
+
+                c.MyItems.Add(item);
+            }
+        }
+    }
+
+    private void LoadBags(SaveData data)
+    {
+        foreach (BagData bagData in data.MyInventoryData.MyBags)
+        {           
+            Bag newBag = (Bag)Instantiate(items[0]);//Bag have to be Element 0 at SaveManager Object!
+
+            newBag.Initialize(bagData.MySlotCount);
+
+            InventoryScript.MyInstance.AddBag(newBag, bagData.MyBagIndex);
+        }
+    }
+
+    private void LoadEquipment(SaveData data)
+    {
+        foreach (EquipmenntData equipmenntData in data.MyEquipmentData)
+        {
+            CharButton cb = Array.Find(equipment, x => x.name == equipmenntData.MyType);//Looking after the Character Buttons
+
+            cb.EquipArmor(Array.Find(items, x => x.MyTitle == equipmenntData.MyTitle) as Armor);//After finding it, equiping it to the armor place
+        }
+    }
+
+    private void LoadActionButtons(SaveData data)
+    {
+        foreach (ActionButtonData buttonData in data.MyActionButtonData)
+        {
+            if (buttonData.IsItem)
+            {
+                actionButtons[buttonData.MyIndex].SetUseable(InventoryScript.MyInstance.GetUseable(buttonData.MyAction));
+            }
+            else
+            {
+                actionButtons[buttonData.MyIndex].SetUseable(SpellBook.MyInstance.GetSpell(buttonData.MyAction));
+            }
+        }
+    }
+
+    private void LoadInventory(SaveData data)
+    {
+        foreach (ItemData itemData in data.MyInventoryData.MyItems)
+        {
+            Item item = Array.Find(items, x => x.MyTitle == itemData.MyTitle);
+
+            for (int i = 0; i < itemData.MyStackCount; i++)
+            {
+                InventoryScript.MyInstance.PlaceInSpecific(item, itemData.MySlotIndex, itemData.MyBagIndex);
+            }
+        }
+    }
+
+    private void LoadQuests(SaveData data)
+    {
+        QuestGiver[] questGivers = FindObjectsOfType<QuestGiver>();
+
+        foreach (QuestData questData in data.MyQuestData)
+        {
+            QuestGiver qg = Array.Find(questGivers, x => x.MyQuestGiverID == questData.MyQuestGiverID);
+
+            Quest q = Array.Find(qg.MyQuests, x => x.MyTitle == questData.MyTitle);
+
+            q.MyQuestGiver = qg;
+
+            QuestLog.MyInstance.AcceptQuest(q);
+        }
+    }
+}
+

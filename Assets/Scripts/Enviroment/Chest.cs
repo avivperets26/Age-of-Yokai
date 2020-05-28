@@ -20,6 +20,37 @@ public class Chest : MonoBehaviour,IInteractable
     [SerializeField]
     private BagScript bag;
 
+    public List<Item> MyItems
+    {
+        get
+        {
+            return items;
+        }
+
+        set
+        {
+            items = value;
+        }
+    }
+
+    public BagScript MyBag
+    {
+        get
+        {
+            return bag;
+        }
+
+        set
+        {
+            bag = value;
+        }
+    }
+
+    private void Awake()
+    {
+        items = new List<Item>();
+    }
+
     public void Interact()
     {
         if (isOpen)
@@ -46,7 +77,7 @@ public class Chest : MonoBehaviour,IInteractable
         {
             StoreItems();
 
-            bag.Clear();
+            MyBag.Clear();
 
             isOpen = false;
 
@@ -60,9 +91,9 @@ public class Chest : MonoBehaviour,IInteractable
 
     public void AddItems()
     {
-        if (items != null)
+        if (MyItems != null)
         {
-            foreach (Item item in items)
+            foreach (Item item in MyItems)
             {
                 item.MySlot.AddItem(item);
             }
@@ -71,6 +102,6 @@ public class Chest : MonoBehaviour,IInteractable
 
     public void StoreItems()
     {
-        items = bag.GetItems();
+        MyItems = MyBag.GetItems();
     }
 }

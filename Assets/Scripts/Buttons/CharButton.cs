@@ -14,6 +14,19 @@ public class CharButton : MonoBehaviour,IPointerClickHandler, IPointerEnterHandl
     [SerializeField]
     private Image icon;
 
+    public Armor MyEquippedArmor
+    {
+        get
+        {
+            return equippedArmor;
+        }
+
+        set
+        {
+            equippedArmor = value;
+        }
+    }
+
     public void OnPointerClick(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Left)
@@ -29,9 +42,9 @@ public class CharButton : MonoBehaviour,IPointerClickHandler, IPointerEnterHandl
 
                 UIManager.MyInstance.RefreshToolTip(tmp);
             }
-            else if (HandScript.MyInstance.MyMoveable == null && equippedArmor != null)
+            else if (HandScript.MyInstance.MyMoveable == null && MyEquippedArmor != null)
             {
-                HandScript.MyInstance.TakeMoveable(equippedArmor);
+                HandScript.MyInstance.TakeMoveable(MyEquippedArmor);
 
                 CharacterPanel.MyInstance.MySelectedButton = this;
 
@@ -44,15 +57,15 @@ public class CharButton : MonoBehaviour,IPointerClickHandler, IPointerEnterHandl
     {
         armor.Remove();
 
-        if (equippedArmor != null)
+        if (MyEquippedArmor != null)
         {
 
-            if (equippedArmor != armor)
+            if (MyEquippedArmor != armor)
             {
-                armor.MySlot.AddItem(equippedArmor);
+                armor.MySlot.AddItem(MyEquippedArmor);
             }          
 
-            UIManager.MyInstance.RefreshToolTip(equippedArmor);
+            UIManager.MyInstance.RefreshToolTip(MyEquippedArmor);
         }
         else
         {
@@ -67,7 +80,7 @@ public class CharButton : MonoBehaviour,IPointerClickHandler, IPointerEnterHandl
 
         this.equippedArmor = armor;// A reference to the equipped armor
 
-        this.equippedArmor.MyCharButton = this;
+        this.MyEquippedArmor.MyCharButton = this;
 
         if(HandScript.MyInstance.MyMoveable == (armor as IMoveable))
         {
@@ -77,9 +90,9 @@ public class CharButton : MonoBehaviour,IPointerClickHandler, IPointerEnterHandl
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (equippedArmor != null)
+        if (MyEquippedArmor != null)
         {
-            UIManager.MyInstance.ShowTooltip(new Vector2(0, 0), transform.position, equippedArmor);
+            UIManager.MyInstance.ShowTooltip(new Vector2(0, 0), transform.position, MyEquippedArmor);
         }
     }
 

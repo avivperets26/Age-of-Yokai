@@ -13,6 +13,9 @@ public class QuestGiver : NPC
     [SerializeField]
     private SpriteRenderer statusRenderer;
 
+    [SerializeField]
+    private int questGiverID;
+
     private List<string> completedQuests = new List<string>();
 
     public Quest[] MyQuests
@@ -45,6 +48,15 @@ public class QuestGiver : NPC
                 }
             }
         }
+    }
+
+    public int MyQuestGiverID
+    {
+        get
+        {
+            return questGiverID;
+        }
+
     }
 
     private void Start()

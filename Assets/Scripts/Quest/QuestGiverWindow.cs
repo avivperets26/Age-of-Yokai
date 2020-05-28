@@ -54,7 +54,7 @@ public class QuestGiverWindow : Window
             {
                 GameObject go = Instantiate(questPrfab, questArea);
 
-                //go.GetComponent<Text>().text = quest.MyTitle;
+                go.GetComponent<Text>().text = "[" +quest.MyLevel+"] "+ quest.MyTitle + "<color=#ffbb04><size=12> !</size></color>";
 
                 go.GetComponent<QGQuestScript>().MyQuest = quest;
 
@@ -62,8 +62,7 @@ public class QuestGiverWindow : Window
 
                 if (QuestLog.MyInstance.HasQuest(quest) && quest.IsComplete)
                 {
-                    //go.GetComponent<Text>().text += "(Complete)";
-                    go.GetComponent<Text>().text = quest.MyTitle + "<color=#ffbb04> <size=12>?</size></color>";
+                    go.GetComponent<Text>().text = quest.MyTitle + "<color=#ffbb04> <size=12> ?</size></color>";
                 }
                 else if (QuestLog.MyInstance.HasQuest(quest))
                 {
@@ -73,7 +72,7 @@ public class QuestGiverWindow : Window
 
                     go.GetComponent<Text>().color = c;
 
-                    go.GetComponent<Text>().text = quest.MyTitle + "<color=#c0c0c0ff> <size=12>?</size></color>";
+                    go.GetComponent<Text>().text = quest.MyTitle + "<color=#c0c0c0ff><size=12> ?</size></color>";
                 }
             }           
         }
@@ -169,6 +168,8 @@ public class QuestGiverWindow : Window
 
                 
             }
+
+            Hero.MyInstance.GainXP(XPManager.CalculateXP(selectedQuest));
 
             QuestLog.MyInstance.RemoveQuest(selectedQuest.MyQuestScript);
 

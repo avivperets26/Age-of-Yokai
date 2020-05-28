@@ -52,6 +52,9 @@ public class Hero : Character
     [SerializeField]
     private Transform[] exitPoints;
 
+    [SerializeField]
+    private Animator ding;
+
     /// <summary>
     /// Index that keeps track of which exit point to use, 2 is default down
     /// </summary>
@@ -64,13 +67,39 @@ public class Hero : Character
     public int MyGold { get; set; }
     public IInteractable MyInteractable { get => interactable; set => interactable = value; }
 
+    public Stat MyXp
+    {
+        get
+        {
+            return xpStat;
+        }
+
+        set
+        {
+            xpStat = value;
+        }
+    }
+
+    public Stat MyStamina
+    {
+        get
+        {
+            return stamina;
+        }
+
+        set
+        {
+            stamina = value;
+        }
+    }
+
     protected override void Start()
     {
         MyGold = 20;
 
-        stamina.Initialize(initStamina, initStamina);
+        MyStamina.Initialize(initStamina, initStamina);
 
-        xpStat.Initialize(0,Mathf.Floor( 100 * MyLevel * Mathf.Pow(MyLevel, 0.5f)));//y=100*x*x^0.5 Algorithm
+        MyXp.Initialize(0,Mathf.Floor( 100 * MyLevel * Mathf.Pow(MyLevel, 0.5f)));//y=100*x*x^0.5 Algorithm
 
         levelText.text = MyLevel.ToString();
 
@@ -104,7 +133,7 @@ public class Hero : Character
         if (Input.GetKeyDown(KeyCode.I))
         {
             health.MyCurrentValue -= 10;
-            stamina.MyCurrentValue -= 10;
+            MyStamina.MyCurrentValue -= 10;
         }
         if (Input.GetKeyDown(KeyCode.X))
         {
@@ -113,7 +142,7 @@ public class Hero : Character
         if (Input.GetKeyDown(KeyCode.O))
         {
             health.MyCurrentValue += 10;
-            stamina.MyCurrentValue += 10;
+            MyStamina.MyCurrentValue += 10;
         }
 
         if (Input.GetKey(keyBindManager.MyInstance.Keybinds["UP"])) //Moves up
@@ -271,11 +300,11 @@ public class Hero : Character
 
     public void GainXP(int xp)
     {
-        xpStat.MyCurrentValue += xp;
+        MyXp.MyCurrentValue += xp;
 
         CombatTextManager.MyInstace.CreatText(transform.position, xp.ToString(), SCTTYPE.XP, false);
 
-        if (xpStat.MyCurrentValue >= xpStat.MyMaxValue)
+        if (MyXp.MyCurrentValue >= MyXp.MyMaxValue)
         {
             StartCoroutine(Ding());
         }
@@ -283,22 +312,34 @@ public class Hero : Character
 
     private IEnumerator Ding()
     {
-        while (!xpStat.IsFull)
+        while (!MyXp.IsFull)
         {
             yield return null;
         }
 
         MyLevel++;
 
+        ding.SetTrigger("Ding");
+
         levelText.text = MyLevel.ToString();
 
-        xpStat.MyMaxValue = 100 * MyLevel * Mathf.Pow(MyLevel, 0.5f);
+        MyXp.MyMaxValue = 100 * MyLevel * Mathf.Pow(MyLevel, 0.5f);
 
-        xpStat.MyMaxValue = Mathf.Floor(xpStat.MyMaxValue);
+        MyXp.MyMaxValue = Mathf.Floor(MyXp.MyMaxValue);
 
-        xpStat.MyCurrentValue = xpStat.MyOverflow;//Keeps the rest of the xp after level up
+        MyXp.MyCurrentValue = MyXp.MyOverflow;//Keeps the rest of the xp after level up
 
-        xpStat.Reset();
+        MyXp.Reset();
+
+        if (MyXp.MyCurrentValue >= MyXp.MyMaxValue)
+        {
+            StartCoroutine(Ding());
+        }
+    }
+
+    public void UpdateLevel()
+    {
+        levelText.text = MyLevel.ToString();
     }
 
     public void OnTriggerEnter2D(Collider2D collision)

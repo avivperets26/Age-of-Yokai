@@ -133,6 +133,8 @@ public abstract class Character : MonoBehaviour
 
         set
         {
+
+
             level = value;
         }
     }

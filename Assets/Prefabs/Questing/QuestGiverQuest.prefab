@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1466141858764384835}
   - component: {fileID: 3504540799072827706}
   - component: {fileID: -2418237965349203898}
+  - component: {fileID: 2695316490704539184}
   m_Layer: 5
   m_Name: QuestGiverQuest
   m_TagString: Untagged
@@ -69,7 +70,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 12
+    m_FontSize: 8
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 1
@@ -149,3 +150,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9948aab27479c7489e5c774adf89d4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2695316490704539184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1466141858764384833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: 0.5, y: -0.5}
+  m_UseGraphicAlpha: 1

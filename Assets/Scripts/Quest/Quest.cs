@@ -21,6 +21,12 @@ public class Quest
 
     public QuestGiver MyQuestGiver { get; set; }
 
+    [SerializeField]
+    private int level;
+
+    [SerializeField]
+    private int xp;
+
     public string MyTitle
     {
         get
@@ -88,6 +94,27 @@ public class Quest
         set
         {
             killObjectives = value;
+        }
+    }
+
+    public int MyLevel
+    {
+        get
+        {
+            return level;
+        }
+
+        set
+        {
+            level = value;
+        }
+    }
+
+    public int MyXp
+    {
+        get
+        {
+            return xp;
         }
     }
 }
