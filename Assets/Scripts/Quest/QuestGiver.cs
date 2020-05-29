@@ -26,7 +26,7 @@ public class QuestGiver : NPC
         }
     }
 
-    public List<string> MyCompltedQuests
+    public List<string> MyCompletedQuests
     {
         get
         {
