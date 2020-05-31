@@ -39,6 +39,8 @@ public class LootWindow : MonoBehaviour
     [SerializeField]
     private GameObject nextBtn, previousBtn;
 
+    public IInteractable MyInteractable { get; set; }
+
     [SerializeField]//for debuging , will removed later
     private Item[] items;
 
@@ -176,6 +178,13 @@ public class LootWindow : MonoBehaviour
         canvasGroup.blocksRaycasts = false;
 
         ClearButtons();
+
+        if (MyInteractable != null)
+        {
+            MyInteractable.StopInteract();
+        }
+
+        MyInteractable = null;
     }
 
 

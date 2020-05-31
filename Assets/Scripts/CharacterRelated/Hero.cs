@@ -236,7 +236,23 @@ public class Hero : Character
 
         StopAttack(); //Ends the attack
     }
+    private IEnumerator GatherRoutine(string skillName, List<Drop> items)
+    {
+        Transform currentTarget = MyTarget;
 
+        //Creates a new spell, so that we can use the information form it to cast it in the game
+        Spell newSpell = SpellBook.MyInstance.CastSpell(skillName);
+
+        IsAttacking = true; //Indicates if we are attacking
+
+        MyAnimator.SetBool("attack", IsAttacking); //Starts the attack animation
+
+        yield return new WaitForSeconds(newSpell.MyCastTime); //This is a hardcoded cast time, for debugging      
+
+        StopAttack(); //Ends the attack
+
+        LootWindow.MyInstance.CreatePages(items);
+    }
     /// <summary>
     /// Casts a spell
     /// </summary>
@@ -246,7 +262,15 @@ public class Hero : Character
 
         if (MyTarget != null && MyTarget.GetComponentInParent<Character>().IsAlive && !IsAttacking && !IsMoving && InLineOfSight()) //Chcks if we are able to attack
         {
-            attackRoutine = StartCoroutine(Attack(spellName));
+            actionRoutine = StartCoroutine(Attack(spellName));
+        }
+    }
+
+    public void Gather(string skillName, List<Drop> items)
+    {
+        if (!IsAttacking)
+        {
+            actionRoutine = StartCoroutine(GatherRoutine(skillName, items));
         }
     }
 
@@ -301,9 +325,9 @@ public class Hero : Character
 
         MyAnimator.SetBool("attack", IsAttacking); //Stops the attack animation
 
-        if (attackRoutine != null) //Checks if we have a reference to an co routine
+        if (actionRoutine != null) //Checks if we have a reference to an co routine
         {
-            StopCoroutine(attackRoutine);
+            StopCoroutine(actionRoutine);
         }
     }
 

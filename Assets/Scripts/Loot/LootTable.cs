@@ -6,7 +6,7 @@ public class LootTable : MonoBehaviour
 {
     
     [SerializeField]
-    private Loot[] loot;
+    protected Loot[] loot;
 
     public List<Drop> MyDroppedItems { get; set; }
 
@@ -24,7 +24,7 @@ public class LootTable : MonoBehaviour
         return MyDroppedItems;
     }
 
-    public void RollLoot()
+    protected virtual void RollLoot()
     {
         foreach (Loot item in loot)
         {

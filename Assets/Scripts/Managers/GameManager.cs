@@ -79,15 +79,16 @@ public class GameManager : MonoBehaviour
         {
             //Makes a raycast from the mouse position into the game world
             RaycastHit2D hit = Physics2D.Raycast(mainCamera.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, Mathf.Infinity, 512);
-
-            IInteractable entity = hit.collider.gameObject.GetComponent<IInteractable>();
-
-            if (hit.collider != null && (hit.collider.tag == "Enemy" || hit.collider.tag == "Interactable") && player.MyInteractables.Contains(entity))
+            if (hit.collider != null)
             {
-                entity.Interact();
+                IInteractable entity = hit.collider.gameObject.GetComponent<IInteractable>();
+
+                if (hit.collider != null && (hit.collider.tag == "Enemy" || hit.collider.tag == "Interactable") && player.MyInteractables.Contains(entity))
+                {
+                    entity.Interact();
+                }
             }
         }
-
     }
 
     private void NextTarget()
@@ -98,11 +99,18 @@ public class GameManager : MonoBehaviour
 
             if (Hero.MyInstance.MyAttackers.Count > 0)
             {
-                SelectTarget(Hero.MyInstance.MyAttackers[targetIndex]);
+                if (targetIndex < Hero.MyInstance.MyAttackers.Count)
+                {
+                    SelectTarget(Hero.MyInstance.MyAttackers[targetIndex]);
 
-                targetIndex++;
+                    targetIndex++;
 
-                if (targetIndex >= Hero.MyInstance.MyAttackers.Count)
+                    if (targetIndex >= Hero.MyInstance.MyAttackers.Count)
+                    {
+                        targetIndex = 0;
+                    }
+                }
+                else
                 {
                     targetIndex = 0;
                 }

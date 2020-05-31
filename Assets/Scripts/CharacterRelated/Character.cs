@@ -45,7 +45,7 @@ public abstract class Character : MonoBehaviour
     /// <summary>
     /// A reference to the attack coroutine
     /// </summary>
-    protected Coroutine attackRoutine;
+    protected Coroutine actionRoutine;
 
     [SerializeField]
     protected Transform hitBox;
