@@ -57,6 +57,8 @@ public class Enemy : Character, IInteractable
 
     protected void Awake()
     {
+        health.Initialize(initHealth, initHealth);
+
         MyStartPosition = transform.position;
         MyAggroRange = initAggroRange;
         MyAttackRange = 1;
@@ -114,11 +116,21 @@ public class Enemy : Character, IInteractable
     {
         if (!(currentState is EvadeState))
         {
-            SetTarget(source);
+            if (IsAlive)
+            {
+                SetTarget(source);
 
-            base.TakeDamage(damage, source);
+                base.TakeDamage(damage, source);
 
-            OnHealthChanged(health.MyCurrentValue);
+                OnHealthChanged(health.MyCurrentValue);
+
+                if (!IsAlive)
+                {
+                    Hero.MyInstance.MyAttackers.Remove(this);
+
+                    Hero.MyInstance.GainXP(XPManager.CalculateXP((this as Enemy)));
+                }
+            }
         }
 
     }
@@ -164,7 +176,17 @@ public class Enemy : Character, IInteractable
     {
         if (!IsAlive)
         {
-            lootTable.ShowLoot();
+            List<Drop> drops = new List<Drop>();
+
+            foreach (IInteractable interactable in Hero.MyInstance.MyInteractables)
+            {
+                if (interactable is Enemy && !(interactable as Enemy).IsAlive)
+                {
+                    drops.AddRange((interactable as Enemy).lootTable.GetLoot());
+                }
+            }
+
+            LootWindow.MyInstance.CreatePages(drops);
         }
     }
 

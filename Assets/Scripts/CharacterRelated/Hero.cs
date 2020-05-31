@@ -23,6 +23,8 @@ public class Hero : Character
         }
     }
 
+    private List<Enemy> attackers = new List<Enemy>();
+
     /// <summary>
     /// The player's mana
     /// </summary>
@@ -60,12 +62,12 @@ public class Hero : Character
     /// </summary>
     private int exitIndex = 2;
 
-    private IInteractable interactable;
+    private List<IInteractable> interactables = new List<IInteractable>();
 
     private Vector3 min, max;
 
     public int MyGold { get; set; }
-    public IInteractable MyInteractable { get => interactable; set => interactable = value; }
+    public List<IInteractable> MyInteractables { get => interactables; set => interactables = value; }
 
     public Stat MyXp
     {
@@ -93,18 +95,20 @@ public class Hero : Character
         }
     }
 
-    protected override void Start()
+    public List<Enemy> MyAttackers
     {
-        MyGold = 20;
+        get
+        {
+            return attackers;
+        }
 
-        MyStamina.Initialize(initStamina, initStamina);
-
-        MyXp.Initialize(0,Mathf.Floor( 100 * MyLevel * Mathf.Pow(MyLevel, 0.5f)));//y=100*x*x^0.5 Algorithm
-
-        levelText.text = MyLevel.ToString();
-
-        base.Start();
+        set
+        {
+            attackers = value;
+        }
     }
+
+
 
     /// <summary>
     /// We are overriding the characters update function, so that we can execute our own functions
@@ -120,6 +124,19 @@ public class Hero : Character
             transform.position.z);
 
         base.Update();
+    }
+
+    public void SetDefaultValues()
+    {
+        MyGold = 1000;
+
+        health.Initialize(initHealth, initHealth);
+
+        MyStamina.Initialize(initStamina, initStamina);
+
+        MyXp.Initialize(0, Mathf.Floor(100 * MyLevel * Mathf.Pow(MyLevel, 0.5f)));//y=100*x*x^0.5 Algorithm
+
+        levelText.text = MyLevel.ToString();
     }
 
     /// <summary>
@@ -290,14 +307,6 @@ public class Hero : Character
         }
     }
 
-    public void Interact()
-    {
-        if (MyInteractable != null)
-        {
-            MyInteractable.Interact();
-        }
-    }
-
     public void GainXP(int xp)
     {
         MyXp.MyCurrentValue += xp;
@@ -307,6 +316,14 @@ public class Hero : Character
         if (MyXp.MyCurrentValue >= MyXp.MyMaxValue)
         {
             StartCoroutine(Ding());
+        }
+    }
+
+    public void AddAttacker(Enemy enemy)
+    {
+        if (!MyAttackers.Contains(enemy))
+        {
+            MyAttackers.Add(enemy);
         }
     }
 
@@ -346,7 +363,13 @@ public class Hero : Character
     {
         if (collision.tag == "Enemy" || collision.tag == "Interactable")
         {
-            MyInteractable = collision.GetComponent<IInteractable>();
+
+            IInteractable interactable = collision.GetComponent<IInteractable>();
+
+            if (!MyInteractables.Contains(interactable))
+            {
+                MyInteractables.Add(interactable);
+            }
         }
     }
 
@@ -354,11 +377,16 @@ public class Hero : Character
     {
         if (collision.tag == "Enemy" || collision.tag == "Interactable")
         {
-            if (MyInteractable != null)
+            if (MyInteractables.Count >0)
             {
-                MyInteractable.StopInteract();
+                IInteractable interactable = MyInteractables.Find(x => x == collision.GetComponent<IInteractable>());
 
-                MyInteractable = null;
+                if (interactable != null)
+                {
+                    interactable.StopInteract();
+                }
+
+                MyInteractables.Remove(interactable);
             }
         }
     }

@@ -5,6 +5,7 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class SaveManager : MonoBehaviour
 {
@@ -21,6 +22,14 @@ public class SaveManager : MonoBehaviour
     [SerializeField]
     private SavedGame[] saveSlots;
 
+    [SerializeField]
+    private GameObject dialogue;
+
+    [SerializeField]
+    private Text dialogueText;
+   
+    private SavedGame current;
+
     private string action;
 
     void Awake()
@@ -35,22 +44,80 @@ public class SaveManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        if (PlayerPrefs.HasKey("Load"))
+        {
+            Load(saveSlots[PlayerPrefs.GetInt("Load")]);
+            PlayerPrefs.DeleteKey("Load");
+        }
+        else
+        {
+            Hero.MyInstance.SetDefaultValues();
+        }
+    }
+
     public void ShowDialogue(GameObject clickButton)
     {
         action = clickButton.name;
 
         switch (action)
         {
-            case "LoadBtn":
-                Load(clickButton.GetComponentInParent<SavedGame>());
+            case "Load":
+                dialogueText.text = "Load game?";
                 break;
-            case "SaveBtn":
-                Save(clickButton.GetComponentInParent<SavedGame>());
+            case "Save":
+                dialogueText.text = "Save game?";
                 break;
-            case "DeleteBtn":
-                Delete(clickButton.GetComponentInParent<SavedGame>());
+            case "Delete":
+                dialogueText.text = "Delete save?";
                 break;
         }
+
+        current = clickButton.GetComponentInParent<SavedGame>();
+
+        dialogue.SetActive(true);
+    }
+
+    public void ExecuteAction()
+    {
+        switch (action)
+        {
+            case "Load":
+                LoadScene(current);
+                break;
+            case "Save":
+                Save(current);
+                break;
+            case "Delete":
+                Delete(current);
+                break;
+        }
+
+        CloseDialogue();
+    }
+
+    private void LoadScene(SavedGame savedGame)
+    {
+        if (File.Exists(Application.persistentDataPath + "/" + savedGame.gameObject.name + ".dat"))
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+
+            FileStream file = File.Open(Application.persistentDataPath + "/" + savedGame.gameObject.name + ".dat", FileMode.Open);
+
+            SaveData data = (SaveData)bf.Deserialize(file);
+
+            file.Close();
+
+            PlayerPrefs.SetInt("Load", savedGame.MyIndex);
+
+            SceneManager.LoadScene(data.MyScene);
+        }
+    }
+
+    public void CloseDialogue()
+    {
+        dialogue.SetActive(false);
     }
 
     private void Delete(SavedGame savedGame)
@@ -112,9 +179,9 @@ public class SaveManager : MonoBehaviour
         }
         catch (System.Exception)
         {
+            Delete(savedGame);
 
-            //This is for handling errors
-            throw;
+            PlayerPrefs.DeleteKey("Load");
         }
     }
 
@@ -212,7 +279,7 @@ public class SaveManager : MonoBehaviour
         }
     }
 
-    private void Load(SavedGame savedGame)
+    private void Load(SavedGame savedGame)//saveSlots[PlayerPrefs.GetInt("Load")]
     {
         try
         {
@@ -224,29 +291,38 @@ public class SaveManager : MonoBehaviour
 
             file.Close();//!!remember to close() alaways!!
 
+            Debug.Log("LoadEquipment(data);");
             LoadEquipment(data);
 
+            Debug.Log("LoadBags(data);");
             LoadBags(data);
 
+            Debug.Log("LoadInventory(data);");
             LoadInventory(data);//Inventory load must be after bag !!
 
+            Debug.Log("LoadPlayer(data);");
             LoadPlayer(data);
 
+            Debug.Log("LoadChest(data);");
             LoadChest(data);
 
+            Debug.Log("LoadActionButtons(data);");
             LoadActionButtons(data);
 
+            Debug.Log("LoadQuests(data);");
             LoadQuests(data);
 
+            Debug.Log("LoadQuestGiver(data);");
             LoadQuestGiver(data);
 
         }
         catch (System.Exception)
         {
-            throw;
+            Debug.Log("Failed to save");
             //This is for handling errors
         }
     }
+
 
     private void LoadPlayer(SaveData data)
     {
@@ -271,7 +347,7 @@ public class SaveManager : MonoBehaviour
 
             foreach (ItemData itemData in chest.MyItems)
             {
-                Item item = Array.Find(items, x => x.MyTitle == itemData.MyTitle);
+                Item item = Instantiate(Array.Find(items, x => x.MyTitle == itemData.MyTitle));
 
                 item.MySlot = c.MyBag.MySlots.Find(x => x.MyIndex == itemData.MySlotIndex);
 
@@ -317,14 +393,33 @@ public class SaveManager : MonoBehaviour
         }
     }
 
+    //private void LoadInventory(SaveData data)
+    //{
+    //    foreach (ItemData itemData in data.MyInventoryData.MyItems)
+    //    {
+    //        Item item = Array.Find(items, x => x.MyTitle == itemData.MyTitle);
+
+    //        for (int i = 0; i < itemData.MyStackCount; i++)
+    //        {
+    //            InventoryScript.MyInstance.PlaceInSpecific(item, itemData.MySlotIndex, itemData.MyBagIndex);
+    //        }
+    //    }
+    //}
     private void LoadInventory(SaveData data)
     {
+        Debug.Log("In LoadInventory method at SaveManager Sript");
         foreach (ItemData itemData in data.MyInventoryData.MyItems)
         {
-            Item item = Array.Find(items, x => x.MyTitle == itemData.MyTitle);
+            Debug.Log("In foreach Loop");
+
+            Item item = Instantiate(Array.Find(items, x => x.MyTitle == itemData.MyTitle));
+
+            Debug.Log("After Instantiate item");
 
             for (int i = 0; i < itemData.MyStackCount; i++)
             {
+                Debug.Log("In For Loop");
+
                 InventoryScript.MyInstance.PlaceInSpecific(item, itemData.MySlotIndex, itemData.MyBagIndex);
             }
         }

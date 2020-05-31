@@ -281,7 +281,14 @@ public class InventoryScript : MonoBehaviour
     public void PlaceInSpecific(Item item, int slotIndex, int bagIndex)
     {
         bags[bagIndex].MyBagScript.MySlots[slotIndex].AddItem(item);
+
     }
+    //public void PlaceInSpecific(Item item, int slotIndex, int bagIndex)
+    //{
+    //    Debug.Log("In PlaceInSpecific method at InventoryScript");
+    //    bags[bagIndex].MyBagScript.MySlots[slotIndex].AddItem(item);
+    //    Debug.Log("Out PlaceInSpecific method at InventoryScript");
+    //}
 
     public void OpenClose()//Open and closes all bags
     {

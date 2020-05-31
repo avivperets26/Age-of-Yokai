@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     private Hero player;
 
     private Enemy currentTarget;
+    private int targetIndex;
 
     public static GameManager MyInstance
     {
@@ -45,6 +46,8 @@ public class GameManager : MonoBehaviour
     {
         //Executes click target
         ClickTarget();
+
+        NextTarget();
     }
 
     private void ClickTarget()
@@ -56,25 +59,16 @@ public class GameManager : MonoBehaviour
 
             if (hit.collider != null && hit.collider.tag =="Enemy")//If we hit something
             {
-                if (currentTarget != null)//If we have a current target
-                {
-                    currentTarget.DeSelect(); //deselct the current target
-                }
+                DeSelecetTarget();
 
-                currentTarget = hit.collider.GetComponent<Enemy>(); //Selects the new target
+                SelectTarget(hit.collider.GetComponent<Enemy>());
 
-                player.MyTarget = currentTarget.Select(); //Gives the player the new target
-
-                UIManager.MyInstance.ShowTargetFrame(currentTarget);
             }
             else//Deselect the target
             {
                 UIManager.MyInstance.HideTargetFrame();
 
-                if (currentTarget != null) //If we have a current target
-                {
-                    currentTarget.DeSelect(); //We deselct it
-                }
+                DeSelecetTarget();
 
                 //We remove the references to the target
                 currentTarget = null;
@@ -86,12 +80,51 @@ public class GameManager : MonoBehaviour
             //Makes a raycast from the mouse position into the game world
             RaycastHit2D hit = Physics2D.Raycast(mainCamera.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, Mathf.Infinity, 512);
 
-            if (hit.collider != null && (hit.collider.tag == "Enemy" || hit.collider.tag == "Interactable") && hit.collider.gameObject.GetComponent<IInteractable>() == player.MyInteractable)
+            IInteractable entity = hit.collider.gameObject.GetComponent<IInteractable>();
+
+            if (hit.collider != null && (hit.collider.tag == "Enemy" || hit.collider.tag == "Interactable") && player.MyInteractables.Contains(entity))
             {
-                player.Interact();
+                entity.Interact();
             }
         }
 
+    }
+
+    private void NextTarget()
+    {
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            DeSelecetTarget();
+
+            if (Hero.MyInstance.MyAttackers.Count > 0)
+            {
+                SelectTarget(Hero.MyInstance.MyAttackers[targetIndex]);
+
+                targetIndex++;
+
+                if (targetIndex >= Hero.MyInstance.MyAttackers.Count)
+                {
+                    targetIndex = 0;
+                }
+            }
+        }
+    }
+
+    private void DeSelecetTarget()
+    {
+        if (currentTarget != null)
+        {
+            currentTarget.DeSelect();
+        }
+    }
+
+    private void SelectTarget(Enemy enemy)
+    {
+        currentTarget = enemy;
+
+        player.MyTarget = currentTarget.Select();
+
+        UIManager.MyInstance.ShowTargetFrame(currentTarget);
     }
 
     public void OnKillConfirmed(Character character)

@@ -18,7 +18,7 @@ public abstract class Item : ScriptableObject, IMoveable,IDescribable//Superclas
     [SerializeField]
     private Quality quality;//The items quality
 
-    protected SlotScript slot;//A reference to the slot that this item is sitting on
+    private SlotScript slot;//A reference to the slot that this item is sitting on
 
     private CharButton charButton;
 

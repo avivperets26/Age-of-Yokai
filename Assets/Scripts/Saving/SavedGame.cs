@@ -45,7 +45,7 @@ public class SavedGame : MonoBehaviour
 
     private void Awake()
     {
-        visuals.SetActive(false);
+        //visuals.SetActive(false);
     }
 
     public void ShowInfo(SaveData saveData)

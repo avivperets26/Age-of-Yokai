@@ -9,7 +9,7 @@ public class BagScript : MonoBehaviour
 
     private CanvasGroup canvasGroup;//A canvasgroup for hiding and showing the bag
 
-    private List<SlotScript> slots = new List<SlotScript>();
+    private List<SlotScript> slots = new List<SlotScript>();// A list of all the slots the belongs to the bag
 
     public int MyBagIndex { get; set; }
 
@@ -83,19 +83,19 @@ public class BagScript : MonoBehaviour
         }
     }
 
-    public bool AddItem(Item item)
+    public bool AddItem(Item item)// Adds an item to the bag
     {
-        foreach (SlotScript slot in MySlots)
+        foreach (SlotScript slot in MySlots)//Checks all slots
         {
-            if (slot.IsEmpty)
+            if (slot.IsEmpty)//If the slot is empty then we add the item
             {
-                slot.AddItem(item);
+                slot.AddItem(item);//Adds the item
 
-                return true;
+                return true;//Success
             }
         }
 
-        return false;
+        return false;//Success
     }
 
     public void OpenClose()//Opens or closes bag

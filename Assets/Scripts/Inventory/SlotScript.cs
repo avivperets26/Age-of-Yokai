@@ -26,7 +26,7 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler,IClickable,IPointe
         }
     }
 
-    public bool IsFull
+    public bool IsFull// Indicates if the slot is full
     {
         get
         {
@@ -39,7 +39,7 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler,IClickable,IPointe
         }
     }
 
-    public Item MyItem
+    public Item MyItem// The current item on the slot
     {
         get
         {
@@ -92,41 +92,6 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler,IClickable,IPointe
         MyItems.OnClear += new UpdateStackEvent(UpdateSlot);
     }
 
-    public bool AddItem(Item item)//Adds an Item to the slot
-    {
-        MyItems.Push(item);
-
-        icon.sprite = item.MyIcon;
-
-        icon.color = Color.white;
-
-        item.MySlot = this;
-
-        return true;
-    }
-
-
-    public bool AddItems(ObservableStack<Item> newItems)//Add a stack of items to the slot
-    {
-        if (IsEmpty || newItems.Peek().GetType() == MyItem.GetType())
-        {
-            int count = newItems.Count;
-
-            for (int i = 0; i < count; i++)
-            {
-                if (IsFull)
-                {
-                    return false;
-                }
-
-                AddItem(newItems.Pop());
-            }
-
-            return true;
-        }
-
-        return false;
-    }
     public void OnPointerClick(PointerEventData eventData)//When the slot is clicked
     {
         if (eventData.button == PointerEventData.InputButton.Left)
@@ -180,7 +145,7 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler,IClickable,IPointe
                 }
                 else if (HandScript.MyInstance.MyMoveable is Armor)
                 {
-                    Armor armor = (Armor)HandScript.MyInstance.MyMoveable;                    
+                    Armor armor = (Armor)HandScript.MyInstance.MyMoveable;
 
                     CharacterPanel.MyInstance.MySelectedButton.DequipArmor();
 
@@ -188,13 +153,13 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler,IClickable,IPointe
 
                     HandScript.MyInstance.Drop();
                 }
-                
+
 
             }
             else if (InventoryScript.MyInstance.FromSlot != null)//If we have somthiing to move
             {
                 //We will try to do different things to place the item back into the inventory
-                if (PutItemBack() || MergeItems(InventoryScript.MyInstance.FromSlot) ||SwapItems(InventoryScript.MyInstance.FromSlot) || AddItems(InventoryScript.MyInstance.FromSlot.MyItems))
+                if (PutItemBack() || MergeItems(InventoryScript.MyInstance.FromSlot) || SwapItems(InventoryScript.MyInstance.FromSlot) || AddItems(InventoryScript.MyInstance.FromSlot.MyItems))
                 {
                     HandScript.MyInstance.Drop();
 
@@ -209,6 +174,43 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler,IClickable,IPointe
             UseItem();
         }
     }
+
+    public bool AddItem(Item item)//Adds an Item to the slot
+    {
+        MyItems.Push(item);
+
+        icon.sprite = item.MyIcon;
+
+        icon.color = Color.white;
+
+        item.MySlot = this;
+
+        return true;
+    }
+
+
+    public bool AddItems(ObservableStack<Item> newItems)//Add a stack of items to the slot
+    {
+        if (IsEmpty || newItems.Peek().GetType() == MyItem.GetType())
+        {
+            int count = newItems.Count;
+
+            for (int i = 0; i < count; i++)
+            {
+                if (IsFull)
+                {
+                    return false;
+                }
+
+                AddItem(newItems.Pop());
+            }
+
+            return true;
+        }
+
+        return false;
+    }
+   
 
     public void RemoveItem(Item item)//Removes the item from the slot
     {
@@ -268,10 +270,9 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler,IClickable,IPointe
 
             return true;
         }
-        else
-        {
-            return false;
-        }
+
+        return false;
+ 
     }
 
     private bool SwapItems(SlotScript from)//Swap two itmes in the inventory
@@ -280,7 +281,7 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler,IClickable,IPointe
         {
             return false;
         }
-        else if (from.MyItem.GetType() != MyItem.GetType() || from.MyCount+MyCount > MyItem.MyStackSize)
+        if (from.MyItem.GetType() != MyItem.GetType() || from.MyCount+MyCount > MyItem.MyStackSize)
         {
             //Copy all the itmes we need to swap from A
             ObservableStack<Item> tmpFrom = new ObservableStack<Item>(from.MyItems);
@@ -310,7 +311,7 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler,IClickable,IPointe
             return false;
 
         }
-        else if (from.MyItem.GetType() == MyItem.GetType() && !IsFull)
+        if (from.MyItem.GetType() == MyItem.GetType() && !IsFull && from.MyItem.MyTitle == MyItem.MyTitle)
         {
             //How many free slots do we have in the stack
             int free = MyItem.MyStackSize - MyCount;

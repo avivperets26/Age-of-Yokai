@@ -27,6 +27,9 @@ public class UIManager : MonoBehaviour
     private ActionButton[] actionButtons;
 
     [SerializeField]
+    private CanvasGroup[] menus;
+
+    [SerializeField]
     private GameObject targetFrame;
 
     private Stat healthStat;
@@ -76,22 +79,33 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+
+        if (Input.GetKeyDown(KeyCode.Escape))//Manu
         {
-            OpenClose(keybindMenu);
+            OpenClose(menus[0]);
         }
-        else if (Input.GetKeyDown(KeyCode.M))
+        else if (Input.GetKeyDown(KeyCode.M))//Spell Book
         {
-            OpenClose(spellBook);
+            OpenClose(menus[1]);
         }
-        else if (Input.GetKeyDown(KeyCode.B))
+        else if (Input.GetKeyDown(KeyCode.C))//Character Panel
+        {         
+            OpenClose(menus[2]);
+        }
+        else if (Input.GetKeyDown(KeyCode.L))//Quest Log
         {
-            InventoryScript.MyInstance.OpenClose();
+            OpenClose(menus[3]);
         }
-        else if (Input.GetKeyDown(KeyCode.C))
-        {
-            charPanel.OpenClose();
-        }
+        //if (Input.GetKeyDown(KeyCode.Escape))
+        //{
+        //    OpenClose(keybindMenu);
+        //}
+        //else if (Input.GetKeyDown(KeyCode.M))
+        //{
+        //    OpenClose(spellBook);
+        //}
+
+
 
     }
 
@@ -161,6 +175,26 @@ public class UIManager : MonoBehaviour
         canvasGroup.alpha = canvasGroup.alpha > 0 ? 0 : 1;
 
         canvasGroup.blocksRaycasts = canvasGroup.blocksRaycasts == true ? false : true;
+    }
+
+    public void OpenSingle(CanvasGroup canvasGroup)
+    {
+        foreach (CanvasGroup canvas in menus)
+        {
+            CloseSingle(canvas);
+        }
+
+        canvasGroup.alpha = canvasGroup.alpha > 0 ? 0 : 1;
+
+        canvasGroup.blocksRaycasts = canvasGroup.blocksRaycasts == true ? false : true;
+    }
+
+    public void CloseSingle(CanvasGroup canvasGroup)
+    {
+        canvasGroup.alpha = 0;
+
+        canvasGroup.blocksRaycasts = false;
+
     }
 
     public void UpdateStackSize(IClickable clickable)//Updates the stacksize on a clickable slot
