@@ -3,23 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class keyBindManager : MonoBehaviour
+public class KeyBindManager : MonoBehaviour
 {
     /// <summary>
     /// A reference to the singleton instance
     /// </summary>
-    private static keyBindManager instance;
+    private static KeyBindManager instance;
 
     /// <summary>
     /// Property for accessing the singleton instance
     /// </summary>
-    public static keyBindManager MyInstance
+    public static KeyBindManager MyInstance
     {
         get
         {
             if (instance == null)
             {
-                instance = FindObjectOfType<keyBindManager>();
+                instance = FindObjectOfType<KeyBindManager>();
             }
 
             return instance;

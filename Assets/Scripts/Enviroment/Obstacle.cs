@@ -20,6 +20,7 @@ public class Obstacle : MonoBehaviour, IComparable<Obstacle>
     /// </summary>
     private Color fadedColor;
 
+
     /// <summary>
     /// Compare to, that is used for sorting the obstacles, so that we can pick the on with the lowest sortorder
     /// </summary>

@@ -57,6 +57,9 @@ public class Hero : Character
     [SerializeField]
     private Animator ding;
 
+    [SerializeField]
+    private Transform minimapIcon;
+
     /// <summary>
     /// Index that keeps track of which exit point to use, 2 is default down
     /// </summary>
@@ -162,34 +165,46 @@ public class Hero : Character
             MyStamina.MyCurrentValue += 10;
         }
 
-        if (Input.GetKey(keyBindManager.MyInstance.Keybinds["UP"])) //Moves up
+        if (Input.GetKey(KeyBindManager.MyInstance.Keybinds["UP"])) //Moves up
         {
             exitIndex = 0;
             Direction += Vector2.up;
+            minimapIcon.eulerAngles = new Vector3(0,0,0);
+      
         }
-        if (Input.GetKey(keyBindManager.MyInstance.Keybinds["LEFT"])) //Moves left
+        if (Input.GetKey(KeyBindManager.MyInstance.Keybinds["LEFT"])) //Moves left
         {
             exitIndex = 3;
             Direction += Vector2.left;
+            if (Direction.y == 0)
+            {
+                minimapIcon.eulerAngles = new Vector3(0, 0, 90);
+            }
         }
-        if (Input.GetKey(keyBindManager.MyInstance.Keybinds["DOWN"]))
+        if (Input.GetKey(KeyBindManager.MyInstance.Keybinds["DOWN"]))
         {
             exitIndex = 2;
             Direction += Vector2.down;
+
+            minimapIcon.eulerAngles = new Vector3(0, 0, 180);
         }
-        if (Input.GetKey(keyBindManager.MyInstance.Keybinds["RIGHT"])) //Moves right
+        if (Input.GetKey(KeyBindManager.MyInstance.Keybinds["RIGHT"])) //Moves right
         {
             exitIndex = 1;
             Direction += Vector2.right;
+            if (Direction.y == 0)
+            {
+                minimapIcon.eulerAngles = new Vector3(0, 0, 270);
+            }
         }
         if (IsMoving)
         {
             StopAttack();
         }
 
-        foreach (string action in keyBindManager.MyInstance.ActionBinds.Keys)
+        foreach (string action in KeyBindManager.MyInstance.ActionBinds.Keys)
         {
-            if (Input.GetKeyDown(keyBindManager.MyInstance.ActionBinds[action]))
+            if (Input.GetKeyDown(KeyBindManager.MyInstance.ActionBinds[action]))
             {
                 UIManager.MyInstance.ClickActionButton(action);
 
