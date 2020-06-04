@@ -239,7 +239,7 @@ public class SaveManager : MonoBehaviour
 
                 if (actionButtons[i].MyUseable is Spell)
                 {
-                    action = new ActionButtonData((actionButtons[i].MyUseable as Spell).MyName, false, i);
+                    action = new ActionButtonData((actionButtons[i].MyUseable as Spell).MyTitle, false, i);
                 }
                 else
                 {

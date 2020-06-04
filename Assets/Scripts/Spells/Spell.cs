@@ -5,13 +5,13 @@ using System.Text;
 using UnityEngine;
 
 [Serializable]
-public class Spell : IUseable, IMoveable, IDescribable
+public class Spell : IUseable, IMoveable, IDescribable, ICastable
 {
     /// <summary>
     /// The Spell's name
     /// </summary>
     [SerializeField]
-    private string name;
+    private string title;
 
     /// <summary>
     /// The spell's damage
@@ -55,11 +55,11 @@ public class Spell : IUseable, IMoveable, IDescribable
     /// <summary>
     /// Property for accessing the spell's name
     /// </summary>
-    public string MyName
+    public string MyTitle
     {
         get
         {
-            return name;
+            return title;
         }
     }
 
@@ -132,11 +132,11 @@ public class Spell : IUseable, IMoveable, IDescribable
 
     public string GetDescription()
     {
-        return string.Format("{0}\nCast time: {1} seconds(s)\n<color=#ffd111>{2}\nthat causes {3} damage</color>", name, castTime,description,damage);
+        return string.Format("{0}\nCast time: {1} seconds(s)\n<color=#ffd111>{2}\nthat causes {3} damage</color>", title, castTime,description,damage);
     }
 
     public void Use()
     {
-        Hero.MyInstance.CastSpell(MyName);
+        Hero.MyInstance.CastSpell(this);
     }
 }

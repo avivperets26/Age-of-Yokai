@@ -73,30 +73,26 @@ public class SpellBook : MonoBehaviour
     /// </summary>
     /// <param name="index">The index of the spell you would like to cast, the first spells is index 0</param>
     /// <returns></returns>
-    public Spell CastSpell(string spellName)
-    {
-        Spell spell = Array.Find(spells, x => x.MyName == spellName);
+    public void Cast(ICastable castable)
+    {        
 
         //Resets the fillamount on the bar
         castingBar.fillAmount = 0;
 
         //Changes the bars color to fit the current spell
-        castingBar.color = spell.MyBarColor;
+        castingBar.color = castable.MyBarColor;
 
         //Changes the text on the bar so that we can read what spell we are casting
-        currentSpell.text = spell.MyName;
+        currentSpell.text = castable.MyTitle;
 
         //Changes the icon on the casting bar
-        icon.sprite = spell.MyIcon;
+        icon.sprite = castable.MyIcon;
 
         //Starts casting the spells
-        spellRoutine = StartCoroutine(Progress(spell));
+        spellRoutine = StartCoroutine(Progress(castable));
 
         //Starts fading the bar
         fadeRoutine = StartCoroutine(FadeBar());
-
-        //Returns the spell that we just  cast.
-        return spell;
     }
 
     /// <summary>
@@ -104,13 +100,13 @@ public class SpellBook : MonoBehaviour
     /// </summary>
     /// <param name="index">Index of the spell to cast</param>
     /// <returns></returns>
-    private IEnumerator Progress(Spell spell)
+    private IEnumerator Progress(ICastable castable)
     {
         //How much time has passed since we started casting the spell
         float timePassed = Time.deltaTime;
 
         //How fast are we going to move the bar
-        float rate = 1.0f / spell.MyCastTime;
+        float rate = 1.0f / castable.MyCastTime;
 
         //The current progress of the cast 
         float progress = 0.0f;
@@ -127,9 +123,9 @@ public class SpellBook : MonoBehaviour
             timePassed += Time.deltaTime;
 
             //Updates the cast time text
-            castTime.text = (spell.MyCastTime - timePassed).ToString("F2");
+            castTime.text = (castable.MyCastTime - timePassed).ToString("F2");
 
-            if (spell.MyCastTime - timePassed < 0) //Makes sure that the time doesn't go below 0
+            if (castable.MyCastTime - timePassed < 0) //Makes sure that the time doesn't go below 0
             {
                 castTime.text = "0.00";
             }
@@ -186,7 +182,7 @@ public class SpellBook : MonoBehaviour
 
     public Spell GetSpell(string spellName)
     {
-        Spell spell = Array.Find(spells, x => x.MyName == spellName);
+        Spell spell = Array.Find(spells, x => x.MyTitle == spellName);
 
         return spell;
     }
