@@ -8149,7 +8149,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 8749254919949873307, guid: 870325add18299b47a8f9ed69e8cd568,
     type: 3}
-  enemyPrefab: {fileID: 9213197564329481239, guid: bb94e2e27a39b244899c57539c5ec463,
+  enemyPrefab: {fileID: 9213197564329481239, guid: 451c5ac53f3502c44bbd4c7043241bf1,
     type: 3}
   playerBattleStation: {fileID: 1972113399}
   enemyBattleStation: {fileID: 1389543085}
@@ -10953,7 +10953,7 @@ MonoBehaviour:
   icon: {fileID: 766961870}
   canvasGroup: {fileID: 28485429}
   spells:
-  - name: Fireball
+  - title: 
     damage: 5
     icon: {fileID: 21300000, guid: 9133d8cbd0b6c2c4982793d7c9a962cb, type: 3}
     speed: 5
@@ -10962,7 +10962,7 @@ MonoBehaviour:
       type: 3}
     description: Throw fiary spell at the target
     barColor: {r: 0.8962264, g: 0.37624598, b: 0.37624598, a: 1}
-  - name: Frostbolt
+  - title: 
     damage: 5
     icon: {fileID: 21300000, guid: 9ae7b58c8b024c44d91449caa18610c8, type: 3}
     speed: 5
@@ -10971,7 +10971,7 @@ MonoBehaviour:
       type: 3}
     description: Throw frost spell at the target
     barColor: {r: 0.20990565, g: 0.58184385, b: 0.8396226, a: 1}
-  - name: Thunderbolt
+  - title: 
     damage: 5
     icon: {fileID: 21300000, guid: 12f259aa767d5394391a13974ee8dde0, type: 3}
     speed: 5
@@ -10980,7 +10980,7 @@ MonoBehaviour:
       type: 3}
     description: Throw electric spell at the target
     barColor: {r: 0.6698113, g: 0.6146958, b: 0.17377181, a: 1}
-  - name: Gather
+  - title: 
     damage: 0
     icon: {fileID: 21300000, guid: 0041a1d876d1f7940bd954b78e82a8cc, type: 3}
     speed: 0
