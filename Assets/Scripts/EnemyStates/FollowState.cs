@@ -33,9 +33,7 @@ class FollowState : IState
     /// This is called as long as we are inside the state
     /// </summary>
     public void Update()
-    {
-        Debug.Log("Follow");
-
+    {       
         if (parent.MyTarget != null)//As long as we have a target, then we need to keep moving
         {
             //Find the target's direction

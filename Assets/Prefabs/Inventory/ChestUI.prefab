@@ -69,7 +69,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 52dea4bb0493e0346bf3efc1c6977284, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3c074eb280923d54e981a1cba8b85541, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -103,15 +103,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 4
-    m_Right: 4
-    m_Top: 4
-    m_Bottom: 4
+    m_Left: 14
+    m_Right: 18
+    m_Top: 32
+    m_Bottom: 10
   m_ChildAlignment: 4
   m_StartCorner: 3
   m_StartAxis: 0
-  m_CellSize: {x: 23, y: 23}
-  m_Spacing: {x: 2, y: 2}
+  m_CellSize: {x: 30, y: 30}
+  m_Spacing: {x: -6, y: -6}
   m_Constraint: 1
   m_ConstraintCount: 8
 --- !u!114 &8826315174095592048
