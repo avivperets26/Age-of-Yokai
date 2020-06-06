@@ -28,7 +28,7 @@ public class AttackState : IState
     }
 
     public void Update()
-    {       
+    {
         //Makes sure that we only attack when we are off cooldown
         if (parent.MyAttackTime >= attackCooldown && !parent.IsAttacking)
         {

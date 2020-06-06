@@ -38,7 +38,7 @@ class IdleState : IState
         //Change into follow state if the player is close
         if (parent.MyTarget != null)//If we have a target , the nwe need to follow it.
         {
-            parent.ChangeState(new FollowState());
+            parent.ChangeState(new PathState());
         }
     }
 }

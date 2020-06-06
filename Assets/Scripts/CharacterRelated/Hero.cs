@@ -69,6 +69,19 @@ public class Hero : Character
 
     private List<IInteractable> interactables = new List<IInteractable>();
 
+    #region PATHFINDING
+    private Stack<Vector3> path;
+
+    private Vector3 destination;
+
+    private Vector3 current;
+
+    private Vector3 goal;
+
+    [SerializeField]
+    private AStar astar;
+    #endregion
+
     private Vector3 min, max;
 
     public int MyGold { get; set; }
@@ -122,6 +135,8 @@ public class Hero : Character
     {
         //Executes the GetInput function
         GetInput();
+
+        ClickToMove();
 
         //Clamps the player inside the tilemap
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, min.x, max.x),
@@ -216,6 +231,14 @@ public class Hero : Character
         }
 
 
+    }
+
+    public override void Move()
+    {
+        if (path == null)
+        {
+            base.Move();
+        }       
     }
 
     /// <summary>
@@ -408,7 +431,66 @@ public class Hero : Character
     {
         levelText.text = MyLevel.ToString();
     }
+    
+    public void GetPath(Vector3 goal)
+    {
+        path = astar.Algorithm(transform.position, goal);
 
+        current = path.Pop();
+
+        destination = path.Pop();
+
+        this.goal = goal;
+    }
+
+    private void ClickToMove()
+    {
+        if (path != null)
+        {
+            transform.parent.position = Vector2.MoveTowards(transform.parent.position, destination, Speed * Time.deltaTime);
+
+            Vector3Int dest = astar.MyTilemap.WorldToCell(destination);
+
+            Vector3Int cur = astar.MyTilemap.WorldToCell(current);
+
+            float distance = Vector2.Distance(destination, transform.parent.position);
+
+            if (cur.y > dest.y)
+            {
+                Direction = Vector2.down;
+            }
+            else if (cur.y < dest.y)
+            {
+                Direction = Vector2.up;
+            }
+            if (cur.y == dest.y)
+            {
+
+                if (cur.x > dest.x)
+                {
+                    Direction = Vector2.left;
+                }
+                else if (cur.x < dest.x)
+                {
+                    Direction = Vector2.right;
+                }
+            }
+
+            if (distance <= 0f)
+            {
+                if (path.Count > 0)
+                {
+                    current = destination;
+
+                    destination = path.Pop();
+                }
+                else
+                {
+                    path = null;
+                }
+            }
+        }
+    }
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Enemy" || collision.tag == "Interactable")

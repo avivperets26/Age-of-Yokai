@@ -86,7 +86,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3916782775030008657}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -103,15 +103,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 14
-    m_Right: 18
-    m_Top: 32
-    m_Bottom: 10
+    m_Left: 20
+    m_Right: 20
+    m_Top: 39
+    m_Bottom: 12
   m_ChildAlignment: 4
   m_StartCorner: 3
   m_StartAxis: 0
   m_CellSize: {x: 30, y: 30}
-  m_Spacing: {x: -6, y: -6}
+  m_Spacing: {x: 1, y: 1}
   m_Constraint: 1
   m_ConstraintCount: 8
 --- !u!114 &8826315174095592048

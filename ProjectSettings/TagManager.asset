@@ -43,11 +43,17 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Ground
+    uniqueID: 1889558633
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
   - name: Obstacles
     uniqueID: 3649784825
+    locked: 0
+  - name: TopLayer
+    uniqueID: 2776851771
     locked: 0
   - name: SCT
     uniqueID: 1689952771

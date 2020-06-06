@@ -12,6 +12,9 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler,IClickable,IPointe
     private Image icon;//A a reference to the slots icon
 
     [SerializeField]
+    private Image cover;
+
+    [SerializeField]
     private Text stackSize;
 
     public BagScript MyBag { get; set; }//A reference to the bag that this slot belong to
@@ -81,6 +84,14 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler,IClickable,IPointe
     }
 
     public ObservableStack<Item> MyItems { get => items; }
+
+    public Image MyCover
+    {
+        get
+        {
+            return cover;
+        }
+    }
 
     private void Awake()
     {
@@ -183,6 +194,8 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler,IClickable,IPointe
 
         icon.color = Color.white;
 
+        MyCover.enabled = false;
+
         item.MySlot = this;
 
         return true;
@@ -224,6 +237,8 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler,IClickable,IPointe
     {
         int initCount = MyItems.Count;
 
+        MyCover.enabled = false;
+
         if (initCount > 0)
         {
             for (int i = 0; i < initCount; i++)
@@ -264,9 +279,11 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler,IClickable,IPointe
 
     public bool PutItemBack()
     {
+        MyCover.enabled = false;
+
         if(InventoryScript.MyInstance.FromSlot == this)
         {
-            InventoryScript.MyInstance.FromSlot.MyIcon.color = Color.white;
+            InventoryScript.MyInstance.FromSlot.MyIcon.enabled = true;
 
             return true;
         }
@@ -277,6 +294,8 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler,IClickable,IPointe
 
     private bool SwapItems(SlotScript from)//Swap two itmes in the inventory
     {
+        from.MyCover.enabled = false;
+
         if (IsEmpty)
         {
             return false;

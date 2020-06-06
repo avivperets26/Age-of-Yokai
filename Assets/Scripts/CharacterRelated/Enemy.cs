@@ -23,6 +23,9 @@ public class Enemy : Character, IInteractable
     [SerializeField]
     private LootTable lootTable;
 
+    [SerializeField]
+    private AStar astar;
+
     // The enemys attack range
     public float MyAttackRange { get; set; }
 
@@ -55,9 +58,21 @@ public class Enemy : Character, IInteractable
         }
     }
 
+    public AStar MyAstar
+    {
+        get
+        {
+            return astar;
+        }
+    }
+
     protected void Awake()
     {
         health.Initialize(initHealth, initHealth);
+
+        //SpriteRenderer sr;
+        //sr = GetComponent<SpriteRenderer>();
+        //sr.enabled = true;
 
         MyStartPosition = transform.position;
         MyAggroRange = initAggroRange;

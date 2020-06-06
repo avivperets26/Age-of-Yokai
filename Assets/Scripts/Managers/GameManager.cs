@@ -20,8 +20,14 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private Hero player;
 
+    [SerializeField]
+    private LayerMask clickableLayer, groundLayer;
+
     private Enemy currentTarget;
+
     private int targetIndex;
+
+    private HashSet<Vector3> blocked = new HashSet<Vector3>();
 
     public static GameManager MyInstance
     {
@@ -33,6 +39,19 @@ public class GameManager : MonoBehaviour
             }
 
             return instance;
+        }
+    }
+
+    public HashSet<Vector3> MyBlocked
+    {
+        get
+        {
+            return blocked;
+        }
+
+        set
+        {
+            blocked = value;
         }
     }
 
@@ -78,7 +97,7 @@ public class GameManager : MonoBehaviour
         else if (Input.GetMouseButtonDown(1) && !EventSystem.current.IsPointerOverGameObject())
         {
             //Makes a raycast from the mouse position into the game world
-            RaycastHit2D hit = Physics2D.Raycast(mainCamera.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, Mathf.Infinity, 512);
+            RaycastHit2D hit = Physics2D.Raycast(mainCamera.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, Mathf.Infinity, clickableLayer);
             if (hit.collider != null)
             {
                 IInteractable entity = hit.collider.gameObject.GetComponent<IInteractable>();
@@ -86,6 +105,15 @@ public class GameManager : MonoBehaviour
                 if (hit.collider != null && (hit.collider.tag == "Enemy" || hit.collider.tag == "Interactable") && player.MyInteractables.Contains(entity))
                 {
                     entity.Interact();
+                }
+            }          
+            else
+            {
+                hit = Physics2D.Raycast(mainCamera.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, Mathf.Infinity, groundLayer);
+
+                if (hit.collider != null)
+                {
+                    player.GetPath(mainCamera.ScreenToWorldPoint(Input.mousePosition));
                 }
             }
         }

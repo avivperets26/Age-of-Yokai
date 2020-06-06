@@ -17,7 +17,6 @@ class FollowState : IState
     public void Enter(Enemy parent)
     {
         Hero.MyInstance.AddAttacker(parent);
-
         this.parent = parent;
     }
 
@@ -33,7 +32,7 @@ class FollowState : IState
     /// This is called as long as we are inside the state
     /// </summary>
     public void Update()
-    {       
+    {
         if (parent.MyTarget != null)//As long as we have a target, then we need to keep moving
         {
             //Find the target's direction

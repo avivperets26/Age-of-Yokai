@@ -124,8 +124,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2108016445}
   m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
-  m_LocalPosition: {x: -0, y: -0.14, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 1}
+  m_LocalPosition: {x: 0.025, y: -0.251, z: 0}
+  m_LocalScale: {x: 0.95401067, y: 0.95401067, z: 0.23854731}
   m_Children: []
   m_Father: {fileID: 8749254919949873306}
   m_RootOrder: 4
@@ -167,7 +167,7 @@ SpriteRenderer:
   m_SortingLayerID: 145226225
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d5c0fc1a8dfada24587cad458b2f7234, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d3699b904c0b00f4b9953ba56345695c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -260,8 +260,8 @@ GameObject:
   - component: {fileID: 8749254919949873304}
   - component: {fileID: 8749254919949873305}
   - component: {fileID: 8749254919949873311}
-  - component: {fileID: 8749254919949873310}
   - component: {fileID: 9111584311952610074}
+  - component: {fileID: 1106611103}
   m_Layer: 0
   m_Name: Wizard Hero
   m_TagString: Player
@@ -351,6 +351,7 @@ MonoBehaviour:
   speed: 2
   type: 
   level: 1
+  myRigidbody: {fileID: 0}
   hitBox: {fileID: 0}
   health: {fileID: 0}
   initHealth: 100
@@ -373,6 +374,7 @@ MonoBehaviour:
   - {fileID: 8749254920866449337}
   ding: {fileID: 1059019702}
   minimapIcon: {fileID: 2108016446}
+  astar: {fileID: 1106611103}
 --- !u!95 &8749254919949873311
 Animator:
   serializedVersion: 3
@@ -392,27 +394,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!50 &8749254919949873310
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8749254919949873307}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
 --- !u!61 &9111584311952610074
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -439,6 +420,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.42372513, y: 0.06564736}
   m_EdgeRadius: 0
+--- !u!114 &1106611103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8749254919949873307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a276ead672389444988f8f8f3760e608, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tilemap: {fileID: 0}
 --- !u!1 &8749254920413841903
 GameObject:
   m_ObjectHideFlags: 0

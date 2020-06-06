@@ -132,7 +132,9 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable, IPo
             MyUseables = InventoryScript.MyInstance.GetUseables(useable);
             if (InventoryScript.MyInstance.FromSlot != null)
             {
-                InventoryScript.MyInstance.FromSlot.MyIcon.color = Color.white;
+                InventoryScript.MyInstance.FromSlot.MyCover.enabled = false;
+
+                InventoryScript.MyInstance.FromSlot.MyIcon.enabled = true;
 
                 InventoryScript.MyInstance.FromSlot = null;
             }
@@ -163,7 +165,7 @@ public class ActionButton : MonoBehaviour, IPointerClickHandler, IClickable, IPo
 
         MyIcon.sprite = moveable.MyIcon;
 
-        MyIcon.color = Color.white;
+        MyIcon.enabled = true;
 
         if (count > 1)
         {

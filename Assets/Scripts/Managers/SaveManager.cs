@@ -318,8 +318,12 @@ public class SaveManager : MonoBehaviour
         }
         catch (System.Exception)
         {
-            Debug.Log("Failed to save");
-            //This is for handling errors
+            //Debug.Log("Failed to save");
+            Delete(savedGame);           
+
+            PlayerPrefs.DeleteKey("Load");
+
+            SceneManager.LoadScene(0);
         }
     }
 

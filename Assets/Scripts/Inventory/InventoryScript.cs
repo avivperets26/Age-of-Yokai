@@ -89,7 +89,7 @@ public class InventoryScript : MonoBehaviour
 
             if (value!= null)
             {
-                fromSlot.MyIcon.color = Color.grey;
+                fromSlot.MyCover.enabled = true;
             }
         }
     }
@@ -189,6 +189,8 @@ public class InventoryScript : MonoBehaviour
         bag.SetUpScript();
 
         MyBags.Add(bag);
+
+        bag.MyBagScript.MyBagIndex = bagIndex;
 
         bag.MyBagButton = bagButtons[bagIndex];
 
