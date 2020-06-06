@@ -292,6 +292,7 @@ MonoBehaviour:
   - {fileID: 8749254920806576421}
   - {fileID: 8749254920866449337}
   ding: {fileID: 1059019702}
+  minimapIcon: {fileID: 0}
 --- !u!95 &8749254919949873311
 Animator:
   serializedVersion: 3
@@ -330,7 +331,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!61 &9111584311952610074
 BoxCollider2D:
