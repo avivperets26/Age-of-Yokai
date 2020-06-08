@@ -26,14 +26,11 @@ public class EvadeState : IState
         //This needs to be improved later so that we can use pathfinding
         parent.Direction = (parent.MyStartPosition - parent.transform.position).normalized;
 
-        parent.transform.position = Vector2.MoveTowards
-            (parent.transform.position, parent.MyStartPosition, parent.Speed * Time.deltaTime);
-
         //Calculates the distance between the enemy and the startpostion
         float distance = Vector2.Distance(parent.MyStartPosition, parent.transform.position);
 
         //If the distance is less t han 0 then we are back home and we need to idle
-        if (distance <= 0)
+        if (distance <= 0.1f)
         {
             parent.ChangeState(new IdleState());
         }

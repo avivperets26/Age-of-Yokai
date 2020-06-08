@@ -20,6 +20,10 @@ public class AttackState : IState
     public void Enter(Enemy parent)
     {
         this.parent = parent;
+
+        parent.MyRigidbody.velocity = Vector2.zero;
+
+        parent.Direction = Vector2.zero;
     }
 
     public void Exit()
@@ -42,7 +46,7 @@ public class AttackState : IState
         if (parent.MyTarget != null) //If we have a target then we need to check if we can attack it or if we need to follow it
         {
             //calculates the distance between the target and the enemy
-            float distance = Vector2.Distance(parent.MyTarget.position, parent.transform.position);
+            float distance = Vector2.Distance(parent.MyTarget.parent.position, parent.transform.parent.position);
 
             //If the distance is larget than the attackrange, then we need to move
             if (distance >= parent.MyAttackRange + extraRange && !parent.IsAttacking)

@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PathState : IState
-{
-    private Stack<Vector3> path;
+{   
 
     private Vector3 destination;
 
@@ -14,40 +13,100 @@ public class PathState : IState
 
     private Transform transform;
 
+    private Enemy parent;
+
+    private Vector3 targetPos;
+
     public void Enter(Enemy parent)
     {
-        this.transform = parent.transform;
+        this.parent = parent;
 
-        path = parent.MyAstar.Algorithm(parent.transform.parent.position, parent.MyTarget.position);
+        this.transform = parent.transform.parent;
 
-        current = path.Pop();
-        destination = path.Pop();
-        this.goal = parent.MyTarget.parent.position;
+        targetPos = Hero.MyInstance.MyCurrentTile.position;
+
+        if (targetPos != parent.MyCurrentTile.position)
+        {
+            parent.MyPath = parent.MyAstar.Algorithm(parent.MyCurrentTile.position, targetPos);
+        }
+        if (parent.MyPath != null)
+        {
+            current = parent.MyPath.Pop();
+            destination = parent.MyPath.Pop();
+            this.goal = parent.MyCurrentTile.position;
+        }
+        else
+        {
+            parent.ChangeState(new EvadeState());
+        }
     }
 
     public void Exit()
     {
-
+        parent.MyPath = null;
     }
 
     public void Update()
     {
-        if (path != null)
+        if (parent.MyPath != null)
         {
-            transform.parent.position = Vector2.MoveTowards(transform.parent.position, destination, 2 * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, destination, 2 * Time.deltaTime);
 
-            float distance = Vector2.Distance(destination, transform.parent.position);
+            Vector3Int dest = parent.MyAstar.MyTilemap.WorldToCell(destination);
+
+            Vector3Int cur = parent.MyAstar.MyTilemap.WorldToCell(current);
+
+            float distance = Vector2.Distance(destination, transform.position);
+
+            float totalDistance = Vector2.Distance(parent.MyTarget.position, transform.position);
+
+            if (cur.y > dest.y)
+            {
+                parent.Direction = Vector2.down;
+            }
+            else if (cur.y < dest.y)
+            {
+                parent.Direction = Vector2.up;
+            }
+            if (cur.y == dest.y)
+            {
+
+                if (cur.x > dest.x)
+                {
+                    parent.Direction = Vector2.left;
+                }
+                else if (cur.x < dest.x)
+                {
+                    parent.Direction = Vector2.right;
+                }
+            }
+            if (totalDistance <= parent.MyAttackRange)
+            {
+                parent.ChangeState(new AttackState());
+            }
+            else if (Hero.MyInstance.MyCurrentTile.position == parent.MyCurrentTile.position)
+            {
+                parent.ChangeState(new FollowState());
+            }
+            
 
             if (distance <= 0f)
             {
-                if (path.Count > 0)
+                if (parent.MyPath.Count > 0)
                 {
                     current = destination;
-                    destination = path.Pop();
+                    destination = parent.MyPath.Pop();
+
+                    if (targetPos != Hero.MyInstance.MyCurrentTile.position)//Than the player has moved to another tile and the enemy need to follow him
+                    {
+                        parent.ChangeState(new PathState());
+                    }
                 }
                 else
                 {
-                    path = null;
+                    parent.MyPath = null;
+
+                    parent.ChangeState(new PathState());
                 }
             }
         }

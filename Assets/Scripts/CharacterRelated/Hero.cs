@@ -42,6 +42,8 @@ public class Hero : Character
     /// </summary>
     private float initStamina = 50;
 
+    private Vector2 initPos;
+
     /// <summary>
     /// An array of blocks used for blocking the player's sight
     /// </summary>
@@ -70,7 +72,6 @@ public class Hero : Character
     private List<IInteractable> interactables = new List<IInteractable>();
 
     #region PATHFINDING
-    private Stack<Vector3> path;
 
     private Vector3 destination;
 
@@ -146,6 +147,11 @@ public class Hero : Character
         base.Update();
     }
 
+    protected void FixedUpdate()
+    {
+        Move();
+    }
+
     public void SetDefaultValues()
     {
         MyGold = 1000;
@@ -157,6 +163,8 @@ public class Hero : Character
         MyXp.Initialize(0, Mathf.Floor(100 * MyLevel * Mathf.Pow(MyLevel, 0.5f)));//y=100*x*x^0.5 Algorithm
 
         levelText.text = MyLevel.ToString();
+
+        initPos = transform.parent.position;
     }
 
     /// <summary>
@@ -231,14 +239,6 @@ public class Hero : Character
         }
 
 
-    }
-
-    public override void Move()
-    {
-        if (path == null)
-        {
-            base.Move();
-        }       
     }
 
     /// <summary>
@@ -434,18 +434,35 @@ public class Hero : Character
     
     public void GetPath(Vector3 goal)
     {
-        path = astar.Algorithm(transform.position, goal);
+        MyPath = astar.Algorithm(transform.position, goal);
 
-        current = path.Pop();
+        current = MyPath.Pop();
 
-        destination = path.Pop();
+        destination = MyPath.Pop();
 
         this.goal = goal;
     }
 
+    public IEnumerator Respawn()
+    {
+        MySpriteRenderer.enabled = false;
+
+        yield return new WaitForSeconds(5f);
+
+        health.Initialize(initHealth, initHealth);
+
+        MyStamina.Initialize(initStamina, initStamina);
+
+        transform.parent.position = initPos;
+
+        MySpriteRenderer.enabled = true;
+
+        MyAnimator.SetTrigger("respawn");
+    }
+
     private void ClickToMove()
     {
-        if (path != null)
+        if (MyPath != null)
         {
             transform.parent.position = Vector2.MoveTowards(transform.parent.position, destination, Speed * Time.deltaTime);
 
@@ -478,19 +495,20 @@ public class Hero : Character
 
             if (distance <= 0f)
             {
-                if (path.Count > 0)
+                if (MyPath.Count > 0)
                 {
                     current = destination;
 
-                    destination = path.Pop();
+                    destination = MyPath.Pop();
                 }
                 else
                 {
-                    path = null;
+                    MyPath = null;
                 }
             }
         }
     }
+
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Enemy" || collision.tag == "Interactable")

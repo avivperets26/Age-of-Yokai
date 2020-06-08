@@ -10,6 +10,8 @@ class FollowState : IState
     /// </summary>
     private Enemy parent;
 
+    private Vector3 offset;
+
     /// <summary>
     /// This is called whenever we enter the state
     /// </summary>
@@ -17,7 +19,10 @@ class FollowState : IState
     public void Enter(Enemy parent)
     {
         Hero.MyInstance.AddAttacker(parent);
+
         this.parent = parent;
+
+        parent.MyPath = null;
     }
 
     /// <summary>
@@ -26,6 +31,8 @@ class FollowState : IState
     public void Exit()
     {
         parent.Direction = Vector2.zero;
+
+        parent.MyRigidbody.velocity = Vector2.zero;
     }
 
     /// <summary>
@@ -36,12 +43,29 @@ class FollowState : IState
         if (parent.MyTarget != null)//As long as we have a target, then we need to keep moving
         {
             //Find the target's direction
-            parent.Direction = (parent.MyTarget.transform.position - parent.transform.position).normalized;
+            parent.Direction = ((parent.MyTarget.transform.position + offset) - parent.transform.position).normalized;
+            
+            float distance = Vector2.Distance((parent.MyTarget.position + offset), parent.transform.position);
 
-            //Moves the enemy towards the target
-            parent.transform.position = Vector2.MoveTowards(parent.transform.position, parent.MyTarget.position, parent.Speed * Time.deltaTime);
+            string animName = parent.MySpriteRenderer.sprite.name;
 
-            float distance = Vector2.Distance(parent.MyTarget.position, parent.transform.position);
+            if (animName.Contains("right"))
+            {
+                offset = new Vector3(0.5f, 0.8f);
+            }
+            else if (animName.Contains("left"))
+            {
+                offset = new Vector3(-0.5f, 0.8f);
+            }
+            else if (animName.Contains("up"))
+            {
+                offset = new Vector3(0f, 1.2f);
+            }
+            else if (animName.Contains("down"))
+            {
+                offset = new Vector3(0, 0);
+            }
+
 
             if (distance <= parent.MyAttackRange)
             {
@@ -53,6 +77,9 @@ class FollowState : IState
         {
             parent.ChangeState(new EvadeState());
         } //if we don't have a target, then we need to go back to idle.
-
+        else if (!parent.CanSeePlayer())
+        {
+            parent.ChangeState(new PathState());
+        }
     }
 }

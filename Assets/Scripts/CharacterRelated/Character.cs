@@ -26,6 +26,10 @@ public abstract class Character : MonoBehaviour
     /// </summary>
     public Animator MyAnimator { get; set; }
 
+    public Transform MyCurrentTile { get; set; }
+
+    public SpriteRenderer MySpriteRenderer { get; set; }
+
     /// <summary>
     /// The Player's direction
     /// </summary>
@@ -54,6 +58,8 @@ public abstract class Character : MonoBehaviour
     protected Stat health;
 
     public Transform MyTarget { get; set; }
+
+    public Stack<Vector3> MyPath { get; set; }
 
     public Stat MyHealth
     {
@@ -139,10 +145,20 @@ public abstract class Character : MonoBehaviour
         }
     }
 
+    public Rigidbody2D MyRigidbody
+    {
+        get
+        {
+            return myRigidbody;
+        }
+    }
+
     protected virtual void Start()
     {
         //Makes a reference to the character's animator
         MyAnimator = GetComponent<Animator>();
+
+        MySpriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     /// <summary>
@@ -153,7 +169,7 @@ public abstract class Character : MonoBehaviour
         HandleLayers();
     }
 
-    private void FixedUpdate()
+    public void FixedUpdate()
     {
         Move();
     }
@@ -161,16 +177,17 @@ public abstract class Character : MonoBehaviour
     /// <summary>
     /// Moves the player
     /// </summary>
-    public virtual void Move()
+    public void Move()
     {
-        if (IsAlive)
+        if (MyPath == null)
         {
-            //Makes sure that the player moves
-            myRigidbody.velocity = Direction.normalized * Speed;
+            if (IsAlive)
+            {
+                //Makes sure that the player moves
+                MyRigidbody.velocity = Direction.normalized * Speed;
+            }
         }
-
     }
-
     /// <summary>
     /// Makes sure that the right animation layer is playing
     /// </summary>
@@ -232,7 +249,7 @@ public abstract class Character : MonoBehaviour
             //Makes sure that the character stops moving when its dead
             Direction = Vector2.zero;
 
-            myRigidbody.velocity = Direction;
+            MyRigidbody.velocity = Direction;
 
             GameManager.MyInstance.OnKillConfirmed(this);
 

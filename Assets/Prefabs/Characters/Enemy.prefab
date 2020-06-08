@@ -66,7 +66,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 145226225
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 6e979e3a0b6e44342972fa753f565907, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -153,7 +153,6 @@ GameObject:
   - component: {fileID: 9213197564329481233}
   - component: {fileID: 9213197564329481235}
   - component: {fileID: 7674172109212830366}
-  - component: {fileID: 9213197564329481234}
   - component: {fileID: 271932688}
   m_Layer: 9
   m_Name: Enemy
@@ -216,7 +215,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 2217c98f01172844e815e1a3a947ad38, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -266,16 +265,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbbe8d56691a94044bfe58115a1e014d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.8
+  speed: 2
   type: Skeleton
   level: 5
-  myRigidbody: {fileID: 9213197564329481234}
+  myRigidbody: {fileID: 0}
   hitBox: {fileID: 9213197566073341377}
   health: {fileID: 9213197564999816812}
   initHealth: 10
   healthGroup: {fileID: 9213197565364862354}
   lootTable: {fileID: 7674172109212830366}
   astar: {fileID: 271932688}
+  damage: 5
+  losMask:
+    serializedVersion: 2
+    m_Bits: 4096
   portrait: {fileID: 21300000, guid: c06cd7d12bec37043b0d4bee13e15945, type: 3}
   initAggroRange: 3
 --- !u!95 &9213197564329481235
@@ -324,27 +327,6 @@ MonoBehaviour:
     dropChance: 20
   - item: {fileID: 11400000, guid: a969a7592ac551e4db2a942af3d78fe4, type: 2}
     dropChance: 10
---- !u!50 &9213197564329481234
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9213197564329481239}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!114 &271932688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -505,7 +487,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: 145226225
+  m_SortingLayerID: -1518115525
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &9213197565364862352
@@ -557,7 +539,7 @@ CanvasGroup:
   m_Enabled: 1
   m_Alpha: 0
   m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!1 &9213197565650171872
 GameObject:
@@ -644,6 +626,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9213197566073341377}
   - component: {fileID: 9213197566073341376}
+  - component: {fileID: 1066615599}
   m_Layer: 9
   m_Name: HitBox
   m_TagString: HitBox
@@ -659,7 +642,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9213197566073341378}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.044, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 9213197564329481238}
@@ -691,3 +674,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.2, y: 0.15}
   m_EdgeRadius: 0
+--- !u!114 &1066615599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9213197566073341378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c84c473e029ec35478502cc541d623d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  character: {fileID: 9213197564329481233}

@@ -9,6 +9,7 @@ TagManager:
   - Obstacle
   - Keybind
   - Interactable
+  - Ground
   layers:
   - Default
   - TransparentFX
@@ -22,7 +23,7 @@ TagManager:
   - Clickable
   - Both
   - Minimap
-  - 
+  - LineOfSight
   - 
   - 
   - 
