@@ -1,37 +1,90 @@
 fileFormatVersion: 2
 guid: 9de61eff327f2e64487e0a2e5deb292b
-timeCreated: 1542022543
-licenseType: Store
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: BronzeP_4k_0
-    21300002: BronzeP_4k_4
-    21300004: BronzeP_4k_5
-    21300006: BronzeP_4k_1
-    21300008: BronzeP_4k_2
-    21300010: BronzeP_4k_6
-    21300012: BronzeP_4k_7
-    21300014: BronzeP_4k_8
-    21300016: BronzeP_4k_10
-    21300018: BronzeP_4k_11
-    21300020: BronzeP_4k_122
-    21300022: BronzeP_4k_13
-    21300024: BronzeP_4k_16
-    21300026: BronzeP_4k_20
-    21300028: BronzeP_4k_14
-    21300030: BronzeP_4k_17
-    21300032: BronzeP_4k_13
-    21300034: BronzeP_4k_16
-    21300036: BronzeP_4k_12
-    21300038: BronzeP_4k_20
-    21300040: BronzeP_4k_14
-    21300042: BronzeP_4k_3
-    21300044: BronzeP_4k_9
-    21300046: BronzeP_4k_18
-    21300048: BronzeP_4k_19
-    21300050: BronzeP_4k_15
-    21300052: BronzeP_4k_21
-  serializedVersion: 4
+  internalIDToNameTable:
+  - first:
+      213: 21300000
+    second: BronzeP_4k_0
+  - first:
+      213: 21300002
+    second: BronzeP_4k_4
+  - first:
+      213: 21300004
+    second: BronzeP_4k_5
+  - first:
+      213: 21300006
+    second: BronzeP_4k_1
+  - first:
+      213: 21300008
+    second: BronzeP_4k_2
+  - first:
+      213: 21300010
+    second: BronzeP_4k_6
+  - first:
+      213: 21300012
+    second: BronzeP_4k_7
+  - first:
+      213: 21300014
+    second: BronzeP_4k_8
+  - first:
+      213: 21300016
+    second: BronzeP_4k_10
+  - first:
+      213: 21300018
+    second: BronzeP_4k_11
+  - first:
+      213: 21300020
+    second: BronzeP_4k_122
+  - first:
+      213: 21300022
+    second: BronzeP_4k_13
+  - first:
+      213: 21300024
+    second: BronzeP_4k_16
+  - first:
+      213: 21300026
+    second: BronzeP_4k_20
+  - first:
+      213: 21300028
+    second: BronzeP_4k_14
+  - first:
+      213: 21300030
+    second: BronzeP_4k_17
+  - first:
+      213: 21300032
+    second: BronzeP_4k_13
+  - first:
+      213: 21300034
+    second: BronzeP_4k_16
+  - first:
+      213: 21300036
+    second: BronzeP_4k_12
+  - first:
+      213: 21300038
+    second: BronzeP_4k_20
+  - first:
+      213: 21300040
+    second: BronzeP_4k_14
+  - first:
+      213: 21300042
+    second: BronzeP_4k_3
+  - first:
+      213: 21300044
+    second: BronzeP_4k_9
+  - first:
+      213: 21300046
+    second: BronzeP_4k_18
+  - first:
+      213: 21300048
+    second: BronzeP_4k_19
+  - first:
+      213: 21300050
+    second: BronzeP_4k_15
+  - first:
+      213: 21300052
+    second: BronzeP_4k_21
+  externalObjects: {}
+  serializedVersion: 11
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -39,6 +92,8 @@ TextureImporter:
     linearTexture: 0
     fadeOut: 0
     borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
     mipMapFadeDistanceStart: 1
     mipMapFadeDistanceEnd: 3
   bumpmap:
@@ -47,6 +102,8 @@ TextureImporter:
     heightScale: 0.25
     normalMapFilter: 0
   isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -54,10 +111,13 @@ TextureImporter:
   textureFormat: 1
   maxTextureSize: 2048
   textureSettings:
+    serializedVersion: 2
     filterMode: -1
     aniso: -1
-    mipBias: -1
-    wrapMode: 1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -66,33 +126,44 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 400
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
   textureType: 8
   textureShape: 1
+  singleChannelComponent: 0
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  applyGammaDecoding: 1
   platformSettings:
-  - buildTarget: DefaultTexturePlatform
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
     maxTextureSize: 4096
+    resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
-  - buildTarget: Standalone
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
+    buildTarget: Standalone
     maxTextureSize: 4096
+    resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -108,7 +179,15 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 93, y: 80, z: 92, w: 85}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: 02305410000000000800000000000000
+      internalID: 21300000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: BronzeP_4k_3
       rect:
@@ -121,7 +200,15 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 90, y: 99, z: 98, w: 96}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: a4305410000000000800000000000000
+      internalID: 21300042
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: BronzeP_4k_4
       rect:
@@ -134,7 +221,15 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 86, y: 100, z: 80, w: 95}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: 22305410000000000800000000000000
+      internalID: 21300002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: BronzeP_4k_5
       rect:
@@ -147,7 +242,15 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 79, y: 78, z: 80, w: 71}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: 42305410000000000800000000000000
+      internalID: 21300004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: BronzeP_4k_1
       rect:
@@ -160,7 +263,15 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 109, y: 79, z: 95, w: 82}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: 62305410000000000800000000000000
+      internalID: 21300006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: BronzeP_4k_6
       rect:
@@ -173,7 +284,15 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: a2305410000000000800000000000000
+      internalID: 21300010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: BronzeP_4k_8
       rect:
@@ -186,7 +305,15 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: e2305410000000000800000000000000
+      internalID: 21300014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: BronzeP_4k_7
       rect:
@@ -199,7 +326,15 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: c2305410000000000800000000000000
+      internalID: 21300012
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: BronzeP_4k_10
       rect:
@@ -212,7 +347,15 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: 03305410000000000800000000000000
+      internalID: 21300016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: BronzeP_4k_11
       rect:
@@ -225,7 +368,15 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: 23305410000000000800000000000000
+      internalID: 21300018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: BronzeP_4k_12
       rect:
@@ -238,7 +389,15 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: 44305410000000000800000000000000
+      internalID: 21300036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: BronzeP_4k_13
       rect:
@@ -251,7 +410,15 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: 63305410000000000800000000000000
+      internalID: 21300022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: BronzeP_4k_16
       rect:
@@ -264,7 +431,15 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 106, y: 93, z: 93, w: 89}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: 83305410000000000800000000000000
+      internalID: 21300024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: BronzeP_4k_14
       rect:
@@ -277,7 +452,15 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 104, y: 85, z: 95, w: 86}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: c3305410000000000800000000000000
+      internalID: 21300028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: BronzeP_4k_17
       rect:
@@ -290,7 +473,15 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 95, y: 103, z: 93, w: 92}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: e3305410000000000800000000000000
+      internalID: 21300030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: BronzeP_4k_18
       rect:
@@ -303,7 +494,15 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 95, y: 102, z: 85, w: 97}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: e4305410000000000800000000000000
+      internalID: 21300046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: BronzeP_4k_19
       rect:
@@ -316,7 +515,15 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: 05305410000000000800000000000000
+      internalID: 21300048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: BronzeP_4k_15
       rect:
@@ -329,7 +536,15 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 98, y: 92, z: 92, w: 96}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: 25305410000000000800000000000000
+      internalID: 21300050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: BronzeP_4k_20
       rect:
@@ -342,7 +557,15 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: a3305410000000000800000000000000
+      internalID: 21300026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: BronzeP_4k_21
       rect:
@@ -355,7 +578,15 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 88, y: 78, z: 85, w: 75}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: 45305410000000000800000000000000
+      internalID: 21300052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: BronzeP_4k_2
       rect:
@@ -368,7 +599,15 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 94, y: 93, z: 101, w: 102}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: 82305410000000000800000000000000
+      internalID: 21300008
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: BronzeP_4k_9
       rect:
@@ -381,9 +620,28 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: 0
+      bones: []
+      spriteID: c4305410000000000800000000000000
+      internalID: 21300044
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
   spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
