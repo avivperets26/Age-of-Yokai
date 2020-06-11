@@ -608,7 +608,8 @@ public class BattleManager : MonoBehaviour {
 								
 								//If the character's team is the enemy team, active A.I.
 								//Also, if auto battle is on, activate A.I.
-								if (activeTeam == 1 || autoBattle) {
+								if (//activeTeam == 1 || 
+									autoBattle) {
 									BattleMethods.core.toggleActions (false);
 									tempRunAI = true;
 								}
