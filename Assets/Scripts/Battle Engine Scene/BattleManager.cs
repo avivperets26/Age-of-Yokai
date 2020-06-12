@@ -167,7 +167,7 @@ public class BattleManager : MonoBehaviour {
 				foreach (int i in characters) {
 
 					//Starting coroutine to display health.
-					StartCoroutine (battleAreahealthManager (i, 0.1f));
+					StartCoroutine (battleAreahealthManager (i, 0.6f));
 				}
 
 

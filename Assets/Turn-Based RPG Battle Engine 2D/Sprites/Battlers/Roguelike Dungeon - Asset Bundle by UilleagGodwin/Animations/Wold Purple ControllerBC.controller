@@ -6,7 +6,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: SkeletonController
+  m_Name: Wold Purple ControllerBC
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: attack
@@ -437,7 +437,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: e672538d2e75dff46b1a593accd37969, type: 2}
+  m_Motion: {fileID: 7400000, guid: af17aaa67c81be04785d1135a447045d, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -464,7 +464,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: b4fcbca62ccdf044f9aefafbacd04c83, type: 2}
+  m_Motion: {fileID: 7400000, guid: a69a9972b655f2947be56fd469b761ca, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -492,7 +492,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: b46dd33d78fb96b4ab808738ae0ad43f, type: 2}
+  m_Motion: {fileID: 7400000, guid: 11b80c88f3a1306409ff83a26bf79952, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -520,7 +520,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 18f8d80a20baef64bbc0b2452984a29b, type: 2}
+  m_Motion: {fileID: 7400000, guid: 8b3ba07d84c176843b28593037182c4d, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -537,7 +537,7 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 1102183062950023090}
-    m_Position: {x: 20, y: 230, z: 0}
+    m_Position: {x: 30, y: 230, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102494449255529666}
     m_Position: {x: 180, y: 336, z: 0}
@@ -546,7 +546,7 @@ AnimatorStateMachine:
     m_Position: {x: -120, y: 336, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102293476824836186}
-    m_Position: {x: 310, y: 230, z: 0}
+    m_Position: {x: 300, y: 228, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []

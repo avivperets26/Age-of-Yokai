@@ -2792,11 +2792,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characters:
-  - name: OldMan
+  - name: wolf 2
     id: 0
     description: A guy named steve
     icon: {fileID: 0}
-    animationController: {fileID: 9100000, guid: 0cca8fae867290f4690746d45562d5a5,
+    animationController: {fileID: 9100000, guid: ee554cc1c3585214db6bba65437e0cca,
       type: 2}
     skills: 00000000
     items:
@@ -2818,11 +2818,11 @@ MonoBehaviour:
       isCoroutine: 0
       isRunning: 0
     isActive: 1
-  - name: Skeleton
+  - name: Wolf 1
     id: 1
     description: A guy named steve
     icon: {fileID: 0}
-    animationController: {fileID: 9100000, guid: feba18c0a7e38f1459acf3f7e26bc0a7,
+    animationController: {fileID: 9100000, guid: ee554cc1c3585214db6bba65437e0cca,
       type: 2}
     skills: 00000000
     items: []
@@ -2995,12 +2995,12 @@ MonoBehaviour:
       isRunning: 0
     - functionName: moveToTarget
       parametersArray:
-      - float:0.03
-      - float:0.03
-      - float:0.03
-      - float:0.03
-      - float:0.03
-      - float:0.03
+      - float:0.2
+      - float:0.2
+      - float:0.2
+      - float:0.2
+      - float:0.2
+      - float:0.2
       waitForPreviousFunction: 1
       isCoroutine: 1
       isRunning: 0
@@ -3145,7 +3145,7 @@ MonoBehaviour:
       waitForPreviousFunction: 1
       isCoroutine: 0
       isRunning: 0
-  tab: 1
+  tab: 2
 --- !u!114 &1314067912
 MonoBehaviour:
   m_ObjectHideFlags: 0
