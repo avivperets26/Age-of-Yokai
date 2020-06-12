@@ -594,7 +594,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000010116464, y: -0.000014879608}
+  m_AnchoredPosition: {x: 0.000010116464, y: -0.0000132911955}
   m_SizeDelta: {x: 0, y: 272.3}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &461384659
@@ -1175,8 +1175,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 602.8, y: 0.000038147}
-  m_SizeDelta: {x: 714.4, y: 332.6}
+  m_AnchoredPosition: {x: 602.8, y: 33.35}
+  m_SizeDelta: {x: 714.4, y: 399.30002}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &819319203
 MonoBehaviour:
@@ -1191,13 +1191,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.47843137}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 3c074eb280923d54e981a1cba8b85541, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1377,8 +1377,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 361.8, y: -168.3}
-  m_SizeDelta: {x: 677.7, y: 296}
+  m_AnchoredPosition: {x: 360.6, y: -226.3}
+  m_SizeDelta: {x: 623.7773, y: 308.84198}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &927685203
 MonoBehaviour:
@@ -1704,8 +1704,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1179084118}
   m_HandleRect: {fileID: 1179084117}
   m_Direction: 0
-  m_Value: 1
-  m_Size: 0.9999999
+  m_Value: 0
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2025,8 +2025,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.7, y: -1.3}
-  m_SizeDelta: {x: 407.1, y: 302.9}
+  m_AnchoredPosition: {x: 5.8, y: -34.7}
+  m_SizeDelta: {x: 396.829, y: 236.12167}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1087294992
 MonoBehaviour:
@@ -2209,7 +2209,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -880, y: 188.89998}
+  m_AnchoredPosition: {x: -880, y: 248.00003}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1128678896
@@ -2279,14 +2279,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.44705883}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 1
+  m_Sprite: {fileID: -1841168349887861217, guid: 0b98d1333ba8cb44d8297b3e36f36965,
+    type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -2442,8 +2443,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 774, y: 219}
-  m_SizeDelta: {x: 334, y: 62.1}
+  m_AnchoredPosition: {x: 834.3, y: 264.05}
+  m_SizeDelta: {x: 213.31555, y: 62.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1207217618
 MonoBehaviour:
@@ -2458,13 +2459,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.47843137}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: -1841168349887861217, guid: 0b98d1333ba8cb44d8297b3e36f36965,
+    type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2563,8 +2565,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 94162818}
   m_HandleRect: {fileID: 94162817}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.9999999
+  m_Value: 1.0000005
+  m_Size: 0.7664277
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2641,8 +2643,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -598, y: 0.00003624}
-  m_SizeDelta: {x: 724, y: 332.6}
+  m_AnchoredPosition: {x: -598, y: 33.350025}
+  m_SizeDelta: {x: 724, y: 399.30002}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1272518394
 CanvasRenderer:
@@ -2665,13 +2667,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.47843137}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 3c074eb280923d54e981a1cba8b85541, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2792,11 +2794,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characters:
-  - name: wolf 2
+  - name: Nobble Samurai
     id: 0
-    description: A guy named steve
+    description: Brave Samurai
     icon: {fileID: 0}
-    animationController: {fileID: 9100000, guid: ee554cc1c3585214db6bba65437e0cca,
+    animationController: {fileID: 9100000, guid: b51fec352f4e60a459511cd8fe491ae3,
       type: 2}
     skills: 00000000
     items:
@@ -2818,11 +2820,11 @@ MonoBehaviour:
       isCoroutine: 0
       isRunning: 0
     isActive: 1
-  - name: Wolf 1
+  - name: Samurai Soldier
     id: 1
-    description: A guy named steve
+    description: Don't mess with this samurai
     icon: {fileID: 0}
-    animationController: {fileID: 9100000, guid: ee554cc1c3585214db6bba65437e0cca,
+    animationController: {fileID: 9100000, guid: 4ae5622aad5ba034f87f6e4a7b743284,
       type: 2}
     skills: 00000000
     items: []
@@ -2842,11 +2844,11 @@ MonoBehaviour:
       isCoroutine: 0
       isRunning: 0
     isActive: 1
-  - name: Samurai Soldier 1
+  - name: Ronin Samurai
     id: 2
-    description: A guy named steve
+    description: Very impressive samurai!
     icon: {fileID: 0}
-    animationController: {fileID: 9100000, guid: 4ae5622aad5ba034f87f6e4a7b743284,
+    animationController: {fileID: 9100000, guid: 6439027a8ed337e4caca80a5f1a8421f,
       type: 2}
     skills: 0000000001000000
     items: []
@@ -2866,35 +2868,11 @@ MonoBehaviour:
       isCoroutine: 0
       isRunning: 0
     isActive: 1
-  - name: Samurai Soldier 2
-    id: 5
-    description: A guy named steve
-    icon: {fileID: 0}
-    animationController: {fileID: 9100000, guid: 4ae5622aad5ba034f87f6e4a7b743284,
-      type: 2}
-    skills: 0000000001000000
-    items: []
-    characterAttributes:
-    - name: HP
-      id: 0
-      maxValue: 100
-      curValue: 100
-    - name: MP
-      id: 1
-      maxValue: 10
-      curValue: 1000
-    aiFunctions:
-    - functionName: sampleAi
-      parametersArray: []
-      waitForPreviousFunction: 0
-      isCoroutine: 0
-      isRunning: 0
-    isActive: 1
-  - name: Noble Samurai 1
+  - name: Dark Monkey
     id: 3
-    description: A guy named steve
+    description: Giant cursed monkey
     icon: {fileID: 0}
-    animationController: {fileID: 9100000, guid: b51fec352f4e60a459511cd8fe491ae3,
+    animationController: {fileID: 9100000, guid: 9f8272dfd27964740b5c6046f92bc18c,
       type: 2}
     skills: 0000000001000000
     items: []
@@ -2914,11 +2892,35 @@ MonoBehaviour:
       isCoroutine: 0
       isRunning: 0
     isActive: 1
-  - name: Noble Samurai 2
+  - name: Skeleton
     id: 4
-    description: A guy named steve
+    description: Dead warrior
     icon: {fileID: 0}
-    animationController: {fileID: 9100000, guid: b51fec352f4e60a459511cd8fe491ae3,
+    animationController: {fileID: 9100000, guid: feba18c0a7e38f1459acf3f7e26bc0a7,
+      type: 2}
+    skills: 0000000001000000
+    items: []
+    characterAttributes:
+    - name: HP
+      id: 0
+      maxValue: 100
+      curValue: 100
+    - name: MP
+      id: 1
+      maxValue: 10
+      curValue: 1000
+    aiFunctions:
+    - functionName: sampleAi
+      parametersArray: []
+      waitForPreviousFunction: 0
+      isCoroutine: 0
+      isRunning: 0
+    isActive: 1
+  - name: Dark Wolf
+    id: 5
+    description: Cursed wolf
+    icon: {fileID: 0}
+    animationController: {fileID: 9100000, guid: ee554cc1c3585214db6bba65437e0cca,
       type: 2}
     skills: 0000000001000000
     items: []
@@ -3158,8 +3160,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 389e55af5848de146bef2e56c886989b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activePlayerTeam: 000000000400000005000000
-  activeEnemyTeam: 010000000200000003000000
+  activePlayerTeam: 000000000100000002000000
+  activeEnemyTeam: 030000000400000005000000
   startingCharacter: 0
   startingMusicId: 0
   musicSourceIndex: 0
@@ -4246,13 +4248,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.47843137}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 3c074eb280923d54e981a1cba8b85541, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

@@ -6,7 +6,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: SamuraiSoldierControllerBC
+  m_Name: Old Man Controller BC
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: attack
@@ -437,7 +437,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: bfdc9af2fb7f1fb479bc7c8d24770fcd, type: 2}
+  m_Motion: {fileID: 7400000, guid: f1d647e9c5f35ff4bbd0bfa3c1138d82, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -492,7 +492,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 307608a951e7a944880dbaf45182f63d, type: 2}
+  m_Motion: {fileID: 7400000, guid: 4ffd0b2a02ee3ab44af229ffcd596667, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -520,7 +520,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 9be14da53afbab0448cee748f5bdefbc, type: 2}
+  m_Motion: {fileID: 7400000, guid: b32739ef4c1db1f4b8266e71202418cd, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
