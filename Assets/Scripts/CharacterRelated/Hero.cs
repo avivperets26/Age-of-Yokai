@@ -434,6 +434,7 @@ public class Hero : Character
     
     public void GetPath(Vector3 goal)
     {
+        Debug.Log("Hero Get Path:" + goal);
         MyPath = astar.Algorithm(transform.position, goal);
 
         current = MyPath.Pop();

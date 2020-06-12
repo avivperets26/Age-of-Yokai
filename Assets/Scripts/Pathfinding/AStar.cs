@@ -11,6 +11,9 @@ public class AStar : MonoBehaviour
     [SerializeField]
     private Tilemap tilemap;
 
+    [SerializeField]
+    private Tile[] tiles;
+
     private Node current;
 
     private Stack<Vector3> path;
@@ -23,9 +26,21 @@ public class AStar : MonoBehaviour
 
     private static HashSet<Vector3Int> noDiagonalTiles = new HashSet<Vector3Int>();
 
+    //Test draw line
+    LineRenderer LineRenderer;
+
+    float distance;
 
 
     private Vector3Int startPos, goalPos;
+
+
+    private void Start()
+    {
+        LineRenderer = GetComponent<LineRenderer>();
+
+        LineRenderer.positionCount = 2;
+    }
 
     public Tilemap MyTilemap
     {
@@ -81,12 +96,31 @@ public class AStar : MonoBehaviour
 
         if (path != null)
         {
-            return path;
-        }
+            foreach (Vector3 position in path)//Paint Path
+            {
+                
+                if (position != goalPos)
+                {
 
+                    //Debug.Log("Algorithm Vector3 position: "+position);
+                    //Debug.Log("Algorithm Vector3Int.FloorToInt position: " + Vector3Int.FloorToInt(position));
+                    //Debug.Log("Algorithm Vector3Int.RoundToInt position: " + Vector3Int.RoundToInt(position));
+                    //Debug.Log("Algorithm Vector3Int.CeilToInt position: " + Vector3Int.CeilToInt(position));
+                    //Vector3int(+o.2,+0.1,-0.3)
+
+                    //Tilemap tilemap = transform.parent.GetComponent<Tilemap>();
+                    Vector3Int cellPosition = tilemap.WorldToCell(position);
+                    
+
+
+                    tilemap.SetTile(cellPosition, tiles[0]);
+                }
+
+            }
+            return path;
+        }       
 
         return null;
-
     }
 
     private List<Node> FindNeighbours(Vector3Int parentPosition)
@@ -156,7 +190,7 @@ public class AStar : MonoBehaviour
         //Get's the direction
         Vector3Int direction = currentNode.Position - neighbour.Position;
 
-        //Gets the positions of the nodes
+        //Gets the positions of the nodes       
         Vector3Int first = new Vector3Int(currentNode.Position.x + (direction.x * -1), currentNode.Position.y, currentNode.Position.z);
         Vector3Int second = new Vector3Int(currentNode.Position.x, currentNode.Position.y + (direction.y * -1), currentNode.Position.z);
 
@@ -209,10 +243,13 @@ public class AStar : MonoBehaviour
         {
             //Creates a stack to contain the final path
             Stack<Vector3> finalPath = new Stack<Vector3>();
-
+            
             //Adds the nodes to the final path
             while (current != null)
             {
+                Debug.Log(current.Position);
+                DrawLine(current);
+
                 //Adds the current node to the final path
                 finalPath.Push(MyTilemap.CellToWorld(current.Position));
                 //Find the parent of the node, this is actually retracing the whole path back to start
@@ -228,8 +265,21 @@ public class AStar : MonoBehaviour
 
     }
 
+    private void DrawLine(Node current)
+    {
+        LineRenderer.SetPosition(0, new Vector3(current.Position.x - 1f, current.Position.y - 0.8899999f, 0f));
+        //Debug.Log("current.Position: x: " + current.Position.x+ " y: "+ current.Position.y);
+
+        LineRenderer.SetPosition(1, new Vector3(goalPos.x-1f, goalPos.y - 0.8899999f, 0f));
+
+        //Debug.Log("goalPos: x: " + goalPos.x + " y: " + current.Position.y);
+
+        distance = (goalPos - current.Position).magnitude;
+    }
+
     private void CalcValues(Node parent, Node neighbour, Vector3Int goalPos, int cost)
     {
+        
         //Sets the parent node
         neighbour.Parent = parent;
 
@@ -247,12 +297,14 @@ public class AStar : MonoBehaviour
 
     private Node GetNode(Vector3Int position)
     {
+        
         if (allNodes.ContainsKey(position))
         {
             return allNodes[position];
         }
         else
         {
+            
             Node node = new Node(position);
             allNodes.Add(position, node);
             return node;
@@ -272,7 +324,10 @@ public class Node
 
     public Node(Vector3Int position)
     {
+        
         this.Position = position;
     }
+
+
 }
 
