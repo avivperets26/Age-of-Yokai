@@ -177,7 +177,7 @@ public class Hero : Character
         ///THIS IS USED FOR DEBUGGING ONLY
         if (Input.GetKeyDown(KeyCode.I))
         {
-            health.MyCurrentValue -= 10;
+            //health.MyCurrentValue -= 10;
             MyStamina.MyCurrentValue -= 10;
         }
         if (Input.GetKeyDown(KeyCode.X))
@@ -186,7 +186,7 @@ public class Hero : Character
         }
         if (Input.GetKeyDown(KeyCode.O))
         {
-            health.MyCurrentValue += 10;
+            //health.MyCurrentValue += 10;
             MyStamina.MyCurrentValue += 10;
         }
 
@@ -434,7 +434,7 @@ public class Hero : Character
     
     public void GetPath(Vector3 goal)
     {
-        Debug.Log("Hero Get Path:" + goal);
+        //Debug.Log("Hero Get Path:" + goal);
         MyPath = astar.Algorithm(transform.position, goal);
 
         current = MyPath.Pop();
@@ -442,6 +442,9 @@ public class Hero : Character
         destination = MyPath.Pop();
 
         this.goal = goal;
+        Debug.Log("Hero MyStepCount: " + astar.MyStepCount * 10);
+        MyStamina.MyCurrentValue -= astar.MyStepCount * 10;
+
     }
 
     public IEnumerator Respawn()

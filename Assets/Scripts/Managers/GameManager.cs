@@ -114,6 +114,9 @@ public class GameManager : MonoBehaviour
                 if (hit.collider != null)
                 {                  
                     player.GetPath(mainCamera.ScreenToWorldPoint(Input.mousePosition));
+                    //ClearPath.Count
+                    
+
                 }
             }
         }

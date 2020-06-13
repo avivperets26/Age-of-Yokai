@@ -16,6 +16,8 @@ public class AStar : MonoBehaviour
 
     private Node current;
 
+    private int stepCount;
+
     private Stack<Vector3> path;
 
     private HashSet<Node> openList;
@@ -24,7 +26,11 @@ public class AStar : MonoBehaviour
 
     private Dictionary<Vector3Int, Node> allNodes = new Dictionary<Vector3Int, Node>();
 
+    private HashSet<Vector3Int> changedTiles = new HashSet<Vector3Int>();
+
     private static HashSet<Vector3Int> noDiagonalTiles = new HashSet<Vector3Int>();
+
+    
 
     //Test draw line
     LineRenderer LineRenderer;
@@ -40,6 +46,8 @@ public class AStar : MonoBehaviour
         LineRenderer = GetComponent<LineRenderer>();
 
         LineRenderer.positionCount = 2;
+
+        changedTiles = new HashSet<Vector3Int>();
     }
 
     public Tilemap MyTilemap
@@ -55,6 +63,19 @@ public class AStar : MonoBehaviour
         get
         {
             return noDiagonalTiles;
+        }
+    }
+
+    public int MyStepCount
+    {
+        get
+        {
+            return stepCount;
+        }
+
+        set
+        {
+            stepCount = value;
         }
     }
 
@@ -94,8 +115,12 @@ public class AStar : MonoBehaviour
             path = GeneratePath(current);
         }
 
+        
+
         if (path != null)
         {
+            Stack<Vector3> ClearPath = new Stack<Vector3>();
+
             foreach (Vector3 position in path)//Paint Path
             {
                 
@@ -103,24 +128,44 @@ public class AStar : MonoBehaviour
                 {
 
                     //Debug.Log("Algorithm Vector3 position: "+position);
-                    //Debug.Log("Algorithm Vector3Int.FloorToInt position: " + Vector3Int.FloorToInt(position));
-                    //Debug.Log("Algorithm Vector3Int.RoundToInt position: " + Vector3Int.RoundToInt(position));
-                    //Debug.Log("Algorithm Vector3Int.CeilToInt position: " + Vector3Int.CeilToInt(position));
-                    //Vector3int(+o.2,+0.1,-0.3)
 
-                    //Tilemap tilemap = transform.parent.GetComponent<Tilemap>();
-                    Vector3Int cellPosition = tilemap.WorldToCell(position);
-                    
+                    ClearPath.Push(position);
 
+                    Vector3Int cellPosition = tilemap.WorldToCell(position);                    
 
                     tilemap.SetTile(cellPosition, tiles[0]);
-                }
 
+                    
+                }                
+                
             }
+            Debug.Log(ClearPath.Count);
+            stepCount = ClearPath.Count - 1;
+
+            while (ClearPath.Count != 0)
+            {               
+                //Debug.Log("Algorithm Vector3Int ClearPath.Count: " + ClearPath.Count);
+                //Debug.Log("Algorithm Vector3Int clearPo ClearPath.Peek(): " + ClearPath.Peek());
+                Vector3 clearPos = ClearPath.Pop();
+
+                StartCoroutine(ClearPathWait(clearPos));
+            }
+
             return path;
-        }       
+        }
 
         return null;
+    }
+
+    IEnumerator ClearPathWait(Vector3 clearPos)
+    {
+
+        yield return new WaitForSeconds(1.5f);
+
+        Vector3Int cellPosition = tilemap.WorldToCell(clearPos);
+
+        tilemap.SetTile(cellPosition, tiles[1]);
+
     }
 
     private List<Node> FindNeighbours(Vector3Int parentPosition)
@@ -247,8 +292,8 @@ public class AStar : MonoBehaviour
             //Adds the nodes to the final path
             while (current != null)
             {
-                Debug.Log(current.Position);
-                DrawLine(current);
+                //Debug.Log(current.Position);
+                //DrawLine(current);
 
                 //Adds the current node to the final path
                 finalPath.Push(MyTilemap.CellToWorld(current.Position));
@@ -310,7 +355,91 @@ public class AStar : MonoBehaviour
             return node;
         }
     }
+
+    //private void ChangeTile(Vector3Int clickPos)
+    //{
+    //    if (clickPos == startPos)
+    //    {
+    //        start = false;
+    //        startPos = Vector3Int.zero;
+    //    }
+    //    else if (clickPos == goalPos)
+    //    {
+    //        goal = false;
+    //        goalPos = Vector3Int.zero;
+    //    }
+    //    if (tileType == TileType.START)
+    //    {
+    //        if (start)
+    //        {
+    //            tilemap.SetTile(startPos, tiles[1]);
+    //        }
+
+    //        startPos = clickPos;
+    //        start = true;
+
+    //    }
+    //    else if (tileType == TileType.GOAL)
+    //    {
+    //        if (goal)
+    //        {
+    //            tilemap.SetTile(goalPos, tiles[1]);
+    //        }
+
+    //        goalPos = clickPos;
+    //        goal = true;
+    //    }
+    //    else if (tileType == TileType.BLOCKED)
+    //    {
+    //        blocked.Add(clickPos);
+    //        tilemap.SetTile(clickPos, water);
+    //    }
+    //    else if (tileType == TileType.STANDARD)
+    //    {
+    //        blocked.Remove(clickPos);
+    //    }
+
+    //    if (tileType != TileType.BLOCKED)
+    //    {
+    //        tilemap.SetTile(clickPos, tiles[(int)tileType]);
+    //    }
+
+    //    changedTiles.Add(clickPos);
+
+    //}
+
+    //public void Erase()
+    //{
+    //    AstarDebugger.Instance.Erase(allNodes);
+
+    //    foreach (Vector3 position in changedTiles)
+    //    {
+
+    //        Vector3Int cellPosition = tilemap.WorldToCell(position);
+
+    //        tilemap.SetTile(cellPosition, tiles[1]);
+                     
+    //    }
+
+    //    foreach (Vector3 path in path)
+    //    {
+    //        Vector3Int PathPosition = tilemap.WorldToCell(path);
+
+    //        tilemap.SetTile(PathPosition, tiles[1]);
+    //    }
+
+    //    tilemap.SetTile(startPos, tiles[1]);
+
+    //    tilemap.SetTile(goalPos, tiles[1]);
+
+    //    allNodes.Clear();
+
+    //    current = null;
+    //}
 }
+
+
+
 
 public class Node
 {
