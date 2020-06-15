@@ -14,10 +14,12 @@ public class Hero : Character
     {
         get
         {
-            if (instance == null)
-            {
-                instance = FindObjectOfType<Hero>();
-            }
+            
+            instance = FindObjectOfType<Hero>();
+            //if (instance == null)
+            //{
+            //    instance = FindObjectOfType<Hero>();
+            //}
 
             return instance;
         }
@@ -44,6 +46,8 @@ public class Hero : Character
 
     private Vector2 initPos;
 
+
+    private int PlayerTurn = 1;
     /// <summary>
     /// An array of blocks used for blocking the player's sight
     /// </summary>
@@ -140,9 +144,9 @@ public class Hero : Character
         ClickToMove();
 
         //Clamps the player inside the tilemap
-        transform.position = new Vector3(Mathf.Clamp(transform.position.x, min.x, max.x),
-            Mathf.Clamp(transform.position.y, min.y, max.y),
-            transform.position.z);
+        //transform.position = new Vector3(Mathf.Clamp(transform.position.x, min.x, max.x),
+        //    Mathf.Clamp(transform.position.y, min.y, max.y),
+        //    transform.position.z);
 
         base.Update();
     }
@@ -177,7 +181,7 @@ public class Hero : Character
         ///THIS IS USED FOR DEBUGGING ONLY
         if (Input.GetKeyDown(KeyCode.I))
         {
-            //health.MyCurrentValue -= 10;
+            //health.MyCurrentValue -= 5;
             MyStamina.MyCurrentValue -= 10;
         }
         if (Input.GetKeyDown(KeyCode.X))
@@ -434,17 +438,37 @@ public class Hero : Character
     
     public void GetPath(Vector3 goal)
     {
-        //Debug.Log("Hero Get Path:" + goal);
-        MyPath = astar.Algorithm(transform.position, goal);
+        if (MyStamina.MyCurrentValue > 0)
+        {
+            //Debug.Log("Hero Get Path:" + goal);
+            MyPath = astar.Algorithm(transform.position, goal);
 
-        current = MyPath.Pop();
+            current = MyPath.Pop();
 
-        destination = MyPath.Pop();
+            destination = MyPath.Pop();
 
-        this.goal = goal;
-        Debug.Log("Hero MyStepCount: " + astar.MyStepCount * 10);
-        MyStamina.MyCurrentValue -= astar.MyStepCount * 10;
+            this.goal = goal;
 
+            Debug.Log("Hero MyStepCount: " + astar.MyStepCount * 10);
+
+            MyStamina.MyCurrentValue -= astar.MyStepCount * 10;
+        }      
+    }
+
+    public void ChangeTurn()
+    {
+        MyStamina.Initialize(initStamina, initStamina);
+
+        if (PlayerTurn == 1)
+        {
+            PlayerTurn = 2;
+        }
+        else if (PlayerTurn == 2)
+        {
+            PlayerTurn = 1;
+        }
+
+        GameManager.MyInstance.MyPlayerTurn = PlayerTurn;
     }
 
     public IEnumerator Respawn()
@@ -544,4 +568,42 @@ public class Hero : Character
             }
         }
     }
+
+
+    //public void ChangeScore()
+    //{
+    //    if (currentScore < maxScore)
+    //    {
+    //        currentScore++;
+    //        pointBar.SetValue(currentScore);
+    //        //text.text = currentScore.ToString();
+    //    }
+    //    if (currentScore == maxScore)
+    //    {
+    //        isPowerUp = true;
+    //        StartCoroutine(IndicatePowerUp());
+    //    }
+    //}
+    //private IEnumerator IndicatePowerUp()
+    //{
+    //    while (isPowerUp)
+    //    {
+    //        pointBarImage.enabled = false;
+    //        yield return new WaitForSeconds(0.1f);
+    //        pointBarImage.enabled = true;
+    //        yield return new WaitForSeconds(0.1f);
+    //    }
+    //}
+    //public void ResetPowerUp()
+    //{
+    //    if (isPowerUp)
+    //    {
+    //        currentScore = 0;
+    //        isPowerUp = false;
+    //        pointBar.SetValue(currentScore);
+    //        //healthUp.Play();
+    //        //currentHealth = maxHealth;
+    //        //healthBar.SetValue(maxHealth);
+    //    }
+    //}
 }

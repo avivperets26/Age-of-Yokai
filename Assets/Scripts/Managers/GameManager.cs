@@ -18,12 +18,17 @@ public class GameManager : MonoBehaviour
     /// A reference to the player object
     /// </summary>
     [SerializeField]
-    private Hero player;
+    private Hero player1;
+
+    [SerializeField]
+    private Hero player2;
 
     [SerializeField]
     private LayerMask clickableLayer, groundLayer;
 
     private Enemy currentTarget;
+
+    private int playerTurn;
 
     private int targetIndex;
 
@@ -55,14 +60,31 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public int MyPlayerTurn
+    {
+        get
+        {
+            return playerTurn;
+        }
+
+        set
+        {
+            playerTurn = value;
+        }
+    }
+
     private void Start()
     {
+        playerTurn = 1;
+
         mainCamera = Camera.main;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        //Debug.Log(playerTurn);
         //Executes click target
         ClickTarget();
 
@@ -91,7 +113,15 @@ public class GameManager : MonoBehaviour
 
                 //We remove the references to the target
                 currentTarget = null;
-                player.MyTarget = null;
+
+                if (playerTurn == 1)
+                {
+                    player1.MyTarget = null;
+                }
+                else if (playerTurn == 2)
+                {
+                    player2.MyTarget = null;
+                }
             }
         }
         else if (Input.GetMouseButtonDown(1) && !EventSystem.current.IsPointerOverGameObject())
@@ -101,19 +131,38 @@ public class GameManager : MonoBehaviour
             if (hit.collider != null)
             {
                 IInteractable entity = hit.collider.gameObject.GetComponent<IInteractable>();
-
-                if (hit.collider != null && (hit.collider.tag == "Enemy" || hit.collider.tag == "Interactable") && player.MyInteractables.Contains(entity))
+                if (playerTurn == 1)
                 {
-                    entity.Interact();
+                    if (hit.collider != null && (hit.collider.tag == "Enemy" || hit.collider.tag == "Interactable") && player1.MyInteractables.Contains(entity))
+                    {
+                        entity.Interact();
+                    }
                 }
+                else if (playerTurn == 2)
+                {
+                    if (hit.collider != null && (hit.collider.tag == "Enemy" || hit.collider.tag == "Interactable") && player2.MyInteractables.Contains(entity))
+                    {
+                        entity.Interact();
+                    }
+                }
+               
             }          
             else
             {
                 hit = Physics2D.Raycast(mainCamera.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, Mathf.Infinity, groundLayer);
 
                 if (hit.collider != null)
-                {                  
-                    player.GetPath(mainCamera.ScreenToWorldPoint(Input.mousePosition));
+                {
+                    if (playerTurn == 1)
+                    {
+                        player1.GetPath(mainCamera.ScreenToWorldPoint(Input.mousePosition));
+
+                    }
+                    else if (playerTurn == 2)
+                    {
+                        player2.GetPath(mainCamera.ScreenToWorldPoint(Input.mousePosition));
+                    }
+                    
                     //ClearPath.Count
                     
 
@@ -161,8 +210,15 @@ public class GameManager : MonoBehaviour
     {
         currentTarget = enemy;
 
-        player.MyTarget = currentTarget.Select();
-
+        if (playerTurn == 1)
+        {
+            player1.MyTarget = currentTarget.Select();
+        }
+        else if (playerTurn == 2)
+        {
+            player1.MyTarget = currentTarget.Select();
+        }
+        
         UIManager.MyInstance.ShowTargetFrame(currentTarget);
     }
 

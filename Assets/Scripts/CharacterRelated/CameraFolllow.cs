@@ -18,7 +18,7 @@ public class CameraFolllow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        target = GameObject.FindGameObjectWithTag("Player").transform;
+        target = GameObject.FindGameObjectWithTag("Player1").transform;
 
         hero = target.GetComponent<Hero>();
 
@@ -34,7 +34,30 @@ public class CameraFolllow : MonoBehaviour
 
     private void LateUpdate()//will calls after all Update will finish calls, that means the camera will move after the player move.
     {
-        transform.position = new Vector3(Mathf.Clamp(target.position.x, xMin, xMax), Mathf.Clamp(target.position.y, yMin, yMax),-10);
+        int playerTurn = GameManager.MyInstance.MyPlayerTurn;
+        if (playerTurn == 1)
+        {
+            target = GameObject.FindGameObjectWithTag("Player1").transform;
+
+            
+        }
+        else if (playerTurn == 2)
+        {
+            target = GameObject.FindGameObjectWithTag("Player2").transform;
+
+            
+        }
+
+        if (target.tag == "Player1")
+        {
+            //Debug.Log("CameraFollow: Player1 transform.position");
+            transform.position = new Vector3(Mathf.Clamp(target.position.x, xMin, xMax), Mathf.Clamp(target.position.y, yMin, yMax), -10);
+        }
+        else if (target.tag == "Player2")
+        {
+            //Debug.Log("CameraFollow: Player2 transform.position");
+            transform.position = new Vector3(Mathf.Clamp(target.position.x, xMin, xMax), Mathf.Clamp(target.position.y, yMin, yMax), -10);
+        }       
     }
 
     private void SetLimits(Vector3 minTile, Vector3 maxTile)

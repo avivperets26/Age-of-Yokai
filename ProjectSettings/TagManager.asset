@@ -10,6 +10,8 @@ TagManager:
   - Keybind
   - Interactable
   - Ground
+  - Player1
+  - Player2
   layers:
   - Default
   - TransparentFX

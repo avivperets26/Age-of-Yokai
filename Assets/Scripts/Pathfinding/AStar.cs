@@ -43,9 +43,9 @@ public class AStar : MonoBehaviour
 
     private void Start()
     {
-        LineRenderer = GetComponent<LineRenderer>();
+        //LineRenderer = GetComponent<LineRenderer>();
 
-        LineRenderer.positionCount = 2;
+        //LineRenderer.positionCount = 2;
 
         changedTiles = new HashSet<Vector3Int>();
     }

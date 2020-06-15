@@ -15,6 +15,7 @@ public class InventoryScript : MonoBehaviour
     {
         get
         {
+
             if (instance == null)
             {
                 instance = FindObjectOfType<InventoryScript>();

@@ -8,8 +8,11 @@ public class HealthPotion : Item,IUseable
     [SerializeField]
     private int health;
 
+    
+
     public void Use()
     {
+        
         if (Hero.MyInstance.MyHealth.MyCurrentValue < Hero.MyInstance.MyHealth.MyMaxValue)
         {
             Remove();
