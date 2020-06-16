@@ -21,6 +21,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Game Board Scene.unity
     guid: 855006beccabfb64093fedd348916d3d
   - enabled: 1
-    path: Assets/Scenes/Castle Scene.unity
-    guid: f7bbefbb68c0ad94981878a4c73eb0ee
+    path: Assets/Scenes/New Battle Scene.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects: {}

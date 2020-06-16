@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public delegate void KillConfirmed(Character character);
 
@@ -135,6 +136,8 @@ public class GameManager : MonoBehaviour
                 {
                     if (hit.collider != null && (hit.collider.tag == "Enemy" || hit.collider.tag == "Interactable") && player1.MyInteractables.Contains(entity))
                     {
+                        //Debug.Log("Player 1 Game Manager interact");
+                        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
                         entity.Interact();
                     }
                 }
@@ -142,6 +145,8 @@ public class GameManager : MonoBehaviour
                 {
                     if (hit.collider != null && (hit.collider.tag == "Enemy" || hit.collider.tag == "Interactable") && player2.MyInteractables.Contains(entity))
                     {
+                        //Debug.Log("Player 2 Game Manager interact");
+                        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
                         entity.Interact();
                     }
                 }
@@ -227,6 +232,19 @@ public class GameManager : MonoBehaviour
         if (killConfirmedEvent != null)
         {
             killConfirmedEvent(character);
+        }
+    }
+
+
+    public void ChagedTurnPlayerData()
+    {
+        if (playerTurn == 1)
+        {
+            //SaveData playerData = 
+        }
+        else if (playerTurn == 2)
+        {
+
         }
     }
 }

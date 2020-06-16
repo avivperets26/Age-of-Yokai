@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public delegate void HealthChanged(float health);
 
@@ -219,20 +220,25 @@ public class Enemy : Character, IInteractable
 
     public void Interact()
     {
-        if (!IsAlive)
-        {
-            List<Drop> drops = new List<Drop>();
+        Debug.Log("Enemy interact");
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 4);
 
-            foreach (IInteractable interactable in Hero.MyInstance.MyInteractables)
-            {
-                if (interactable is Enemy && !(interactable as Enemy).IsAlive)
-                {
-                    drops.AddRange((interactable as Enemy).lootTable.GetLoot());
-                }
-            }
+        //if (!IsAlive)
+        //{
+        //    //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 4);
 
-            LootWindow.MyInstance.CreatePages(drops);
-        }
+        //    List<Drop> drops = new List<Drop>();
+
+        //    foreach (IInteractable interactable in Hero.MyInstance.MyInteractables)
+        //    {
+        //        if (interactable is Enemy && !(interactable as Enemy).IsAlive)
+        //        {
+        //            drops.AddRange((interactable as Enemy).lootTable.GetLoot());
+        //        }
+        //    }
+
+        //    LootWindow.MyInstance.CreatePages(drops);
+        //}
     }
 
     public void StopInteract()

@@ -74,26 +74,32 @@ public class ChangeTurnButton : MonoBehaviour, IPointerEnterHandler, IPointerExi
     }
     private IEnumerator IndicatePowerUp()
     {
-        //float j = 1;
-
-        //for (int i = 1; i < 10; i++)
-        //{
-
-        //    pointBarImage.rectTransform.localScale = new Vector3(1, 1, 0);
-        //}
-
-        for (int i = 0; i < 3; i++)
+        float curScale = 1.0f;
+        for (int i = 0; i < 5; i++)
         {
-           // int j = 1;
-            pointBarImage.enabled = false;
-            //pointBarImage.rectTransform.localScale = new Vector3(1, 1, 0);
-            title.enabled = false;
-            yield return new WaitForSeconds(0.3f);
-            //j += 0.2;
-            pointBarImage.enabled = true;
-            //pointBarImage.rectTransform.localScale = new Vector3(2, 2, 0);
-            title.enabled = true;
-            yield return new WaitForSeconds(0.3f);
+            for (int j = 1; j < 9; j++)
+            {
+                curScale = curScale + 0.1f;
+
+                Debug.Log("Current scale Increased: " + curScale);
+
+                pointBarImage.rectTransform.localScale = new Vector3(curScale, curScale, 0);
+
+                yield return new WaitForSeconds(0.03f);
+            }                     
+
+            for (int j = 1; j < 9; j++)
+            {
+                curScale = curScale - 0.1f;
+
+                Debug.Log("Current scale Decreased: " + curScale);
+
+                pointBarImage.rectTransform.localScale = new Vector3(curScale, curScale, 0);
+
+                yield return new WaitForSeconds(0.03f);
+            }     
+            
+            curScale = 1.0f;
         }
         ResetPowerUp();
     }
