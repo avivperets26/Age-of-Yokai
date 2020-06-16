@@ -2892,11 +2892,11 @@ MonoBehaviour:
       isCoroutine: 0
       isRunning: 0
     isActive: 1
-  - name: Skeleton
+  - name: Silver Ninja
     id: 4
-    description: Dead warrior
+    description: Dangerous ninja
     icon: {fileID: 21300000, guid: 035be3b17969bad4fae87db17eca032c, type: 3}
-    animationController: {fileID: 9100000, guid: feba18c0a7e38f1459acf3f7e26bc0a7,
+    animationController: {fileID: 9100000, guid: 6ec3ff42c5719124fa5f07d11dfb129c,
       type: 2}
     skills: 0000000001000000
     items: []
